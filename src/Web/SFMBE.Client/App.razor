@@ -1,0 +1,20 @@
+<Router AppAssembly="@typeof(Program).Assembly">
+    <Found Context="routeData">
+        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+            <Authorizing>
+                <text>Custom Auth</text>
+            </Authorizing>
+
+            <NotAuthorized>
+                <text>Custom Not Auth</text>
+            </NotAuthorized>
+        </AuthorizeRouteView>
+    </Found>
+    <NotFound>
+        <CascadingAuthenticationState>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <p>POPRAVI GO TVA</p>>
+            </LayoutView>
+        </CascadingAuthenticationState>
+    </NotFound>
+</Router>

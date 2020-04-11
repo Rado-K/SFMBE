@@ -1,0 +1,105 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200331191959_CharacterAccessories.cs" />
+    <Compile Remove="Migrations\20200331191959_CharacterAccessories.Designer.cs" />
+    <Compile Remove="Migrations\20200331192428_CharacterAccessories.cs" />
+    <Compile Remove="Migrations\20200331192428_CharacterAccessories.Designer.cs" />
+    <Compile Remove="Migrations\20200331194512_CharacterAccessories.cs" />
+    <Compile Remove="Migrations\20200331194512_CharacterAccessories.Designer.cs" />
+    <Compile Remove="Migrations\20200401171629_CharacterAccessories.cs" />
+    <Compile Remove="Migrations\20200401171629_CharacterAccessories.Designer.cs" />
+    <Compile Remove="Migrations\20200401172128_CharacterAccessories.cs" />
+    <Compile Remove="Migrations\20200401172128_CharacterAccessories.Designer.cs" />
+    <Compile Remove="Migrations\20200405004638_RepairProperty.cs" />
+    <Compile Remove="Migrations\20200405004638_RepairProperty.Designer.cs" />
+    <Compile Remove="Migrations\20200405012756_TEST.cs" />
+    <Compile Remove="Migrations\20200405012756_TEST.Designer.cs" />
+    <Compile Remove="Migrations\20200405020211_TEST.cs" />
+    <Compile Remove="Migrations\20200405020211_TEST.Designer.cs" />
+    <Compile Remove="Migrations\20200405020640_TEST.cs" />
+    <Compile Remove="Migrations\20200405020640_TEST.Designer.cs" />
+    <Compile Remove="Migrations\20200405021028_TEST.cs" />
+    <Compile Remove="Migrations\20200405021028_TEST.Designer.cs" />
+    <Compile Remove="Migrations\20200405021410_TEsT.cs" />
+    <Compile Remove="Migrations\20200405021410_TEsT.Designer.cs" />
+    <Compile Remove="Migrations\20200405021456_TEST.cs" />
+    <Compile Remove="Migrations\20200405021456_TEST.Designer.cs" />
+    <Compile Remove="Migrations\20200405022825_TEST.cs" />
+    <Compile Remove="Migrations\20200405022825_TEST.Designer.cs" />
+    <Compile Remove="Migrations\20200405023838_TES.cs" />
+    <Compile Remove="Migrations\20200405023838_TES.Designer.cs" />
+    <Compile Remove="Migrations\20200405024727_TEST.cs" />
+    <Compile Remove="Migrations\20200405024727_TEST.Designer.cs" />
+    <Compile Remove="Migrations\20200405171112_TEST.cs" />
+    <Compile Remove="Migrations\20200405171112_TEST.Designer.cs" />
+    <Compile Remove="Migrations\20200405172243_TEST.cs" />
+    <Compile Remove="Migrations\20200405172243_TEST.Designer.cs" />
+    <Compile Remove="Migrations\20200405172543_TEST.cs" />
+    <Compile Remove="Migrations\20200405172543_TEST.Designer.cs" />
+    <Compile Remove="Migrations\20200405172826_CharacterAccessories.cs" />
+    <Compile Remove="Migrations\20200405172826_CharacterAccessories.Designer.cs" />
+    <Compile Remove="Migrations\20200406233749_ItemBagRelation.cs" />
+    <Compile Remove="Migrations\20200406233749_ItemBagRelation.Designer.cs" />
+    <Compile Remove="Migrations\20200406234705_BagItemRelation.cs" />
+    <Compile Remove="Migrations\20200406234705_BagItemRelation.Designer.cs" />
+    <Compile Remove="Migrations\20200406234857_BagItemsRelation.cs" />
+    <Compile Remove="Migrations\20200406234857_BagItemsRelation.Designer.cs" />
+    <Compile Remove="Migrations\20200407005252_BagItemRelation.cs" />
+    <Compile Remove="Migrations\20200407005252_BagItemRelation.Designer.cs" />
+    <Compile Remove="Migrations\20200407012557_test.cs" />
+    <Compile Remove="Migrations\20200407012557_test.Designer.cs" />
+    <Compile Remove="Migrations\20200407021656_RemoveItemsFromUser.cs" />
+    <Compile Remove="Migrations\20200407021656_RemoveItemsFromUser.Designer.cs" />
+    <Compile Remove="Migrations\20200407174944_DetachmentEntities.cs" />
+    <Compile Remove="Migrations\20200407174944_DetachmentEntities.Designer.cs" />
+    <Compile Remove="Migrations\20200407180351_DetachmentEntities.cs" />
+    <Compile Remove="Migrations\20200407180351_DetachmentEntities.Designer.cs" />
+    <Compile Remove="Migrations\20200407180735_DetachmentEntities.cs" />
+    <Compile Remove="Migrations\20200407180735_DetachmentEntities.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.3" />
+    <!--<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>-->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Services\SFMBE.Services.Data\SFMBE.Services.Data.csproj" />
+    <ProjectReference Include="..\..\SFMBE.Common\SFMBE.Common.csproj" />
+    <ProjectReference Include="..\SFMBE.Data.Common\SFMBE.Data.Common.csproj" />
+    <ProjectReference Include="..\SFMBE.Data.Models\SFMBE.Data.Models.csproj" />
+  </ItemGroup>
+
+</Project>

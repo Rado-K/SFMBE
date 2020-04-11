@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.7.82" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SFMBE.Common\SFMBE.Common.csproj" />
+    <ProjectReference Include="..\..\Data\SFMBE.Data.Common\SFMBE.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\SFMBE.Data.Models\SFMBE.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\SFMBE.Data\SFMBE.Data.csproj" />
+    <ProjectReference Include="..\..\Services\SFMBE.Services.Data\SFMBE.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Services\SFMBE.Services.Mapping\SFMBE.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\SFMBE.Services.Messaging\SFMBE.Services.Messaging.csproj" />
+    <ProjectReference Include="..\..\Web\SFMBE.Client.Infrastructure\SFMBE.Client.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Web\SFMBE.Client\SFMBE.Client.csproj" />
+  </ItemGroup>
+
+</Project>

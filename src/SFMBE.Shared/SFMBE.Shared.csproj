@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Data\SFMBE.Data.Models\SFMBE.Data.Models.csproj" />
+    <ProjectReference Include="..\Services\SFMBE.Services.Mapping\SFMBE.Services.Mapping.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Account\UserLoginRequestModel.cs">
+      <ExcludeFromSourceAnalysis>True</ExcludeFromSourceAnalysis>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+  </ItemGroup>
+
+</Project>

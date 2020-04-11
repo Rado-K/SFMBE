@@ -1,0 +1,14 @@
+﻿@page "/logout"
+
+@using SFMBE.Client.Infrastructure.Auth;
+
+@inject ILoginService LogionService;
+@inject NavigationManager NavigationManager;
+@code
+{
+    protected override async Task OnInitializedAsync()
+    {
+        await this.LogionService.Logout();
+        this.NavigationManager.NavigateTo("");
+    }
+}

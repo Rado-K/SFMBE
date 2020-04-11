@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\stylecop.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <!--<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.6.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />-->
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\SFMBE.Data.Models\SFMBE.Data.Models.csproj" />
+    <ProjectReference Include="..\..\SFMBE.Shared\SFMBE.Shared.csproj" />
+    <ProjectReference Include="..\..\Web\SFMBE.Web.Infrastructure\SFMBE.Server.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
