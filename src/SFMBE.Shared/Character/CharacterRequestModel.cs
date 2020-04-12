@@ -2,6 +2,6 @@
 {
   public class CharacterRequestModel
   {
-    public string UserId { get; set; }
+    public string CharacterName { get; set; }
   }
 }

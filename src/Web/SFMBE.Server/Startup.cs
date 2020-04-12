@@ -27,7 +27,8 @@ namespace SFMBE.Server
   using Services.Data.Settings;
   using Services.Data.Storage;
   using Services.Mapping;
-
+  using SFMBE.Services.Data.Character;
+  using SFMBE.Services.Data.User;
   using Shared;
   using System;
   using System.Linq;
@@ -117,11 +118,12 @@ namespace SFMBE.Server
       services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
       // Application services
-      //services.AddTransient<IEmailSender, NullMessageSender>();
       services.AddTransient<ISettingsService, SettingsService>();
       services.AddScoped<IAccountService, AccountService>();
       services.AddScoped<IItemsService, ItemsService>();
       services.AddScoped<IBagsService, BagsService>();
+      services.AddScoped<ICharacterService, CharacterService>();
+      services.AddScoped<IUserService, UserService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -143,7 +145,6 @@ namespace SFMBE.Server
         //new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
       }
 
-
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
@@ -156,49 +157,15 @@ namespace SFMBE.Server
         app.UseExceptionHandler("/Error");
       }
 
-      app.UseExceptionHandler(
-                alternativeApp =>
-                {
-                  alternativeApp.Run(
-                      async context =>
-                      {
-                        context.Response.StatusCode = (int)HttpStatusCode.OK;
-                        context.Response.ContentType = GlobalConstants.JsonContentType;
-                        var exceptionHandlerFeature = context.Features.Get<IExceptionHandlerFeature>();
-                        if (exceptionHandlerFeature?.Error != null)
-                        {
-                          var ex = exceptionHandlerFeature.Error;
-                          while (ex is AggregateException aggregateException
-                                   && aggregateException.InnerExceptions.Any())
-                          {
-                            ex = aggregateException.InnerExceptions.First();
-                          }
+      app.UseExceptionHandler(this.ExceptionHandler(env));
 
-                          //// TODO: Log it
-
-                          var exceptionMessage = ex.Message;
-                          if (env.IsDevelopment())
-                          {
-                            exceptionMessage = ex.ToString();
-                          }
-
-                          await context.Response
-                                .WriteAsync(JsonConvert.SerializeObject(new ApiResponse<object>(new ApiError("GLOBAL", exceptionMessage))))
-                                .ConfigureAwait(continueOnCapturedContext: false);
-                        }
-                      });
-                });
-
-
-      //app.UseHttpsRedirection();
-      //app.UseCookiePolicy();
       app.UseJwtBearerTokens(
                 app.ApplicationServices.GetRequiredService<IOptions<TokenProviderOptions>>(),
                 PrincipalResolver);
 
       app.UseBlazorFrameworkFiles();
       app.UseStaticFiles();
-      //app.UseClientSideBlazorFiles<Client.Program>();
+
       app.UseRouting();
 
       app.UseAuthentication();
@@ -206,14 +173,42 @@ namespace SFMBE.Server
 
       app.UseEndpoints(endpoints =>
       {
-        //endpoints.MapDefaultControllerRoute();
-        //endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-        //endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-
         endpoints.MapControllers();
         endpoints.MapFallbackToFile("index.html");
       });
     }
+
+    private Action<IApplicationBuilder> ExceptionHandler(IWebHostEnvironment env) => alternativeApp =>
+    {
+      alternativeApp.Run(
+          async context =>
+          {
+            context.Response.StatusCode = (int)HttpStatusCode.OK;
+            context.Response.ContentType = GlobalConstants.JsonContentType;
+            var exceptionHandlerFeature = context.Features.Get<IExceptionHandlerFeature>();
+            if (exceptionHandlerFeature?.Error != null)
+            {
+              var ex = exceptionHandlerFeature.Error;
+              while (ex is AggregateException aggregateException
+                       && aggregateException.InnerExceptions.Any())
+              {
+                ex = aggregateException.InnerExceptions.First();
+              }
+
+              //// TODO: Log it
+
+              var exceptionMessage = ex.Message;
+              if (env.IsDevelopment())
+              {
+                exceptionMessage = ex.ToString();
+              }
+
+              await context.Response
+                    .WriteAsync(JsonConvert.SerializeObject(new ApiResponse<object>(new ApiError("GLOBAL", exceptionMessage))))
+                    .ConfigureAwait(continueOnCapturedContext: false);
+            }
+          });
+    };
 
     private static async Task<GenericPrincipal> PrincipalResolver(HttpContext context)
     {

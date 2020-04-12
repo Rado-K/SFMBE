@@ -21,11 +21,11 @@
 
     [HttpPost]
     [Route("create")]
-    public async Task<ActionResult<ApiResponse<ItemStatsResponseModel>>> Create(ItemStatsRequestModel itemStatsRequestModel)
+    public async Task<ActionResult<ApiResponse<ItemResponseModel>>> Create(ItemStatsRequestModel itemStatsRequestModel)
     {
       if (itemStatsRequestModel == null || !this.ModelState.IsValid)
       {
-        return this.ModelStateErrors<ItemStatsResponseModel>();
+        return this.ModelStateErrors<ItemResponseModel>();
       }
 
       var response = await this.itemsService.CreateAsync(itemStatsRequestModel);

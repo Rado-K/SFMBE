@@ -5,6 +5,8 @@ namespace SFMBE.Data.Models
 {
   public class Character : BaseModel<int>
   {
+    public string Name { get; set; }
+
     public int Level { get; set; } = 0;
 
     public int Money { get; set; } = 25;
@@ -26,7 +28,6 @@ namespace SFMBE.Data.Models
     public virtual Gear Gear { get; set; }
 
     public int BagId { get; set; }
-
     public virtual Bag Bag { get; set; }
   }
 }

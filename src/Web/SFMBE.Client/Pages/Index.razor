@@ -2,12 +2,40 @@
 @page "/index"
 @using SFMBE.Client.Pages.Character;
 
-<div class="">
+@if (this.character == null)
+{
+    <EditForm Model="this.model" OnValidSubmit="this.log">
+        <div class="form-group">
+            <label>Character name:</label>
+            <div>
+                <InputText class="form-control" @bind-Value="this.model.CharacterName" />
+                <ValidationMessage For="(() => this.model.CharacterName)" />
+            </div>
+        </div>
+    </EditForm>
 
-    <CardInfo />
 
-    <Board TypeBoard="gear" Items="gearItems" BoardRows="3" />
+    <form>
+        <div class="form-group">
 
-    <Board TypeBoard="bag" Items="bagItems" BoardRows="7" />
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
 
-</div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+}
+else
+{
+    <div class="row">
+
+        <CardInfo />
+
+        <Board TypeBoard="gear" Items="gearItems" BoardRows="3" />
+
+        <Board TypeBoard="bag" Items="bagItems" BoardRows="7" />
+
+    </div>
+}

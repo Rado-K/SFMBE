@@ -11,6 +11,7 @@ namespace SFMBE.Client
   using SFMBE.Client.Infrastructure;
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Client.Respository.Account;
+  using SFMBE.Client.Respository.Character;
 
   public class Program
   {
@@ -28,18 +29,19 @@ namespace SFMBE.Client
     {
       services.AddOptions();
 
-      services.AddScoped<JWTAuthenticationStateProvider>();
-      services.AddScoped<AuthenticationStateProvider, JWTAuthenticationStateProvider>(
+      services.AddSingleton<JWTAuthenticationStateProvider>();
+      services.AddSingleton<AuthenticationStateProvider, JWTAuthenticationStateProvider>(
         provider => provider.GetRequiredService<JWTAuthenticationStateProvider>());
 
-      services.AddScoped<ILoginService, JWTAuthenticationStateProvider>(
+      services.AddSingleton<ILoginService, JWTAuthenticationStateProvider>(
         provider => provider.GetRequiredService<JWTAuthenticationStateProvider>());
 
 
       services.AddSingleton<IApplicationState, ApplicationState>();
-      services.AddScoped<IHttpService, HttpService>();
-      services.AddScoped<IAccountRepository, AccountRepository>();
-      //services.AddTransient<IApiClient, ApiClient>();
+      services.AddSingleton<IHttpService, HttpService>();
+      services.AddSingleton<IAccountRepository, AccountRepository>();
+      services.AddSingleton<ICharactersRepository, CharactersRepository>();
+      
 
       services.AddApiAuthorization();
       services.AddBaseAddressHttpClient();

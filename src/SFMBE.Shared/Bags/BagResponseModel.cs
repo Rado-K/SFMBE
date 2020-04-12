@@ -1,7 +1,12 @@
 ﻿namespace SFMBE.Shared.Bags
 {
-  public class BagResponseModel
+  using SFMBE.Data.Models;
+  using SFMBE.Services.Mapping;
+  using SFMBE.Shared.Items;
+  using System.Collections.Generic;
+
+  public class BagResponseModel : IMapFrom<Bag>
   {
-    public bool GODMOD { get; set; }
+    public ICollection<ItemResponseModel> Items { get; set; }
   }
 }
