@@ -30,26 +30,6 @@
             new CharacterResponseModel
             {
               Agility = x.Agility,
-              Bag =
-                new Shared.Bags.BagResponseModel
-                {
-                  Items = x.Bag.Items.Select(i =>
-                      new ItemResponseModel
-                      {
-                        Id = i.Id
-                      })
-                  .ToList()
-                },
-              Gear =
-                new Shared.Gear.GearResponseModel
-                {
-                  EquippedItems = x.Gear.EquippedItems.Select(i =>
-                      new ItemResponseModel
-                      {
-                        Id = i.Id
-                      })
-                  .ToList()
-                },
               Experience = x.Experience,
               Image = x.Image,
               Intelligence = x.Intelligence,
