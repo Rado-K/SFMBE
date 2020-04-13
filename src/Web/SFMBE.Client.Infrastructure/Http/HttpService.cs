@@ -44,7 +44,7 @@
     {
       var response = await this.httpClient.PostAsync(url, data);
 
-      if (response.IsSuccessStatusCode && response.Content != default)
+      if (response.IsSuccessStatusCode)
       {
         var responseDeserialized = await this.Deserialize<TResponse>(response, this.defaultJsonSerializerOptions);
         return new ApiResponse<TResponse>(responseDeserialized);
@@ -78,6 +78,11 @@
     private async Task<T> Deserialize<T>(HttpResponseMessage httpResponse, JsonSerializerOptions options)
     {
       string responseString = await httpResponse.Content.ReadAsStringAsync();
+
+      if (string.IsNullOrEmpty(responseString))
+      {
+        return default;
+      }
 
       return JsonSerializer.Deserialize<T>(responseString, options);
     }

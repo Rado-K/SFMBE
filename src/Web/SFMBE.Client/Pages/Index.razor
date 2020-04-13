@@ -1,31 +1,27 @@
 ﻿@page "/"
 @page "/index"
+@attribute [Authorize]
 @using SFMBE.Client.Pages.Character;
 
-@if (this.character == null)
+<ErrorList Errors="this.character?.Errors" />
+
+@if (this.character is null)
 {
-    <EditForm Model="this.model" OnValidSubmit="this.log">
+    <p><em>Searching Character...</em></p>
+}
+else if (this.character?.Data is null)
+{
+    <EditForm Model="this.characterRequestModel" OnValidSubmit="this.CreateCharacter">
         <div class="form-group">
             <label>Character name:</label>
             <div>
-                <InputText class="form-control" @bind-Value="this.model.CharacterName" />
-                <ValidationMessage For="(() => this.model.CharacterName)" />
+                <InputText class="form-control" @bind-Value="this.characterRequestModel.CharacterName" />
+                @*<ValidationMessage For="(() => this.characterRequestModel.CharacterName)" />*@
             </div>
         </div>
+
+        <button type="submit" class="btn btn-block text-right">Create</button>
     </EditForm>
-
-
-    <form>
-        <div class="form-group">
-
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-
 }
 else
 {

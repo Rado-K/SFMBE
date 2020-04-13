@@ -67,6 +67,10 @@
     <Compile Remove="Migrations\20200407180351_DetachmentEntities.Designer.cs" />
     <Compile Remove="Migrations\20200407180735_DetachmentEntities.cs" />
     <Compile Remove="Migrations\20200407180735_DetachmentEntities.Designer.cs" />
+    <Compile Remove="Migrations\20200412080739_test.cs" />
+    <Compile Remove="Migrations\20200412080739_test.Designer.cs" />
+    <Compile Remove="Migrations\20200412080927_test.cs" />
+    <Compile Remove="Migrations\20200412080927_test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

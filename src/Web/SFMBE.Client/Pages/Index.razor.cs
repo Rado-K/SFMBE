@@ -4,9 +4,7 @@
   using SFMBE.Client.Respository.Character;
   using SFMBE.Shared;
   using SFMBE.Shared.Character;
-  using System;
   using System.Collections.Generic;
-  using System.Linq;
   using System.Threading.Tasks;
 
   public partial class Index
@@ -18,14 +16,11 @@
     private List<string> gearItems;
 
     private ApiResponse<CharacterResponseModel> character;
-    private CharacterRequestModel model = new CharacterRequestModel();
-    private string charachterName = string.Empty;
+    private readonly CharacterRequestModel characterRequestModel = new CharacterRequestModel();
 
     protected override async Task OnInitializedAsync()
     {
-
-      await Task.Delay(0);
-
+      this.character = await this.CharactersRepository.GetCharacter();
 
       this.gearItems = new List<string>
       {
@@ -44,10 +39,14 @@
         };
     }
 
-    private void log()
+    private async Task CreateCharacter()
     {
-      this.charachterName = "maa";
-      Console.WriteLine(this.charachterName);
+      var characterId = await this.CharactersRepository.CreateCharacter(this.characterRequestModel.CharacterName);
+
+      if (characterId.IsOk)
+      {
+        this.character = await this.CharactersRepository.GetCharacter(characterId.Data.Id);
+      }
     }
   }
 }

@@ -76,11 +76,52 @@
       return character.Id;
     }
 
-    public async Task<Character> GetCurrentCharacter()
+    public async Task<CharacterResponseModel> GetCurrentCharacter()
     {
       var user = await this.userService.GetUser();
 
-      return user.Character;
+      if (user.Character != null)
+      {
+        return new CharacterResponseModel
+        {
+          Agility = user.Character.Agility,
+          Bag =
+                  new Shared.Bags.BagResponseModel
+                  {
+                    Items = user.Character.Bag.Items.Select(i =>
+                        new ItemResponseModel
+                        {
+                          Id = i.Id
+                        })
+                    .ToList()
+                  },
+          Gear =
+                  new Shared.Gear.GearResponseModel
+                  {
+                    EquippedItems = user.Character.Gear.EquippedItems.Select(i =>
+                        new ItemResponseModel
+                        {
+                          Id = i.Id
+                        })
+                    .ToList()
+                  },
+          Experience = user.Character.Experience,
+          Image = user.Character.Image,
+          Intelligence = user.Character.Intelligence,
+          Level = user.Character.Level,
+          Money = user.Character.Money,
+          Name = user.Character.Name,
+          Stamina = user.Character.Stamina,
+          Strength = user.Character.Strength
+        };
+      }
+
+      return default;
+    }
+
+    public async Task<bool> HaveCharacter()
+    {
+      return await this.userService.CurrentUserHasCharacter();
     }
   }
 }

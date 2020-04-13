@@ -21,5 +21,12 @@
 
     public async Task<ApplicationUser> GetUser()
       => await this.userManager.GetUserAsync(this.httpContext.HttpContext.User);
+
+    public async Task<bool> CurrentUserHasCharacter()
+    {
+      var user = await this.userManager.GetUserAsync(this.httpContext.HttpContext.User);
+
+      return user.Character != null;
+    }
   }
 }

@@ -7,5 +7,6 @@ namespace SFMBE.Services.Data.User
   {
     Task<ApplicationUser> GetUser();
     string GetEmail();
+    Task<bool> CurrentUserHasCharacter();
   }
 }

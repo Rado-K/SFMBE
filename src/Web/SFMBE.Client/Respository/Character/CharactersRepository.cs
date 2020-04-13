@@ -8,12 +8,24 @@
 
   public class CharactersRepository : ICharactersRepository
   {
-    private const string URL = "api/character";
+    private const string URL = "api/characters";
     private readonly IHttpService httpService;
 
     public CharactersRepository(IHttpService httpService)
     {
       this.httpService = httpService;
+    }
+
+    public async Task<ApiResponse<CharacterResponseModel>> GetCharacter()
+    {
+      var httpResponse = await this.httpService.Get<CharacterResponseModel>($"{URL}/GetCharacter");
+
+      if (!httpResponse.IsOk)
+      {
+        return new ApiResponse<CharacterResponseModel>(httpResponse.Errors);
+      }
+
+      return httpResponse;
     }
 
     public async Task<ApiResponse<CharacterResponseModel>> GetCharacter(int characterId)
@@ -28,13 +40,25 @@
       return httpResponse;
     }
 
-    public async Task<ApiResponse<int>> CreateCharacter(string name)
+    public async Task<ApiResponse<CharacterCreateResponseModel>> CreateCharacter(string name)
     {
-      var httpResponse = await this.httpService.PostJson<string, int>(URL, name);
+      var httpResponse = await this.httpService.PostJson<string, CharacterCreateResponseModel>($"{URL}/CreateCharacter", name);
 
       if (!httpResponse.IsOk)
       {
-        return new ApiResponse<int>(httpResponse.Errors);
+        return new ApiResponse<CharacterCreateResponseModel>(httpResponse.Errors);
+      }
+
+      return httpResponse;
+    }
+
+    public async Task<ApiResponse<bool>> TryToGetCharacter()
+    {
+      var httpResponse = await this.httpService.Get<bool>($"{URL}/TryToGet");
+
+      if (!httpResponse.IsOk)
+      {
+        return new ApiResponse<bool>(httpResponse.Errors);
       }
 
       return httpResponse;

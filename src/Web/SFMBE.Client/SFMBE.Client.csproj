@@ -23,5 +23,8 @@
     <ProjectReference Include="..\..\SFMBE.Shared\SFMBE.Shared.csproj" />
     <ProjectReference Include="..\SFMBE.Client.Infrastructure\SFMBE.Client.Infrastructure.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Respository\User\" />
+  </ItemGroup>
 
 </Project>
