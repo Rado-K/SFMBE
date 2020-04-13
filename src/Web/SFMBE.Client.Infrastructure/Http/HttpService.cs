@@ -24,8 +24,8 @@
 
       if (responseHTTP.IsSuccessStatusCode)
       {
-        var response = await this.Deserialize<T>(responseHTTP, this.defaultJsonSerializerOptions);
-        return new ApiResponse<T>(response);
+        var response = await this.Deserialize<ApiResponse<T>>(responseHTTP, this.defaultJsonSerializerOptions);
+        return response;
       }
 
       return new ApiResponse<T>(new ApiError { Error = responseHTTP.StatusCode.ToString(), Item = await responseHTTP.Content.ReadAsStringAsync() });
@@ -46,8 +46,8 @@
 
       if (response.IsSuccessStatusCode)
       {
-        var responseDeserialized = await this.Deserialize<TResponse>(response, this.defaultJsonSerializerOptions);
-        return new ApiResponse<TResponse>(responseDeserialized);
+        var responseDeserialized = await this.Deserialize<ApiResponse<TResponse>>(response, this.defaultJsonSerializerOptions);
+        return responseDeserialized;
       }
 
       return new ApiResponse<TResponse>(new ApiError { Error = response.StatusCode.ToString(), Item = await response.Content.ReadAsStringAsync() });

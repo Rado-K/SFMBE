@@ -3,6 +3,7 @@
   using Microsoft.EntityFrameworkCore;
   using SFMBE.Data.Common.Repositories;
   using SFMBE.Data.Models;
+  using SFMBE.Services.Mapping;
   using SFMBE.Services.Data.User;
   using SFMBE.Shared.Character;
   using SFMBE.Shared.Items;
@@ -64,7 +65,7 @@
       return character;
     }
 
-    public async Task<int> CreateCharacter(string name)
+    public async Task<CharacterCreateResponseModel> CreateCharacter(string name)
     {
       var character = new Character { Name = name };
       var user = await this.userService.GetUser();
@@ -73,7 +74,7 @@
       await this.characterRepository.AddAsync(character);
       await this.characterRepository.SaveChangesAsync();
 
-      return character.Id;
+      return new CharacterCreateResponseModel { Id = character.Id };
     }
 
     public async Task<CharacterResponseModel> GetCurrentCharacter()

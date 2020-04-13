@@ -2,7 +2,6 @@
 {
   using Microsoft.AspNetCore.Mvc;
   using SFMBE.Services.Data.Account;
-  using SFMBE.Services.Data.Bag;
   using SFMBE.Shared;
   using SFMBE.Shared.Account;
   using System.Threading.Tasks;

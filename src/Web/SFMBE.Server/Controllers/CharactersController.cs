@@ -29,7 +29,7 @@
     }
 
     [Route("{characterId:int}")]
-    public async Task<ActionResult<ApiResponse<CharacterResponseModel>>> GetCharacterById(int characterId)
+    public async Task<ActionResult<ApiResponse<CharacterResponseModel>>> GetCharacterById([FromBody] int characterId)
     {
       var response = await this.characterService.GetCharacterById(characterId);
 
