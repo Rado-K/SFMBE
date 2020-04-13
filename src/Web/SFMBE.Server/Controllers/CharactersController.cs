@@ -15,7 +15,7 @@
       this.characterService = characterService;
     }
 
-    [Route("GetCharacter")]
+    [Route(nameof(GetCharacter))]
     public async Task<ActionResult<ApiResponse<CharacterResponseModel>>> GetCharacter()
     {
       var response = await this.characterService.GetCurrentCharacter();
@@ -28,10 +28,10 @@
       return this.Ok(response.ToApiResponse());
     }
 
-    [Route("{characterId:int}")]
-    public async Task<ActionResult<ApiResponse<CharacterResponseModel>>> GetCharacterById([FromBody] int characterId)
+    [Route("{id:int}")]
+    public async Task<ActionResult<ApiResponse<CharacterResponseModel>>> GetCharacterById([FromBody] int id)
     {
-      var response = await this.characterService.GetCharacterById(characterId);
+      var response = await this.characterService.GetCharacterById(id);
 
       if (response is null)
       {

@@ -81,40 +81,9 @@
     {
       var user = await this.userService.GetUser();
 
-      if (user.Character != null)
+      if (user.CharacterId != null)
       {
-        return new CharacterResponseModel
-        {
-          Agility = user.Character.Agility,
-          Bag =
-                  new Shared.Bags.BagResponseModel
-                  {
-                    Items = user.Character.Bag.Items.Select(i =>
-                        new ItemResponseModel
-                        {
-                          Id = i.Id
-                        })
-                    .ToList()
-                  },
-          Gear =
-                  new Shared.Gear.GearResponseModel
-                  {
-                    EquippedItems = user.Character.Gear.EquippedItems.Select(i =>
-                        new ItemResponseModel
-                        {
-                          Id = i.Id
-                        })
-                    .ToList()
-                  },
-          Experience = user.Character.Experience,
-          Image = user.Character.Image,
-          Intelligence = user.Character.Intelligence,
-          Level = user.Character.Level,
-          Money = user.Character.Money,
-          Name = user.Character.Name,
-          Stamina = user.Character.Stamina,
-          Strength = user.Character.Strength
-        };
+        return await this.GetCharacterById((int)user.CharacterId);
       }
 
       return default;
