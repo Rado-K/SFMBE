@@ -51,17 +51,5 @@
 
       return httpResponse;
     }
-
-    public async Task<ApiResponse<bool>> TryToGetCharacter()
-    {
-      var httpResponse = await this.httpService.Get<bool>($"{URL}/TryToGet");
-
-      if (!httpResponse.IsOk)
-      {
-        return new ApiResponse<bool>(httpResponse.Errors);
-      }
-
-      return httpResponse;
-    }
   }
 }

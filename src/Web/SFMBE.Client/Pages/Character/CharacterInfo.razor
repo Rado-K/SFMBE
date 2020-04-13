@@ -5,85 +5,17 @@
             <img readonly="" class="" style="height: 200px; width: 100%; display: block;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22318%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20318%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_158bd1d28ef%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_158bd1d28ef%22%3E%3Crect%20width%3D%22318%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22129.359375%22%20y%3D%2297.35%22%3EImage%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Card image">
         </div>
         <div class="card-body">
-            <h5 class="card-title">@this.Character</h5>
-            <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-        </div>
-        <div class="card-body">
-            <p class="card-text">Choose wisely</p>
+            <p class="card-text">Characteristics</p>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="col-md-6">
-                    Stamina
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a class="badge badge-primary badge-pill"><img src="remove-24px.svg"></a>
-                        </div>
-                        <div class="col-md-4">
-                            313
-                        </div>
-                        <div class="col-md-4">
-                            <a class="badge badge-primary badge-pill"><img src="add-24px.svg"></a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="col-md-6">
-                    Strength
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a class="badge badge-primary badge-pill">-</a>
-                        </div>
-                        <div class="col-md-4">
-                            31
-                        </div>
-                        <div class="col-md-4">
-                            <a class="badge badge-primary badge-pill">+</a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="col-md-6">
-                    Agility
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <span class="badge badge-primary badge-pill">-</span>
-                        </div>
-                        <div class="col-md-4">
-                            31
-                        </div>
-                        <div class="col-md-4">
-                            <span class="badge badge-primary badge-pill">+</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="col-md-6">
-                    Intelligence
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <span class="badge badge-primary badge-pill">-</span>
-                        </div>
-                        <div class="col-md-4">
-                            31
-                        </div>
-                        <div class="col-md-4">
-                            <span class="badge badge-primary badge-pill">+</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
+
+            <StatsLine Info="this" Type="@nameof(this.Character.Stamina)" Value="this.Character.Stamina" />
+
+            <StatsLine Info="this" Type="@nameof(this.Character.Strength)" Value="this.Character.Strength" />
+
+            <StatsLine Info="this" Type="@nameof(this.Character.Agility)" Value="this.Character.Agility" />
+
+            <StatsLine Info="this" Type="@nameof(this.Character.Intelligence)" Value="this.Character.Intelligence" />
         </ul>
     </div>
 </div>
