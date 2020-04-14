@@ -20,19 +20,19 @@
     }
 
     [HttpPost]
-    [Route("create")]
-    public async Task<ActionResult<ApiResponse<ItemResponseModel>>> Create(ItemStatsRequestModel itemStatsRequestModel)
+    [Route(nameof(CreateItem))]
+    public async Task<ActionResult<ApiResponse<ItemResponseModel>>> CreateItem([FromBody] ItemStatsRequestModel itemStatsRequestModel)
     {
       if (itemStatsRequestModel == null || !this.ModelState.IsValid)
       {
         return this.ModelStateErrors<ItemResponseModel>();
       }
 
-      var response = await this.itemsService.CreateAsync(itemStatsRequestModel);
+      var response = await this.itemsService.CreateItem(itemStatsRequestModel);
 
       if (response is null)
       {
-        return this.BadRequest("Invalid item!");
+        return this.BadRequest("Item is missing.");
       }
 
       return this.Ok(response.ToApiResponse());

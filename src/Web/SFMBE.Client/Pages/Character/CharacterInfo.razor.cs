@@ -1,7 +1,7 @@
 ﻿namespace SFMBE.Client.Pages.Character
 {
   using Microsoft.AspNetCore.Components;
-  using SFMBE.Client.Respository.Character;
+  using SFMBE.Client.Respository.Characters;
   using SFMBE.Shared.Character;
 
   public partial class CharacterInfo

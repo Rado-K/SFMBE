@@ -1,4 +1,4 @@
-﻿namespace SFMBE.Client.Respository.Account
+﻿namespace SFMBE.Client.Respository.Accounts
 {
   using SFMBE.Shared;
   using SFMBE.Shared.Account;

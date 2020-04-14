@@ -18,7 +18,7 @@
       this.itemsRepository = itemsRepository;
     }
 
-    public async Task<ItemResponseModel> CreateAsync(ItemStatsRequestModel userModel)
+    public async Task<ItemResponseModel> CreateItem(ItemStatsRequestModel userModel)
     {
       var rnd = new Random();
 
@@ -42,7 +42,7 @@
       return new ItemResponseModel { Id = item.Id };
     }
 
-    public T GetById<T>(int id)
+    public T GetItemById<T>(int id)
     {
       var post = this.itemsRepository
         .All()

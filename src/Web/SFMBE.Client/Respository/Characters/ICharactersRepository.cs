@@ -1,4 +1,4 @@
-﻿namespace SFMBE.Client.Respository.Character
+﻿namespace SFMBE.Client.Respository.Characters
 {
   using SFMBE.Shared;
   using SFMBE.Shared.Character;

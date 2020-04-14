@@ -1,7 +1,7 @@
 ﻿namespace SFMBE.Client.Pages
 {
   using Microsoft.AspNetCore.Components;
-  using SFMBE.Client.Respository.Character;
+  using SFMBE.Client.Respository.Characters;
   using SFMBE.Shared;
   using SFMBE.Shared.Character;
   using System.Collections.Generic;

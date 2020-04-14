@@ -2,7 +2,7 @@
 {
   using Microsoft.AspNetCore.Components;
   using SFMBE.Client.Infrastructure.Auth;
-  using SFMBE.Client.Respository.Account;
+  using SFMBE.Client.Respository.Accounts;
   using SFMBE.Shared;
   using SFMBE.Shared.Account;
   using System;

@@ -10,8 +10,8 @@ namespace SFMBE.Client
   using Microsoft.AspNetCore.Components.Authorization;
   using SFMBE.Client.Infrastructure;
   using SFMBE.Client.Infrastructure.Http;
-  using SFMBE.Client.Respository.Account;
-  using SFMBE.Client.Respository.Character;
+  using SFMBE.Client.Respository.Accounts;
+  using SFMBE.Client.Respository.Characters;
 
   public class Program
   {
