@@ -11,36 +11,16 @@
     [Parameter]
     public int Value { get; set; }
 
-    [ParameterAttribute]
-    public CharacterInfo Info { get; set; }
+    [Parameter] public EventCallback<int> Update{ get; set; }
 
     private void Decreased()
     {
-      --this.Value;
-
-      this.StateHasChanged();
+      this.Update.InvokeAsync(--this.Value);
     }
 
-    private void Increase()
+    private void Increased()
     {
-      ++this.Value;
-
-      this.StateHasChanged();
-    }
-
-    public void UpdateValue(int value)
-    {
-      Console.WriteLine("UpdateValue() statsLine");
-      this.Value = value;
-    }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-      if (firstRender)
-      {
-        Console.WriteLine("OnAfterRender");
-        this.Info.AddToParent(this);
-      }
+      this.Update.InvokeAsync(++this.Value);
     }
   }
 }

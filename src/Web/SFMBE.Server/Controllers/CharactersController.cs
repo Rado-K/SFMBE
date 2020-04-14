@@ -49,5 +49,13 @@
 
       return this.Ok(response.ToApiResponse());
     }
+
+    [HttpPut]
+    public async Task<ActionResult<ApiResponse<CharacterResponseModel>>> UpdateCharacter([FromBody] CharacterResponseModel characterResponseModel)
+    {
+      var response = await this.characterService.UpdateCharacter(characterResponseModel);
+
+      return this.Ok(response.ToApiResponse());
+    }
   }
 }

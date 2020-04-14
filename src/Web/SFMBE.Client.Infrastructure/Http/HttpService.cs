@@ -61,12 +61,18 @@
       return await this.Post<StringContent, TResponse>(url, stringContent);
     }
 
-    public async Task<ApiResponse<object>> Put<T>(string url, T data)
+    public async Task<ApiResponse<T>> Put<T>(string url, T data)
     {
       var dataJson = JsonSerializer.Serialize(data);
       var stringContent = new StringContent(dataJson, Encoding.UTF8, "application/json");
       var response = await this.httpClient.PutAsync(url, stringContent);
-      return new ApiResponse<object>(response);
+      if (response.IsSuccessStatusCode)
+      {
+        var responseDeserialized = await this.Deserialize<ApiResponse<T>>(response, this.defaultJsonSerializerOptions);
+        return responseDeserialized;
+      }
+
+      return new ApiResponse<T>(new ApiError { Error = response.StatusCode.ToString(), Item = await response.Content.ReadAsStringAsync() });
     }
 
     public async Task<ApiResponse<object>> Delete(string url)

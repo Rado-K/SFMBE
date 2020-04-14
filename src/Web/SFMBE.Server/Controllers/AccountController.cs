@@ -32,7 +32,7 @@
         return this.BadRequest("Username or password invalid");
       }
 
-      return this.Ok(response);
+      return this.Ok(response.ToApiResponse());
     }
   }
 }

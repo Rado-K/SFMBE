@@ -35,7 +35,7 @@
         return this.BadRequest("Invalid item!");
       }
 
-      return this.Ok(response);
+      return this.Ok(response.ToApiResponse());
     }
   }
 }

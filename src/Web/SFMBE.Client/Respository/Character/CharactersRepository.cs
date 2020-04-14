@@ -51,5 +51,18 @@
 
       return httpResponse;
     }
+
+    public async Task<ApiResponse<CharacterResponseModel>> UpdateCharacter(CharacterResponseModel characterResponseModel)
+    {
+      var httpResponse = await this.httpService.Put(URL, characterResponseModel);
+
+      if (!httpResponse.IsOk)
+      {
+        return new ApiResponse<CharacterResponseModel>(httpResponse.Errors);
+      }
+
+      return httpResponse;
+    }
+
   }
 }

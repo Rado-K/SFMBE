@@ -9,6 +9,7 @@
   using SFMBE.Shared.Items;
   using System.Linq;
   using System.Threading.Tasks;
+  using System.Runtime.CompilerServices;
 
   public class CharacterService : ICharacterService
   {
@@ -72,6 +73,24 @@
     public async Task<bool> HaveCharacter()
     {
       return await this.userService.CurrentUserHasCharacter();
+    }
+
+    public async Task<CharacterResponseModel> UpdateCharacter(CharacterResponseModel characterResponseModel)
+    {
+      var character = await this.characterRepository
+        .All()
+        .FirstOrDefaultAsync(x => x.Name == characterResponseModel.Name);
+
+      character.Level = characterResponseModel.Level;
+      character.Money = characterResponseModel.Money;
+      character.Stamina = characterResponseModel.Stamina;
+      character.Strength = characterResponseModel.Strength;
+      character.Agility = characterResponseModel.Agility;
+      character.Intelligence = characterResponseModel.Intelligence;
+
+      await this.characterRepository.SaveChangesAsync();
+
+      return await this.GetCurrentCharacter();
     }
   }
 }

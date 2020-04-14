@@ -3,7 +3,6 @@
   using Microsoft.AspNetCore.Components;
   using SFMBE.Client.Respository.Character;
   using SFMBE.Shared.Character;
-  using System;
 
   public partial class CharacterInfo
   {
@@ -12,21 +11,37 @@
 
     [Inject] public ICharactersRepository CharactersRepository { get; set; }
 
-    public void AddToParent(StatsLine stats)
+    private void UpdateStamina(int value)
     {
-      Console.WriteLine("Befor Update method in info");
-      this.Update(stats, stats.Value);
-      Console.WriteLine("after Update method in info");
+      this.Character.Stamina = value;
 
-      this.CharactersRepository.UpdateCharacter();
-      this.StateHasChanged();
+      this.UpdateCharacter();
     }
 
-    private void Update(StatsLine item, int value)
+    private void UpdateStrength(int value)
     {
-      Console.WriteLine("In update method");
-      item.UpdateValue(value);
-      Console.WriteLine("end update method");
+      this.Character.Strength = value;
+
+      this.UpdateCharacter();
+    }
+
+    private void UpdateAgility(int value)
+    {
+      this.Character.Agility = value;
+
+      this.UpdateCharacter();
+    }
+
+    private void UpdateIntelligence(int value)
+    {
+      this.Character.Intelligence = value;
+
+      this.UpdateCharacter();
+    }
+
+    private void UpdateCharacter()
+    {
+      this.CharactersRepository.UpdateCharacter(this.Character);
     }
   }
 }

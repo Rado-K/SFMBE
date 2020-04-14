@@ -9,13 +9,14 @@
         </div>
         <ul class="list-group list-group-flush">
 
-            <StatsLine Info="this" Type="@nameof(this.Character.Stamina)" Value="this.Character.Stamina" />
+            <StatsLine Update="this.UpdateStamina" Type="@nameof(this.Character.Stamina)" Value="this.Character.Stamina" />
 
-            <StatsLine Info="this" Type="@nameof(this.Character.Strength)" Value="this.Character.Strength" />
+            <StatsLine Update="this.UpdateStrength" Type="@nameof(this.Character.Strength)" Value="this.Character.Strength" />
 
-            <StatsLine Info="this" Type="@nameof(this.Character.Agility)" Value="this.Character.Agility" />
+            <StatsLine Update="this.UpdateAgility" Type="@nameof(this.Character.Agility)" Value="this.Character.Agility" />
 
-            <StatsLine Info="this" Type="@nameof(this.Character.Intelligence)" Value="this.Character.Intelligence" />
+            <StatsLine Update="this.UpdateIntelligence" Type="@nameof(this.Character.Intelligence)" Value="this.Character.Intelligence" />
         </ul>
     </div>
 </div>
+

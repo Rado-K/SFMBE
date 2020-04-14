@@ -10,5 +10,6 @@
     Task<CharacterResponseModel> GetCharacterById(int characterId);
     Task<CharacterResponseModel> GetCurrentCharacter();
     Task<bool> HaveCharacter();
+    Task<CharacterResponseModel> UpdateCharacter(CharacterResponseModel characterResponseModel);
   }
 }

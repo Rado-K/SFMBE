@@ -12,10 +12,11 @@
 
     Task<ApiResponse<TResponse>> PostJson<T, TResponse>(string url, T data);
 
-    Task<ApiResponse<object>> Put<T>(string url, T data);
+    //Task<ApiResponse<object>> Put<T>(string url, T data);
 
     Task<ApiResponse<object>> Delete(string url);
 
     Task<ApiResponse<TResponse>> Post<T, TResponse>(string url, T data) where T : HttpContent;
+    Task<ApiResponse<T>> Put<T>(string url, T data);
   }
 }

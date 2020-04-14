@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SFMBE.Common\SFMBE.Common.csproj" />
+    <ProjectReference Include="..\..\SFMBE.Shared\SFMBE.Shared.csproj" />
   </ItemGroup>
 
 </Project>

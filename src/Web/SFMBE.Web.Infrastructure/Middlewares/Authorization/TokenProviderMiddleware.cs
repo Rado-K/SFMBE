@@ -12,6 +12,7 @@
   using Microsoft.Extensions.Options;
   using Newtonsoft.Json;
   using SFMBE.Common;
+  using SFMBE.Shared;
 
   public class TokenProviderMiddleware
   {
@@ -113,7 +114,7 @@
         roles = existingClaims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value)
       };
       context.Response.ContentType = GlobalConstants.JsonContentType;
-      await context.Response.WriteAsync(JsonConvert.SerializeObject(response));
+      await context.Response.WriteAsync(JsonConvert.SerializeObject(response.ToApiResponse()));
     }
   }
 }
