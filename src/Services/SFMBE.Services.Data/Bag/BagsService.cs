@@ -9,6 +9,9 @@
   using System.Threading.Tasks;
   using System.Linq;
   using SFMBE.Services.Mapping;
+  using SFMBE.Shared.Bags;
+  using SFMBE.Shared.Items;
+  using Microsoft.EntityFrameworkCore;
 
   public class BagsService : IBagsService
   {
@@ -19,19 +22,25 @@
       this.bagsRepository = bagService;
     }
 
-    public async Task<Bag> CreateBag()
+    public async Task<BagResponseModel> GetBagById(int bagId)
     {
-      var bag = new Bag();
-
-      await this.bagsRepository.AddAsync(bag);
-      await this.bagsRepository.SaveChangesAsync();
+      var bag = await this.bagsRepository
+        .All()
+        .Where(x => x.Id == bagId)
+        .Select(x =>
+            new BagResponseModel
+            {
+              Items = x.Items
+              .Select(i =>
+                  new ItemsBagResponseModel
+                  {
+                    Id = i.Id
+                  })
+              .ToList()
+            })
+        .FirstOrDefaultAsync();
 
       return bag;
     }
-
-    //public async Task<int> ChangeItemAsync(int itemId, int bagId)
-    //{
-
-    //}
   }
 }

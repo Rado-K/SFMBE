@@ -16,7 +16,7 @@ else if (this.character?.Data is null)
             <label>Character name:</label>
             <div>
                 <InputText class="form-control" @bind-Value="this.characterRequestModel.CharacterName" />
-                @*<ValidationMessage For="(() => this.characterRequestModel.CharacterName)" />*@
+                <ValidationMessage For="(() => this.characterRequestModel.CharacterName)" />
             </div>
         </div>
 
@@ -31,7 +31,7 @@ else
 
         <Board TypeBoard="gear" Items="gearItems" BoardRows="3" />
 
-        <Board TypeBoard="bag" Items="bagItems" BoardRows="7" />
+        <Board TypeBoard="bag" Items="this.bag?.Data" BoardRows="7" />
 
     </div>
 }

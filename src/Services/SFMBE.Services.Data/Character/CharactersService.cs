@@ -3,7 +3,6 @@
   using Microsoft.EntityFrameworkCore;
   using SFMBE.Data.Common.Repositories;
   using SFMBE.Data.Models;
-  using SFMBE.Services.Data.Bag;
   using SFMBE.Services.Data.User;
   using SFMBE.Shared.Character;
   using System.Linq;
@@ -13,16 +12,11 @@
   {
     private readonly IRepository<Character> characterRepository;
     private readonly IUserService userService;
-    private readonly IBagsService bagsService;
 
-    public CharactersService(
-      IRepository<Character> characterRepository,
-      IUserService userService,
-      IBagsService bagsService)
+    public CharactersService(IRepository<Character> characterRepository, IUserService userService)
     {
       this.characterRepository = characterRepository;
       this.userService = userService;
-      this.bagsService = bagsService;
     }
 
     public async Task<CharacterResponseModel> GetCharacterById(int characterId)
@@ -41,7 +35,8 @@
               Money = x.Money,
               Name = x.Name,
               Stamina = x.Stamina,
-              Strength = x.Strength
+              Strength = x.Strength,
+              BagId = x.BagId
             })
         //.To<CharacterResponseModel>()
         .FirstOrDefaultAsync();
@@ -55,8 +50,6 @@
       var user = await this.userService.GetUser();
 
       user.Character = character;
-      var bag = await this.bagsService.CreateBag();
-      user.Character.Bag = bag;
 
       await this.characterRepository.AddAsync(character);
       await this.characterRepository.SaveChangesAsync();
@@ -68,9 +61,9 @@
     {
       var user = await this.userService.GetUser();
 
-      if (user.CharacterId != null)
+      if (user.CharacterId.HasValue)
       {
-        return await this.GetCharacterById((int)user.CharacterId);
+        return await this.GetCharacterById(user.CharacterId.Value);
       }
 
       return default;

@@ -22,5 +22,7 @@
     public int Intelligence { get; set; }
 
     public int Strength { get; set; }
+
+    public int BagId { get; set; }
   }
 }

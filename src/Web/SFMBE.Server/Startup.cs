@@ -28,6 +28,7 @@ namespace SFMBE.Server
   using Services.Data.Storage;
   using Services.Mapping;
   using SFMBE.Services.Data.Character;
+  using SFMBE.Services.Data.Gear;
   using SFMBE.Services.Data.User;
   using Shared;
   using System;
@@ -120,10 +121,11 @@ namespace SFMBE.Server
       // Application services
       services.AddTransient<ISettingsService, SettingsService>();
       services.AddScoped<IAccountService, AccountService>();
-      services.AddScoped<IItemsService, ItemsService>();
-      services.AddScoped<IBagsService, BagsService>();
-      services.AddScoped<ICharactersService, CharactersService>();
       services.AddScoped<IUserService, UserService>();
+      services.AddScoped<ICharactersService, CharactersService>();
+      services.AddScoped<IBagsService, BagsService>();
+      services.AddScoped<IGearsService, GearsService>();
+      services.AddScoped<IItemsService, ItemsService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

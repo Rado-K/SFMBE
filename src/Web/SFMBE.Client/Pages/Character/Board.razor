@@ -8,25 +8,3 @@
                  Border="@(this.TypeBoard == "bag" ? "border-bottom" : string.Empty)" />
     }
 </div>
-
-    @code {
-        [Parameter]
-        public string TypeBoard { get; set; }
-
-        [Parameter]
-        public int BoardRows { get; set; } = 3;
-
-        [Parameter]
-        public List<string> Items { get; set; }
-
-        private List<string> SendItems()
-        {
-            var rowCount = (this.Items.Count < 3 ? this.Items.Count : 3);
-            Console.WriteLine(rowCount);
-            //var rowItems = (int)(Math.Ceiling((decimal)(this.Items.Count) / rowCount));
-            var items = this.Items.GetRange(0, rowCount);
-            this.Items.RemoveRange(0, rowCount);
-
-            return items;
-        }
-    }
