@@ -122,7 +122,7 @@ namespace SFMBE.Server
       services.AddScoped<IAccountService, AccountService>();
       services.AddScoped<IItemsService, ItemsService>();
       services.AddScoped<IBagsService, BagsService>();
-      services.AddScoped<ICharacterService, CharacterService>();
+      services.AddScoped<ICharactersService, CharactersService>();
       services.AddScoped<IUserService, UserService>();
     }
 

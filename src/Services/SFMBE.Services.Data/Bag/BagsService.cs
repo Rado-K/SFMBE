@@ -19,28 +19,19 @@
       this.bagsRepository = bagService;
     }
 
-    public async Task<int> CreateAsync()
+    public async Task<Bag> CreateBag()
     {
       var bag = new Bag();
 
       await this.bagsRepository.AddAsync(bag);
       await this.bagsRepository.SaveChangesAsync();
 
-      return bag.Id;
+      return bag;
     }
 
     //public async Task<int> ChangeItemAsync(int itemId, int bagId)
     //{
 
     //}
-    public IEnumerable<Item> GetItemsInBag(int bagId)
-    {
-      var items = this.bagsRepository.All()
-       .Where(b => b.Id == bagId)
-       .Select(x =>x.Items)
-       .FirstOrDefault();
-
-      return items;
-    }
   }
 }

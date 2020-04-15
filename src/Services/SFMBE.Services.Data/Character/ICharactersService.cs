@@ -1,10 +1,9 @@
 ﻿namespace SFMBE.Services.Data.Character
 {
-  using SFMBE.Data.Models;
   using SFMBE.Shared.Character;
   using System.Threading.Tasks;
 
-  public interface ICharacterService
+  public interface ICharactersService
   {
     Task<CharacterCreateResponseModel> CreateCharacter(string name);
     Task<CharacterResponseModel> GetCharacterById(int characterId);

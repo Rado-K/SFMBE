@@ -8,9 +8,9 @@
 
   public class CharactersController : BaseController
   {
-    private readonly ICharacterService characterService;
+    private readonly ICharactersService characterService;
 
-    public CharactersController(ICharacterService characterService)
+    public CharactersController(ICharactersService characterService)
     {
       this.characterService = characterService;
     }

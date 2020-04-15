@@ -1,30 +1,22 @@
 ﻿namespace Sandbox
 {
-  using System;
-  using System.Diagnostics;
-  using System.IO;
-  using System.Threading.Tasks;
-
+  using CommandLine;
+  using Microsoft.EntityFrameworkCore;
+  using Microsoft.Extensions.Configuration;
+  using Microsoft.Extensions.DependencyInjection;
+  using Microsoft.Extensions.Logging;
+  using SFMBE.Client.Infrastructure.Http;
+  using SFMBE.Client.Respository.Accounts;
   using SFMBE.Data;
   using SFMBE.Data.Common;
   using SFMBE.Data.Common.Repositories;
   using SFMBE.Data.Models;
   using SFMBE.Data.Repositories;
-  using SFMBE.Data.Seeding;
-  using SFMBE.Services.Messaging;
-
-  using CommandLine;
-
-  using Microsoft.EntityFrameworkCore;
-  using Microsoft.Extensions.Configuration;
-  using Microsoft.Extensions.DependencyInjection;
-  using Microsoft.Extensions.Logging;
-  using SFMBE.Client.Respository.Account;
-  using SFMBE.Client.Infrastructure.Http;
-  using SFMBE.Client.Infrastructure;
-  using SFMBE.Shared.Account;
-  using System.Collections.Generic;
   using SFMBE.Services.Data.Settings;
+  using System;
+  using System.Diagnostics;
+  using System.IO;
+  using System.Threading.Tasks;
 
   public static class Program
   {

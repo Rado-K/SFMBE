@@ -7,6 +7,7 @@
   using SFMBE.Services.Data.Items;
   using SFMBE.Shared;
   using SFMBE.Shared.Bags;
+  using System;
   using System.Linq;
   using System.Threading.Tasks;
 
@@ -28,13 +29,7 @@
     [Route("t")]
     public async Task<ActionResult<ApiResponse<BagResponseModel>>> Get(int bagId = 1, string itemType = "Head", int itemId = 4)
     {
-
-      var itemsforSplit = this.bagsService
-        .GetItemsInBag(bagId)
-        .Where(i => (i.Id == itemId && i.IsEquip == false)
-         || (i.IsEquip && i.ItemType.ToString() == itemType));
-      var itemInBag = itemsforSplit.Where(i => !i.IsEquip);
-      return default;
+      throw new NotImplementedException();
     }
   }
 }

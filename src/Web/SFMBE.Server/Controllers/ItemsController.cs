@@ -21,7 +21,7 @@
 
     [HttpPost]
     [Route(nameof(CreateItem))]
-    public async Task<ActionResult<ApiResponse<ItemResponseModel>>> CreateItem([FromBody] ItemStatsRequestModel itemStatsRequestModel)
+    public async Task<ActionResult<ApiResponse<ItemResponseModel>>> CreateItem([FromBody] ItemCreateRequestModel itemStatsRequestModel)
     {
       if (itemStatsRequestModel == null || !this.ModelState.IsValid)
       {

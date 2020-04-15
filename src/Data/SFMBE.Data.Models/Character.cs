@@ -25,9 +25,9 @@ namespace SFMBE.Data.Models
 
 
     public int GearId { get; set; }
-    public virtual Gear Gear { get; set; } = new Gear();
+    public virtual Gear Gear { get; set; }
 
     public int BagId { get; set; }
-    public virtual Bag Bag { get; set; } = new Bag();
+    public virtual Bag Bag { get; set; }
   }
 }

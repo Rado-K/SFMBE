@@ -3,23 +3,26 @@
   using Microsoft.EntityFrameworkCore;
   using SFMBE.Data.Common.Repositories;
   using SFMBE.Data.Models;
-  using SFMBE.Services.Mapping;
+  using SFMBE.Services.Data.Bag;
   using SFMBE.Services.Data.User;
   using SFMBE.Shared.Character;
-  using SFMBE.Shared.Items;
   using System.Linq;
   using System.Threading.Tasks;
-  using System.Runtime.CompilerServices;
 
-  public class CharacterService : ICharacterService
+  public class CharactersService : ICharactersService
   {
     private readonly IRepository<Character> characterRepository;
     private readonly IUserService userService;
+    private readonly IBagsService bagsService;
 
-    public CharacterService(IRepository<Character> characterRepository, IUserService userService)
+    public CharactersService(
+      IRepository<Character> characterRepository,
+      IUserService userService,
+      IBagsService bagsService)
     {
       this.characterRepository = characterRepository;
       this.userService = userService;
+      this.bagsService = bagsService;
     }
 
     public async Task<CharacterResponseModel> GetCharacterById(int characterId)
@@ -50,7 +53,10 @@
     {
       var character = new Character { Name = name };
       var user = await this.userService.GetUser();
+
       user.Character = character;
+      var bag = await this.bagsService.CreateBag();
+      user.Character.Bag = bag;
 
       await this.characterRepository.AddAsync(character);
       await this.characterRepository.SaveChangesAsync();

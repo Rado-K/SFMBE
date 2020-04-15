@@ -18,7 +18,7 @@
       this.itemsRepository = itemsRepository;
     }
 
-    public async Task<ItemResponseModel> CreateItem(ItemStatsRequestModel userModel)
+    public async Task<ItemResponseModel> CreateItem(ItemCreateRequestModel userModel)
     {
       var rnd = new Random();
 
