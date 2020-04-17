@@ -12,6 +12,9 @@ namespace SFMBE.Client
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Client.Respository.Accounts;
   using SFMBE.Client.Respository.Characters;
+  using SFMBE.Client.Respository.Bags;
+  using SFMBE.Client.Pages.Character;
+  using SFMBE.Client.Respository.Items;
 
   public class Program
   {
@@ -41,6 +44,8 @@ namespace SFMBE.Client
       services.AddSingleton<IHttpService, HttpService>();
       services.AddSingleton<IAccountRepository, AccountRepository>();
       services.AddSingleton<ICharactersRepository, CharactersRepository>();
+      services.AddSingleton<IBagsRepository, BagsRepository>();
+      services.AddSingleton<IItemsRepository, ItemsRepository>();
       
 
       services.AddApiAuthorization();

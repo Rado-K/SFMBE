@@ -8,5 +8,6 @@
   {
     Task<ItemsBagResponseModel> CreateItem(ItemCreateRequestModel userModel);
     T GetItemById<T>(int id);
+    Task<ItemsResponseModel> GetItemsByIds(ItemsRequestModel itemsRequestModel);
   }
 }

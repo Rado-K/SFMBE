@@ -9,6 +9,7 @@
   using System.Collections.Generic;
   using System.Linq;
   using System.Threading.Tasks;
+  using System.Web.Http;
 
   public class ItemsController : BaseController
   {
@@ -19,23 +20,43 @@
       this.itemsService = itemsService;
     }
 
-    [HttpPost]
-    [Route(nameof(CreateItem))]
-    public async Task<ActionResult<ApiResponse<ItemsBagResponseModel>>> CreateItem([FromBody] ItemCreateRequestModel itemStatsRequestModel)
+    //[HttpGet]
+    public async Task<ActionResult<ApiResponse<ItemsResponseModel>>> GetItems([FromQuery] ItemsRequestModel itemsRequestModel)
     {
-      if (itemStatsRequestModel == null || !this.ModelState.IsValid)
+      if (itemsRequestModel is null || !this.ModelState.IsValid)
       {
-        return this.ModelStateErrors<ItemsBagResponseModel>();
+        return this.ModelStateErrors<ItemsResponseModel>();
       }
 
-      var response = await this.itemsService.CreateItem(itemStatsRequestModel);
+      var response = await this.itemsService.GetItemsByIds(itemsRequestModel);
 
       if (response is null)
       {
-        return this.BadRequest("Item is missing.");
+        return this.BadRequest("Something is wrong.");
       }
 
       return this.Ok(response.ToApiResponse());
+
+      throw new NotImplementedException();
     }
+
+    //[HttpPost]
+    //[Route(nameof(CreateItem))]
+    //public async Task<ActionResult<ApiResponse<ItemsBagResponseModel>>> CreateItem([System.Web.Http.FromBody] ItemCreateRequestModel itemStatsRequestModel)
+    //{
+    //  if (itemStatsRequestModel == null || !this.ModelState.IsValid)
+    //  {
+    //    return this.ModelStateErrors<ItemsBagResponseModel>();
+    //  }
+
+    //  var response = await this.itemsService.CreateItem(itemStatsRequestModel);
+
+    //  if (response is null)
+    //  {
+    //    return this.BadRequest("Item is missing.");
+    //  }
+
+    //  return this.Ok(response.ToApiResponse());
+    //}
   }
 }

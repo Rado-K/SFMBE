@@ -1,5 +1,6 @@
 ﻿namespace SFMBE.Services.Data.Items
 {
+  using Microsoft.EntityFrameworkCore;
   using SFMBE.Data.Common.Repositories;
   using SFMBE.Data.Models;
   using SFMBE.Services.Mapping;
@@ -40,6 +41,29 @@
       await this.itemsRepository.SaveChangesAsync();
 
       return new ItemsBagResponseModel { Id = item.Id };
+    }
+
+    public async Task<ItemsResponseModel> GetItemsByIds(ItemsRequestModel itemsRequestModel)
+    {
+      var items = new ItemsResponseModel
+      {
+        Items = await this.itemsRepository
+        .All()
+        .Where(x => itemsRequestModel.ItemsIds.Contains(x.Id))
+        .Select(x =>
+            new ItemResponseModel
+            {
+              Agility = x.Agility,
+              Intelligence = x.Intelligence,
+              ItemType = x.ItemType.ToString(),
+              Level = x.Level,
+              Stamina = x.Stamina,
+              Strength = x.Strength
+            })
+        .ToListAsync()
+      };
+
+      return items;
     }
 
     public T GetItemById<T>(int id)

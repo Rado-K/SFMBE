@@ -1,11 +1,12 @@
 ﻿namespace SFMBE.Client.Respository.Items
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
+  using SFMBE.Shared;
+  using SFMBE.Shared.Items;
   using System.Threading.Tasks;
 
-  interface IItemsRepository
+  public interface IItemsRepository
   {
+    Task<ApiResponse<ItemsBagResponseModel>> CreateItem(ItemCreateRequestModel itemCreateRequestModel);
+    Task<ApiResponse<ItemsResponseModel>> GetItems(ItemsRequestModel itemsRequestModel);
   }
 }

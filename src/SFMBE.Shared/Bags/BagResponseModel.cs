@@ -7,6 +7,6 @@
 
   public class BagResponseModel : IMapFrom<Bag>
   {
-    public ICollection<ItemsBagResponseModel> Items { get; set; }
+    public IList<int> Items { get; set; }
   }
 }

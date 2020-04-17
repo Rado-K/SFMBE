@@ -3,19 +3,30 @@
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Shared;
   using SFMBE.Shared.Items;
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
   using System.Threading.Tasks;
 
   public class ItemsRepository : IItemsRepository
   {
-    private const string URL = "api/characters";
+    private const string URL = "api/items";
     private readonly IHttpService httpService;
 
     public ItemsRepository(IHttpService httpService)
     {
       this.httpService = httpService;
+    }
+
+    public async Task<ApiResponse<ItemsResponseModel>> GetItems(ItemsRequestModel itemsRequestModel)
+    {
+      var requestString = "ItemsIds=" + string.Join("&ItemsIds=", itemsRequestModel.ItemsIds);
+
+      var httpResponse = await this.httpService.Get<ItemsResponseModel>($"{URL}?{requestString}");
+
+      if (!httpResponse.IsOk)
+      {
+        return new ApiResponse<ItemsResponseModel>(httpResponse.Errors);
+      }
+
+      return httpResponse;
     }
 
     public async Task<ApiResponse<ItemsBagResponseModel>> CreateItem(ItemCreateRequestModel itemCreateRequestModel)
@@ -28,8 +39,6 @@
       }
 
       return httpResponse;
-
-
     }
   }
 }

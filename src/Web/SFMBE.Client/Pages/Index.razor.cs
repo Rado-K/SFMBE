@@ -7,16 +7,13 @@
   using SFMBE.Shared.Bags;
   using SFMBE.Shared.Character;
   using System.Collections.Generic;
+  using System.Linq;
   using System.Threading.Tasks;
 
   public partial class Index
   {
     [Inject] public ICharactersRepository CharactersRepository { get; set; }
     [Inject] public IBagsRepository BagsRepository { get; set; }
-
-    private List<string> bagItems;
-
-    private List<string> gearItems;
 
     private ApiResponse<CharacterResponseModel> character;
     private ApiResponse<BagResponseModel> bag;
@@ -26,19 +23,8 @@
     {
       this.character = await this.CharactersRepository.GetCharacter();
       this.bag = await this.BagsRepository.GetBag(this.character.Data.BagId);
-      this.bag.Data.Items
-      this.gearItems = default;
+      
 
-
-      this.bagItems = new List<string>
-        {
-          "chest1", "boots1", "head1","sword1","shield1",
-          "chest1", "boots1", "head1","sword1","shield1",
-          "chest1", "boots1", "head1","sword1","shield1",
-          "chest1", "boots1", "head1","sword1","shield1",
-          "chest1", "boots1", "head1","sword1","shield1",
-          "chest1", "boots1", "head1","sword1","shield1",
-        };
     }
 
     private async Task CreateCharacter()

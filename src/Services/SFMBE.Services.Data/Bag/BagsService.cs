@@ -1,17 +1,11 @@
 ﻿namespace SFMBE.Services.Data.Bag
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Text;
-
-  using SFMBE.Data.Models;
-  using SFMBE.Data.Common.Repositories;
-  using System.Threading.Tasks;
-  using System.Linq;
-  using SFMBE.Services.Mapping;
-  using SFMBE.Shared.Bags;
-  using SFMBE.Shared.Items;
   using Microsoft.EntityFrameworkCore;
+  using SFMBE.Data.Common.Repositories;
+  using SFMBE.Data.Models;
+  using SFMBE.Shared.Bags;
+  using System.Linq;
+  using System.Threading.Tasks;
 
   public class BagsService : IBagsService
   {
@@ -31,12 +25,8 @@
             new BagResponseModel
             {
               Items = x.Items
-              .Select(i =>
-                  new ItemsBagResponseModel
-                  {
-                    Id = i.Id
-                  })
-              .ToList()
+                  .Select(x => x.Id)
+                  .ToList()
             })
         .FirstOrDefaultAsync();
 
