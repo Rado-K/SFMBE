@@ -31,6 +31,15 @@
 
       this.items = await this.ItemsRepository.GetItems(requestModel);
 
+      if (this.TypeBoard == "gear" && this.items.Data.Items.Count < 9)
+      {
+        int emptyItemsCount = (9 - this.items.Data.Items.Count);
+        for (int i = 0; i <= emptyItemsCount; i++)
+        {
+          this.items.Data.Items.Add(new ItemResponseModel());
+        }
+      }
+
       if (this.BoardRows == 0)
       {
         this.BoardRows = (int)Math.Ceiling((decimal)(this.items.Data.Items.Count) / 3);

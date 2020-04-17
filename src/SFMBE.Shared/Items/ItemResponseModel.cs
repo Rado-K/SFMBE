@@ -6,7 +6,7 @@
 
   public class ItemResponseModel
   {
-    public string ItemType { get; set; }
+    public string ItemType { get; set; } = "Empty";
 
     public int Level { get; set; }
 

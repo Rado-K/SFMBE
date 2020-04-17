@@ -5,7 +5,7 @@
     <div class="dropdown">
         <img src="Items/@(this.ItemName).png"
              alt="dropdown image"
-             class="btn btn-outline-danger img-responsive @(this.ClassName == "gear" ? "border" : string.Empty)">
+             class="btn btn-outline-danger img-responsive @(this.ClassName == "gear" ? "border" : default)">
         <ul class="dropdown-menu text-center">
             <li><a href="#">Equit</a></li>
             <li><a href="#">Info</a></li>
