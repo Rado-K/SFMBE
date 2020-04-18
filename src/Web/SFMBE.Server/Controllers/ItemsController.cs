@@ -1,15 +1,11 @@
 ﻿namespace SFMBE.Server.Controllers
 {
   using Microsoft.AspNetCore.Mvc;
-  using SFMBE.Data.Models;
   using SFMBE.Services.Data.Items;
   using SFMBE.Shared;
   using SFMBE.Shared.Items;
   using System;
-  using System.Collections.Generic;
-  using System.Linq;
   using System.Threading.Tasks;
-  using System.Web.Http;
 
   public class ItemsController : BaseController
   {

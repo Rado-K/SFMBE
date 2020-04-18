@@ -23,8 +23,6 @@
     {
       this.character = await this.CharactersRepository.GetCharacter();
       this.bag = await this.BagsRepository.GetBag(this.character.Data.BagId);
-      
-
     }
 
     private async Task CreateCharacter()

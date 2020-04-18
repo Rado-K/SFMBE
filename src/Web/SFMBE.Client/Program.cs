@@ -15,6 +15,7 @@ namespace SFMBE.Client
   using SFMBE.Client.Respository.Bags;
   using SFMBE.Client.Pages.Character;
   using SFMBE.Client.Respository.Items;
+  using System.Net.Http;
 
   public class Program
   {
@@ -23,6 +24,8 @@ namespace SFMBE.Client
       var builder = WebAssemblyHostBuilder.CreateDefault(args);
       builder.RootComponents.Add<App>("app");
 
+      builder.Services.AddSingleton(new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
       ConfigureServices(builder.Services);
 
       await builder.Build().RunAsync();
@@ -30,7 +33,7 @@ namespace SFMBE.Client
 
     private static void ConfigureServices(IServiceCollection services)
     {
-      services.AddOptions();
+      //services.AddOptions();
 
       services.AddSingleton<JWTAuthenticationStateProvider>();
       services.AddSingleton<AuthenticationStateProvider, JWTAuthenticationStateProvider>(
@@ -46,10 +49,9 @@ namespace SFMBE.Client
       services.AddSingleton<ICharactersRepository, CharactersRepository>();
       services.AddSingleton<IBagsRepository, BagsRepository>();
       services.AddSingleton<IItemsRepository, ItemsRepository>();
-      
+
 
       services.AddApiAuthorization();
-      services.AddBaseAddressHttpClient();
     }
   }
 }

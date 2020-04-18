@@ -46,10 +46,9 @@
       }
     }
 
-    protected IList<ItemResponseModel> ItemsPerRow()
+    private IList<ItemResponseModel> ItemsPerRow()
     {
       var rowCount = (this.items.Data.Items.Count < 3 ? this.items.Data.Items.Count : 3);
-      //var rowItems = (int)(Math.Ceiling((decimal)(this.Items.Count) / rowCount));
       var itemsPerRow = this.items.Data.Items.GetRange(0, rowCount);
       this.items.Data.Items.RemoveRange(0, rowCount);
       return itemsPerRow;
