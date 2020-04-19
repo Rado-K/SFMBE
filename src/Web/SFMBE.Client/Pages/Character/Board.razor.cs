@@ -33,16 +33,36 @@
 
       if (this.TypeBoard == "gear" && this.items.Data.Items.Count < 9)
       {
-        int emptyItemsCount = (9 - this.items.Data.Items.Count);
-        for (int i = 0; i <= emptyItemsCount; i++)
-        {
-          this.items.Data.Items.Add(new ItemResponseModel());
-        }
+        this.OrderItems();
       }
 
       if (this.BoardRows == 0)
       {
         this.BoardRows = (int)Math.Ceiling((decimal)(this.items.Data.Items.Count) / 3);
+      }
+    }
+
+    private void OrderItems()
+    {
+      int emptyItemsCount = (9 - this.items.Data.Items.Count);
+      for (int i = 0; i <= emptyItemsCount; i++)
+      {
+        this.items.Data.Items.Add(new ItemResponseModel());
+      }
+
+      var gearItemsPosition = new List<string>()
+      {
+        "Empty", "Head", "Empty",
+        "Sword", "Chest", "Shield",
+        "Empty", "Boots", "Empty",
+      };
+
+      for (int i = 0; i < 9; i++)
+      {
+        var temp = this.items.Data.Items.FirstOrDefault(x => x.ItemType == gearItemsPosition[i]);
+        var currItem = this.items.Data.Items.IndexOf(temp);
+        this.items.Data.Items[currItem] = this.items.Data.Items[i];
+        this.items.Data.Items[i] = temp;
       }
     }
 

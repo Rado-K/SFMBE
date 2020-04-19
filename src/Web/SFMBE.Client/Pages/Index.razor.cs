@@ -19,10 +19,14 @@
     private ApiResponse<BagResponseModel> bag;
     private readonly CharacterRequestModel characterRequestModel = new CharacterRequestModel();
 
+    private IList<int> GearItems { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
       this.character = await this.CharactersRepository.GetCharacter();
       this.bag = await this.BagsRepository.GetBag(this.character.Data.BagId);
+
+      this.GearItems = new List<int>() { 14, 12, 11, 10, 4 };
     }
 
     private async Task CreateCharacter()
