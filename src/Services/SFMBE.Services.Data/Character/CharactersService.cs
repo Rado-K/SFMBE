@@ -4,6 +4,7 @@
   using SFMBE.Data.Common.Repositories;
   using SFMBE.Data.Models;
   using SFMBE.Services.Data.User;
+  using SFMBE.Services.Mapping;
   using SFMBE.Shared.Character;
   using System.Linq;
   using System.Threading.Tasks;
@@ -24,21 +25,7 @@
       var character = await this.characterRepository
         .All()
         .Where(x => x.Id == characterId)
-        .Select(x =>
-            new CharacterResponseModel
-            {
-              Agility = x.Agility,
-              Experience = x.Experience,
-              Image = x.Image,
-              Intelligence = x.Intelligence,
-              Level = x.Level,
-              Money = x.Money,
-              Name = x.Name,
-              Stamina = x.Stamina,
-              Strength = x.Strength,
-              BagId = x.BagId
-            })
-        //.To<CharacterResponseModel>()
+        .To<CharacterResponseModel>()
         .FirstOrDefaultAsync();
 
       return character;

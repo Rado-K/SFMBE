@@ -25,7 +25,6 @@
     <ProjectReference Include="..\..\Services\SFMBE.Services.Messaging\SFMBE.Services.Messaging.csproj" />
     <ProjectReference Include="..\SFMBE.Client\SFMBE.Client.csproj" />
     <ProjectReference Include="..\SFMBE.Web.Infrastructure\SFMBE.Server.Infrastructure.csproj" />
-    <ProjectReference Include="..\SFMBE.Web.ViewModels\SFMBE.Web.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -30,7 +30,7 @@ namespace SFMBE.Server
   using SFMBE.Services.Data.Character;
   using SFMBE.Services.Data.Gear;
   using SFMBE.Services.Data.User;
-  using Shared;
+  using SFMBE.Shared;
   using System;
   using System.Linq;
   using System.Net;
@@ -40,7 +40,6 @@ namespace SFMBE.Server
   using System.Text;
   using System.Threading.Tasks;
   using Web.Infrastructure.Middlewares.Authorization;
-  using Web.ViewModels;
 
   public class Startup
   {
