@@ -24,7 +24,11 @@
     protected override async Task OnInitializedAsync()
     {
       this.character = await this.CharactersRepository.GetCharacter();
-      this.bag = await this.BagsRepository.GetBag(this.character.Data.BagId);
+      ;
+      if (this.character.IsOk)
+      {
+        this.bag = await this.BagsRepository.GetBag(this.character.Data.BagId);
+      }
 
       this.GearItems = new List<int>() { 14, 12, 11, 10, 4 };
     }
