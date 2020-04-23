@@ -187,7 +187,7 @@ namespace SFMBE.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CharacterId")
+                    b.Property<int>("CharacterId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -247,8 +247,6 @@ namespace SFMBE.Data.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CharacterId");
 
                     b.HasIndex("IsDeleted");
 
@@ -338,6 +336,9 @@ namespace SFMBE.Data.Migrations
                     b.Property<int>("Strength")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BagId")
@@ -346,7 +347,11 @@ namespace SFMBE.Data.Migrations
                     b.HasIndex("GearId")
                         .IsUnique();
 
-                    b.ToTable("Character");
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
+
+                    b.ToTable("Characters");
                 });
 
             modelBuilder.Entity("SFMBE.Data.Models.Gear", b =>
@@ -364,7 +369,7 @@ namespace SFMBE.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Gear");
+                    b.ToTable("Gears");
                 });
 
             modelBuilder.Entity("SFMBE.Data.Models.Item", b =>
@@ -395,9 +400,6 @@ namespace SFMBE.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsEquip")
-                        .HasColumnType("bit");
-
                     b.Property<int>("ItemType")
                         .HasColumnType("int");
 
@@ -425,38 +427,6 @@ namespace SFMBE.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Items");
-                });
-
-            modelBuilder.Entity("SFMBE.Data.Models.Setting", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -522,13 +492,6 @@ namespace SFMBE.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SFMBE.Data.Models.ApplicationUser", b =>
-                {
-                    b.HasOne("SFMBE.Data.Models.Character", "Character")
-                        .WithMany()
-                        .HasForeignKey("CharacterId");
-                });
-
             modelBuilder.Entity("SFMBE.Data.Models.Character", b =>
                 {
                     b.HasOne("SFMBE.Data.Models.Bag", "Bag")
@@ -542,6 +505,11 @@ namespace SFMBE.Data.Migrations
                         .HasForeignKey("SFMBE.Data.Models.Character", "GearId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("SFMBE.Data.Models.ApplicationUser", "User")
+                        .WithOne("Character")
+                        .HasForeignKey("SFMBE.Data.Models.Character", "UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("SFMBE.Data.Models.Item", b =>
@@ -552,9 +520,10 @@ namespace SFMBE.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SFMBE.Data.Models.Gear", null)
+                    b.HasOne("SFMBE.Data.Models.Gear", "Gear")
                         .WithMany("EquippedItems")
-                        .HasForeignKey("GearId");
+                        .HasForeignKey("GearId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

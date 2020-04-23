@@ -12,7 +12,6 @@
   using SFMBE.Data.Common.Repositories;
   using SFMBE.Data.Models;
   using SFMBE.Data.Repositories;
-  using SFMBE.Services.Data.Settings;
   using System;
   using System.Diagnostics;
   using System.IO;
@@ -47,8 +46,8 @@
     {
       var sw = Stopwatch.StartNew();
 
-      var settingsService = serviceProvider.GetService<ISettingsService>();
-      Console.WriteLine($"Count of settings: {settingsService.GetCount()}");
+      //var settingsService = serviceProvider.GetService<object>();
+      //Console.WriteLine($"Count of settings: {settingsService.GetCount()}");
 
 
       Console.WriteLine(sw.Elapsed);
@@ -77,7 +76,6 @@
 
       // Application services
       //services.AddTransient<IEmailSender, NullMessageSender>();
-      services.AddTransient<ISettingsService, SettingsService>();
 
 
 

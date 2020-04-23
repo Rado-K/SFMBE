@@ -24,9 +24,9 @@
     {
     }
 
-    public DbSet<Setting> Settings { get; set; }
-
+    public DbSet<Character> Characters { get; set; }
     public DbSet<Item> Items { get; set; }
+    public DbSet<Gear> Gears { get; set; }
     public DbSet<Bag> Bags { get; set; }
 
 
@@ -51,14 +51,9 @@
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-      builder
-        .Entity<Bag>()
-        .HasMany(i => i.Items)
-        .WithOne(i => i.Bag)
-        .HasForeignKey(i => i.BagId);
-
       // Needed for Identity models configuration
       base.OnModelCreating(builder);
+      builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
       this.ConfigureUserIdentityRelations(builder);
 

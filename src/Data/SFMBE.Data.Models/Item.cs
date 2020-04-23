@@ -18,10 +18,10 @@
 
     public int Intelligence { get; set; } = 0;
 
-    public bool IsEquip { get; set; } = false;
+    public int? GearId { get; set; }
+    public virtual Gear Gear { get; set; }
 
     public int BagId { get; set; }
-
     public virtual Bag Bag { get; set; }
   }
 }

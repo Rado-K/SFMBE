@@ -5,7 +5,7 @@
 
   public class Gear : BaseModel<int>
   {
-    public virtual ICollection<Item> EquippedItems { get; set; } = new List<Item>();
+    public virtual ICollection<Item> EquippedItems { get; set; } = new HashSet<Item>();
 
     public virtual Character Character { get; set; }
   }

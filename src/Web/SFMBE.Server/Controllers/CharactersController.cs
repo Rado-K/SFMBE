@@ -18,7 +18,7 @@
     [Route(nameof(GetCharacter))]
     public async Task<ActionResult<ApiResponse<CharacterResponseModel>>> GetCharacter()
     {
-      var response = await this.characterService.GetCurrentCharacter();
+      var response = await this.characterService.GetCharacter<CharacterResponseModel>();
 
       if (response is null)
       {
@@ -31,7 +31,7 @@
     [Route("{id:int}")]
     public async Task<ActionResult<ApiResponse<CharacterResponseModel>>> GetCharacterById([FromBody] int id)
     {
-      var response = await this.characterService.GetCharacterById(id);
+      var response = await this.characterService.GetCharacter<CharacterResponseModel>();
 
       if (response is null)
       {

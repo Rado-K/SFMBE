@@ -38,7 +38,7 @@ namespace SFMBE.Data.Models
 
     #endregion
 
-    public int? CharacterId { get; set; }
-    public Character Character { get; set; }
+    public int CharacterId { get; set; }
+    public virtual Character Character { get; set; }
   }
 }

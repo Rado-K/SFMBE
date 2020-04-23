@@ -24,7 +24,6 @@ namespace SFMBE.Server
   using Services.Data.Account;
   using Services.Data.Bag;
   using Services.Data.Items;
-  using Services.Data.Settings;
   using Services.Data.Storage;
   using Services.Mapping;
   using SFMBE.Services.Data.Character;
@@ -118,7 +117,6 @@ namespace SFMBE.Server
       services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
       // Application services
-      services.AddTransient<ISettingsService, SettingsService>();
       services.AddScoped<IAccountService, AccountService>();
       services.AddScoped<IUserService, UserService>();
       services.AddScoped<ICharactersService, CharactersService>();

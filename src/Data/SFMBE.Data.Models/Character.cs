@@ -29,5 +29,8 @@ namespace SFMBE.Data.Models
 
     public int BagId { get; set; }
     public virtual Bag Bag { get; set; } = new Bag();
+
+    public string UserId { get; set; }
+    public virtual ApplicationUser User { get; set; }
   }
 }

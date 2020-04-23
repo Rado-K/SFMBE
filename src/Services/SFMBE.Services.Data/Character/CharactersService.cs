@@ -7,6 +7,7 @@
   using SFMBE.Services.Mapping;
   using SFMBE.Shared.Character;
   using System.Linq;
+  using System.Security.Cryptography.X509Certificates;
   using System.Threading.Tasks;
 
   public class CharactersService : ICharactersService
@@ -34,9 +35,7 @@
     public async Task<CharacterCreateResponseModel> CreateCharacter(string name)
     {
       var character = new Character { Name = name };
-      var user = await this.userService.GetUser();
-
-      user.Character = character;
+      character.User = await this.userService.GetUser();
 
       await this.characterRepository.AddAsync(character);
       await this.characterRepository.SaveChangesAsync();
@@ -44,21 +43,16 @@
       return new CharacterCreateResponseModel { Id = character.Id };
     }
 
-    public async Task<CharacterResponseModel> GetCurrentCharacter()
+    public async Task<T> GetCharacter<T>()
     {
-      var user = await this.userService.GetUser();
+      var user = await this.userService.GetUser(x => x.Character);
 
-      if (user.CharacterId.HasValue)
+      if (user.Character is null)
       {
-        return await this.GetCharacterById(user.CharacterId.Value);
+        return default;
       }
 
-      return default;
-    }
-
-    public async Task<bool> HaveCharacter()
-    {
-      return await this.userService.CurrentUserHasCharacter();
+      return user.Character.To<T>();
     }
 
     public async Task<CharacterResponseModel> UpdateCharacter(CharacterResponseModel characterResponseModel)
@@ -67,16 +61,12 @@
         .All()
         .FirstOrDefaultAsync(x => x.Name == characterResponseModel.Name);
 
-      character.Level = characterResponseModel.Level;
-      character.Money = characterResponseModel.Money;
-      character.Stamina = characterResponseModel.Stamina;
-      character.Strength = characterResponseModel.Strength;
-      character.Agility = characterResponseModel.Agility;
-      character.Intelligence = characterResponseModel.Intelligence;
+      character = characterResponseModel.To<Character>();
+
 
       await this.characterRepository.SaveChangesAsync();
 
-      return await this.GetCurrentCharacter();
+      return await this.GetCharacter<CharacterResponseModel>();
     }
   }
 }

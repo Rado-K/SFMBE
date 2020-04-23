@@ -1,32 +1,48 @@
 ﻿namespace SFMBE.Services.Data.User
 {
   using Microsoft.AspNetCore.Http;
-  using Microsoft.AspNetCore.Identity;
+  using Microsoft.EntityFrameworkCore;
+  using SFMBE.Data.Common.Repositories;
   using SFMBE.Data.Models;
+  using System;
+  using System.Linq;
+  using System.Linq.Expressions;
   using System.Threading.Tasks;
 
   public class UserService : IUserService
   {
     private readonly IHttpContextAccessor httpContext;
-    private readonly UserManager<ApplicationUser> userManager;
+    private readonly IRepository<ApplicationUser> userRepository;
 
-    public UserService(IHttpContextAccessor httpContext, UserManager<ApplicationUser> userManager)
+    public UserService(
+      IHttpContextAccessor httpContext,
+      IRepository<ApplicationUser> userRepository)
     {
       this.httpContext = httpContext;
-      this.userManager = userManager;
+      this.userRepository = userRepository;
     }
 
-    public string GetEmail()
-      => this.httpContext.HttpContext.User?.Identity?.Name;
-
-    public async Task<ApplicationUser> GetUser()
-      => await this.userManager.GetUserAsync(this.httpContext.HttpContext.User);
-
-    public async Task<bool> CurrentUserHasCharacter()
+    public async Task<ApplicationUser> GetUser(params Expression<Func<ApplicationUser, object>>[] properties)
     {
-      var user = await this.userManager.GetUserAsync(this.httpContext.HttpContext.User);
+      ApplicationUser user = default;
 
-      return user.Character != null;
+      if (properties is null)
+      {
+        user = await this.userRepository
+          .AllAsNoTracking()
+          .Where(x => x.UserName == this.httpContext.HttpContext.User.Identity.Name)
+          .FirstOrDefaultAsync();
+      }
+      else
+      {
+        user = this.userRepository
+        .GetWithProperties(
+        x => x.UserName == this.httpContext.HttpContext.User.Identity.Name,
+        properties)
+        .FirstOrDefault();
+      }
+
+      return user;
     }
   }
 }

@@ -6,9 +6,7 @@
   public interface ICharactersService
   {
     Task<CharacterCreateResponseModel> CreateCharacter(string name);
-    Task<CharacterResponseModel> GetCharacterById(int characterId);
-    Task<CharacterResponseModel> GetCurrentCharacter();
-    Task<bool> HaveCharacter();
+    Task<T> GetCharacter<T>();
     Task<CharacterResponseModel> UpdateCharacter(CharacterResponseModel characterResponseModel);
   }
 }
