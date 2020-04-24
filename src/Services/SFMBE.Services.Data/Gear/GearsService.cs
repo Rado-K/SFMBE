@@ -30,7 +30,7 @@
             {
               EquippedItems = x.EquippedItems
               .Select(i =>
-                new ItemsBagResponseModel
+                new ItemCreateResponseModel
                 {
                   Id = i.Id
                 })

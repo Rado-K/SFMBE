@@ -6,7 +6,7 @@
 
   public interface IItemsRepository
   {
-    Task<ApiResponse<ItemsBagResponseModel>> CreateItem(ItemCreateRequestModel itemCreateRequestModel);
+    Task<ApiResponse<ItemCreateResponseModel>> CreateItem(ItemCreateRequestModel itemCreateRequestModel);
     Task<ApiResponse<ItemsResponseModel>> GetItems(ItemsRequestModel itemsRequestModel);
   }
 }

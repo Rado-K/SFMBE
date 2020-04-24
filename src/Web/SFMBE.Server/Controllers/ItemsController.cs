@@ -32,5 +32,23 @@
 
       return this.Ok(response.ToApiResponse());
     }
+
+    [HttpPost]
+    public async Task<ActionResult<ApiResponse<ItemCreateResponseModel>>> CreateItem([FromBody] ItemCreateRequestModel itemCreateRequestModel)
+    {
+      if (itemCreateRequestModel is null || !this.ModelState.IsValid)
+      {
+        return this.ModelStateErrors<ItemCreateResponseModel>();
+      }
+
+      var response = await this.itemsService.CreateItem(itemCreateRequestModel);
+
+      if (response is null)
+      {
+        return this.BadRequest("Something is wrong.");
+      }
+
+      return this.Ok(response.ToApiResponse());
+    }
   }
 }

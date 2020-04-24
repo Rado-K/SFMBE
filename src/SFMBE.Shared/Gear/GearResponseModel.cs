@@ -7,6 +7,6 @@
 
   public class GearResponseModel : IMapFrom<Gear>
   {
-    public ICollection<ItemsBagResponseModel> EquippedItems { get; set; }
+    public ICollection<ItemCreateResponseModel> EquippedItems { get; set; }
   }
 }

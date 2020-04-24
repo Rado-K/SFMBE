@@ -19,7 +19,7 @@
       this.itemsRepository = itemsRepository;
     }
 
-    public async Task<ItemsBagResponseModel> CreateItem(ItemCreateRequestModel userModel)
+    public async Task<ItemCreateResponseModel> CreateItem(ItemCreateRequestModel userModel)
     {
       var rnd = new Random();
 
@@ -40,41 +40,29 @@
       await this.itemsRepository.AddAsync(item);
       await this.itemsRepository.SaveChangesAsync();
 
-      return new ItemsBagResponseModel { Id = item.Id };
+      return new ItemCreateResponseModel { Id = item.Id };
     }
 
     public async Task<ItemsResponseModel> GetItemsByIds(ItemsRequestModel itemsRequestModel)
     {
-      var items = new ItemsResponseModel
-      {
-        Items = await this.itemsRepository
+      var items = await this.itemsRepository
         .All()
         .Where(x => itemsRequestModel.Items.Contains(x.Id))
-        .Select(x =>
-            new ItemResponseModel
-            {
-              Agility = x.Agility,
-              Intelligence = x.Intelligence,
-              ItemType = x.ItemType.ToString(),
-              Level = x.Level,
-              Stamina = x.Stamina,
-              Strength = x.Strength
-            })
-        .ToListAsync()
-      };
+        .To<ItemResponseModel>()
+        //.Select(x =>
+        //    new ItemResponseModel
+        //    {
+        //      Agility = x.Agility,
+        //      Intelligence = x.Intelligence,
+        //      ItemType = x.ItemType.ToString(),
+        //      Level = x.Level,
+        //      Stamina = x.Stamina,
+        //      Strength = x.Strength
+        //    })
+        .ToListAsync();
 
-      return items;
-    }
-
-    public T GetItemById<T>(int id)
-    {
-      var post = this.itemsRepository
-        .All()
-        .Where(x => x.Id == id)
-        .To<T>()
-        .FirstOrDefault();
-
-      return post;
+      var answer = items.To<ItemsResponseModel>();
+      return answer;
     }
   }
 }

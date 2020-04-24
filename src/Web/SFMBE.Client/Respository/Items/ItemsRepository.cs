@@ -29,13 +29,13 @@
       return httpResponse;
     }
 
-    public async Task<ApiResponse<ItemsBagResponseModel>> CreateItem(ItemCreateRequestModel itemCreateRequestModel)
+    public async Task<ApiResponse<ItemCreateResponseModel>> CreateItem(ItemCreateRequestModel itemCreateRequestModel)
     {
-      var httpResponse = await this.httpService.PostJson<ItemCreateRequestModel, ItemsBagResponseModel>($"{URL}/CreateItem", itemCreateRequestModel);
+      var httpResponse = await this.httpService.PostJson<ItemCreateRequestModel, ItemCreateResponseModel>($"{URL}/CreateItem", itemCreateRequestModel);
 
       if (!httpResponse.IsOk)
       {
-        return new ApiResponse<ItemsBagResponseModel>(httpResponse.Errors);
+        return new ApiResponse<ItemCreateResponseModel>(httpResponse.Errors);
       }
 
       return httpResponse;

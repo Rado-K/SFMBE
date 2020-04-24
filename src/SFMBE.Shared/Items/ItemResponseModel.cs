@@ -1,10 +1,9 @@
 ﻿namespace SFMBE.Shared.Items
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Text;
+  using SFMBE.Data.Models;
+  using SFMBE.Services.Mapping;
 
-  public class ItemResponseModel
+  public class ItemResponseModel : IMapFrom<Item>
   {
     public string ItemType { get; set; } = "Empty";
 
