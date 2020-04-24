@@ -49,7 +49,7 @@
       {
         Items = await this.itemsRepository
         .All()
-        .Where(x => itemsRequestModel.ItemsIds.Contains(x.Id))
+        .Where(x => itemsRequestModel.Items.Contains(x.Id))
         .Select(x =>
             new ItemResponseModel
             {

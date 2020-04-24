@@ -52,13 +52,13 @@
       return httpResponse;
     }
 
-    public async Task<ApiResponse<CharacterResponseModel>> UpdateCharacter(CharacterResponseModel characterResponseModel)
+    public async Task<ApiResponse<CharacterUpdateModel>> UpdateCharacter(CharacterUpdateModel characterResponseModel)
     {
       var httpResponse = await this.httpService.Put(URL, characterResponseModel);
 
       if (!httpResponse.IsOk)
       {
-        return new ApiResponse<CharacterResponseModel>(httpResponse.Errors);
+        return new ApiResponse<CharacterUpdateModel>(httpResponse.Errors);
       }
 
       return httpResponse;

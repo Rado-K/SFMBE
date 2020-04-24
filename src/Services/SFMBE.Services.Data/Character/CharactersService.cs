@@ -7,7 +7,6 @@
   using SFMBE.Services.Mapping;
   using SFMBE.Shared.Character;
   using System.Linq;
-  using System.Security.Cryptography.X509Certificates;
   using System.Threading.Tasks;
 
   public class CharactersService : ICharactersService
@@ -40,7 +39,7 @@
       await this.characterRepository.AddAsync(character);
       await this.characterRepository.SaveChangesAsync();
 
-      return new CharacterCreateResponseModel { Id = character.Id };
+      return character.To<CharacterCreateResponseModel>();
     }
 
     public async Task<T> GetCharacter<T>()
@@ -55,18 +54,18 @@
       return user.Character.To<T>();
     }
 
-    public async Task<CharacterResponseModel> UpdateCharacter(CharacterResponseModel characterResponseModel)
+    public async Task<CharacterUpdateModel> UpdateCharacter(CharacterUpdateModel characterUpdateModel)
     {
       var character = await this.characterRepository
         .All()
-        .FirstOrDefaultAsync(x => x.Name == characterResponseModel.Name);
+        .FirstOrDefaultAsync(x => x.Name == characterUpdateModel.Name);
 
-      character = characterResponseModel.To<Character>();
+      QueryableMappingExtensions.To(characterUpdateModel, character);
 
-
+      this.characterRepository.Update(character);
       await this.characterRepository.SaveChangesAsync();
 
-      return await this.GetCharacter<CharacterResponseModel>();
+      return character.To<CharacterUpdateModel>();
     }
   }
 }

@@ -16,6 +16,9 @@ namespace SFMBE.Client
   using SFMBE.Client.Pages.Character;
   using SFMBE.Client.Respository.Items;
   using System.Net.Http;
+  using SFMBE.Services.Mapping;
+  using SFMBE.Shared;
+  using System.Reflection;
 
   public class Program
   {
@@ -34,6 +37,7 @@ namespace SFMBE.Client
     private static void ConfigureServices(IServiceCollection services)
     {
       //services.AddOptions();
+      AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
       services.AddSingleton<JWTAuthenticationStateProvider>();
       services.AddSingleton<AuthenticationStateProvider, JWTAuthenticationStateProvider>(

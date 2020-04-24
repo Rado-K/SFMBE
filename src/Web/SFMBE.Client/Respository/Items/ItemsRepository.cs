@@ -17,7 +17,7 @@
 
     public async Task<ApiResponse<ItemsResponseModel>> GetItems(ItemsRequestModel itemsRequestModel)
     {
-      var requestString = "ItemsIds=" + string.Join("&ItemsIds=", itemsRequestModel.ItemsIds);
+      var requestString = "ItemsIds=" + string.Join("&ItemsIds=", itemsRequestModel.Items);
 
       var httpResponse = await this.httpService.Get<ItemsResponseModel>($"{URL}?{requestString}");
 

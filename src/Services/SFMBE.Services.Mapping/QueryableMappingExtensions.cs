@@ -3,7 +3,7 @@
   using System;
   using System.Linq;
   using System.Linq.Expressions;
-
+  using AutoMapper;
   using AutoMapper.QueryableExtensions;
 
   public static class QueryableMappingExtensions
@@ -42,14 +42,22 @@
       return AutoMapperConfig.MapperInstance.Map<TDestination>(source);
     }
 
-    public static TDestination To<TSource, TDestination>(this TSource source)
+    public static TDestination To<TSource, TDestination>(this TSource source, TDestination destination)
     {
       if (source == null)
       {
         throw new ArgumentNullException(nameof(source));
       }
 
-      return AutoMapperConfig.MapperInstance.Map<TSource ,TDestination>(source);
+      return AutoMapperConfig.MapperInstance.Map(source, destination);
+    }
+
+    public static IMappingExpression<TSource, TDestination> Ignore<TSource, TDestination>(
+    this IMappingExpression<TSource, TDestination> map,
+    Expression<Func<TDestination, object>> selector)
+    {
+      map.ForMember(selector, config => config.Ignore());
+      return map;
     }
   }
 }

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using SFMBE.Data.Models;
+﻿using SFMBE.Data.Models;
 using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;

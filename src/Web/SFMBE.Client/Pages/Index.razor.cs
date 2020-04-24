@@ -20,6 +20,7 @@
     private readonly CharacterRequestModel characterRequestModel = new CharacterRequestModel();
 
     private IList<int> GearItems { get; set; }
+    private IList<int> BagItems { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -28,9 +29,10 @@
       if (this.character.IsOk)
       {
         this.bag = await this.BagsRepository.GetBag(this.character.Data.BagId);
+        this.BagItems = this.bag.Data.Items;
       }
 
-      this.GearItems = new List<int>() { 14, 12, 11, 10, 4 };
+      this.GearItems = new List<int>() { };
     }
 
     private async Task CreateCharacter()

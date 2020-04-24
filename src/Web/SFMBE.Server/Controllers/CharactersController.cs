@@ -51,7 +51,7 @@
     }
 
     [HttpPut]
-    public async Task<ActionResult<ApiResponse<CharacterResponseModel>>> UpdateCharacter([FromBody] CharacterResponseModel characterResponseModel)
+    public async Task<ActionResult<ApiResponse<CharacterUpdateModel>>> UpdateCharacter([FromBody] CharacterUpdateModel characterResponseModel)
     {
       var response = await this.characterService.UpdateCharacter(characterResponseModel);
 

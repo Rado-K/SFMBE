@@ -7,6 +7,6 @@
   {
     Task<CharacterCreateResponseModel> CreateCharacter(string name);
     Task<T> GetCharacter<T>();
-    Task<CharacterResponseModel> UpdateCharacter(CharacterResponseModel characterResponseModel);
+    Task<CharacterUpdateModel> UpdateCharacter(CharacterUpdateModel characterResponseModel);
   }
 }

@@ -2,6 +2,7 @@
 {
   using Microsoft.AspNetCore.Components;
   using SFMBE.Client.Respository.Items;
+  using SFMBE.Services.Mapping;
   using SFMBE.Shared;
   using SFMBE.Shared.Items;
   using System;
@@ -27,18 +28,21 @@
 
     protected override async Task OnInitializedAsync()
     {
-      var requestModel = new ItemsRequestModel { ItemsIds = Items };
+      var requestModel = new ItemsRequestModel { Items = this.Items };
 
       this.items = await this.ItemsRepository.GetItems(requestModel);
 
-      if (this.TypeBoard == "gear" && this.items.Data.Items.Count < 9)
+      if (this.items.Data != null)
       {
-        this.OrderItems();
-      }
+        if (this.TypeBoard == "gear" && this.items.Data.Items.Count < 9)
+        {
+          this.OrderItems();
+        }
 
-      if (this.BoardRows == 0)
-      {
-        this.BoardRows = (int)Math.Ceiling((decimal)(this.items.Data.Items.Count) / 3);
+        if (this.BoardRows == 0)
+        {
+          this.BoardRows = (int)Math.Ceiling((decimal)(this.items.Data.Items.Count) / 3);
+        }
       }
     }
 

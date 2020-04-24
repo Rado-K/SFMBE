@@ -16,7 +16,6 @@
       this.itemsService = itemsService;
     }
 
-    //[HttpGet]
     public async Task<ActionResult<ApiResponse<ItemsResponseModel>>> GetItems([FromQuery] ItemsRequestModel itemsRequestModel)
     {
       if (itemsRequestModel is null || !this.ModelState.IsValid)
@@ -32,27 +31,6 @@
       }
 
       return this.Ok(response.ToApiResponse());
-
-      throw new NotImplementedException();
     }
-
-    //[HttpPost]
-    //[Route(nameof(CreateItem))]
-    //public async Task<ActionResult<ApiResponse<ItemsBagResponseModel>>> CreateItem([System.Web.Http.FromBody] ItemCreateRequestModel itemStatsRequestModel)
-    //{
-    //  if (itemStatsRequestModel == null || !this.ModelState.IsValid)
-    //  {
-    //    return this.ModelStateErrors<ItemsBagResponseModel>();
-    //  }
-
-    //  var response = await this.itemsService.CreateItem(itemStatsRequestModel);
-
-    //  if (response is null)
-    //  {
-    //    return this.BadRequest("Item is missing.");
-    //  }
-
-    //  return this.Ok(response.ToApiResponse());
-    //}
   }
 }
