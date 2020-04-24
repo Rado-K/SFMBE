@@ -25,10 +25,10 @@
     protected override async Task OnInitializedAsync()
     {
       this.character = await this.CharactersRepository.GetCharacter();
-      ;
+
       if (this.character.IsOk)
       {
-        this.bag = await this.BagsRepository.GetBag(this.character.Data.BagId);
+        this.bag = await this.BagsRepository.GetBag();
         this.BagItems = this.bag.Data.Items;
       }
 

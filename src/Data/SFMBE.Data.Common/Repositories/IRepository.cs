@@ -21,6 +21,6 @@
 
     Task<int> SaveChangesAsync();
 
-    IEnumerable<TEntity> GetWithProperties(Expression<Func<TEntity, bool>> where, params Expression<Func<TEntity, object>>[] properties);
-    }
+    IQueryable<TEntity> GetWithProperties(Expression<Func<TEntity, bool>> where, params Expression<Func<TEntity, object>>[] properties);
+  }
 }

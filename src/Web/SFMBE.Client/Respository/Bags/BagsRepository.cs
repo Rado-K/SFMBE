@@ -3,9 +3,6 @@
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Shared;
   using SFMBE.Shared.Bags;
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
   using System.Threading.Tasks;
 
   public class BagsRepository : IBagsRepository
@@ -18,9 +15,9 @@
       this.httpService = httpService;
     }
 
-    public async Task<ApiResponse<BagResponseModel>> GetBag(int bagId)
+    public async Task<ApiResponse<BagResponseModel>> GetBag()
     {
-      var httpResponse = await this.httpService.Get<BagResponseModel>($"{URL}/{bagId}");
+      var httpResponse = await this.httpService.Get<BagResponseModel>($"{URL}");
 
       if (!httpResponse.IsOk)
       {

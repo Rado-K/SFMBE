@@ -7,6 +7,6 @@
 
   public interface IBagsService
   {
-    Task<BagResponseModel> GetBagById(int bagId);
+    Task<BagResponseModel> GetBag();
   }
 }

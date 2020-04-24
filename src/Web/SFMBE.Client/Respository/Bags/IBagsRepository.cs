@@ -9,6 +9,6 @@
 
   public interface IBagsRepository
   {
-    Task<ApiResponse<BagResponseModel>> GetBag(int characterId);
+    Task<ApiResponse<BagResponseModel>> GetBag();
   }
 }

@@ -28,7 +28,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-      var requestModel = new ItemsRequestModel { Items = this.Items };
+      var requestModel = QueryableMappingExtensions.To<ItemsRequestModel>(this.Items);
 
       this.items = await this.ItemsRepository.GetItems(requestModel);
 

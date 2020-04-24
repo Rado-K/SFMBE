@@ -43,25 +43,15 @@
       return new ItemCreateResponseModel { Id = item.Id };
     }
 
-    public async Task<ItemsResponseModel> GetItemsByIds(ItemsRequestModel itemsRequestModel)
+    public async Task<ItemsResponseModel> GetItemsById(ItemsRequestModel itemsRequestModel)
     {
       var items = await this.itemsRepository
         .All()
         .Where(x => itemsRequestModel.Items.Contains(x.Id))
         .To<ItemResponseModel>()
-        //.Select(x =>
-        //    new ItemResponseModel
-        //    {
-        //      Agility = x.Agility,
-        //      Intelligence = x.Intelligence,
-        //      ItemType = x.ItemType.ToString(),
-        //      Level = x.Level,
-        //      Stamina = x.Stamina,
-        //      Strength = x.Strength
-        //    })
         .ToListAsync();
 
-      var answer = items.To<ItemsResponseModel>();
+      var answer = QueryableMappingExtensions.To<ItemsResponseModel>(items);
       return answer;
     }
   }

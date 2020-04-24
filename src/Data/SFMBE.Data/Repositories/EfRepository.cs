@@ -38,7 +38,7 @@
       entry.State = EntityState.Modified;
     }
 
-    public virtual IEnumerable<TEntity> GetWithProperties(
+    public virtual IQueryable<TEntity> GetWithProperties(
       Expression<Func<TEntity, bool>> where,
       params Expression<Func<TEntity, object>>[] properties)
     {
@@ -52,7 +52,7 @@
       query = properties
                  .Aggregate(query, (current, property) => current.Include(property));
 
-      return query.AsNoTracking().Where(where).ToList();
+      return query.AsNoTracking().Where(where);
     }
 
     public virtual void Delete(TEntity entity) => this.DbSet.Remove(entity);

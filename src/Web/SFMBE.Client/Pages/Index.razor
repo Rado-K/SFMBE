@@ -1,6 +1,7 @@
 ﻿@page "/"
 @page "/index"
 @attribute [Authorize]
+
 @using SFMBE.Client.Pages.Character;
 
 <ErrorList Errors="this.character?.Errors" />
@@ -29,10 +30,9 @@ else
 
         <CharacterInfo Character="this.character?.Data" />
 
-        @*<Board TypeBoard="gear" Items="this.GearItems" BoardRows="3" />
+        @*<Board TypeBoard="gear" Items="this.GearItems" BoardRows="3" />*@
 
-        <Board TypeBoard="gear" Items="this.BagItems" />*@
-
+        <Board TypeBoard="bag" Items="this.BagItems" />
 
     </div>
 }

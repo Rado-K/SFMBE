@@ -5,7 +5,6 @@
   using SFMBE.Data.Common.Repositories;
   using SFMBE.Data.Models;
   using System;
-  using System.Linq;
   using System.Linq.Expressions;
   using System.Threading.Tasks;
 
@@ -24,23 +23,11 @@
 
     public async Task<ApplicationUser> GetUser(params Expression<Func<ApplicationUser, object>>[] properties)
     {
-      ApplicationUser user = default;
-
-      if (properties is null)
-      {
-        user = await this.userRepository
-          .AllAsNoTracking()
-          .Where(x => x.UserName == this.httpContext.HttpContext.User.Identity.Name)
-          .FirstOrDefaultAsync();
-      }
-      else
-      {
-        user = this.userRepository
+      var user = await this.userRepository
         .GetWithProperties(
-        x => x.UserName == this.httpContext.HttpContext.User.Identity.Name,
-        properties)
-        .FirstOrDefault();
-      }
+            x => x.UserName == this.httpContext.HttpContext.User.Identity.Name,
+            properties)
+        .FirstOrDefaultAsync();
 
       return user;
     }

@@ -18,10 +18,9 @@
     }
 
     [HttpGet]
-    [Route("{id:int}")]
-    public async Task<ActionResult<ApiResponse<BagResponseModel>>> GetBag(int id)
+    public async Task<ActionResult<ApiResponse<BagResponseModel>>> GetBag()
     {
-      var response = await this.bagsService.GetBagById(id);
+      var response = await this.bagsService.GetBag();
 
       if (response is null)
       {

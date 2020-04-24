@@ -23,7 +23,7 @@
         return this.ModelStateErrors<ItemsResponseModel>();
       }
 
-      var response = await this.itemsService.GetItemsByIds(itemsRequestModel);
+      var response = await this.itemsService.GetItemsById(itemsRequestModel);
 
       if (response is null)
       {
