@@ -1,14 +1,14 @@
 ﻿namespace SFMBE.Services.Data.Gear
 {
   using SFMBE.Data.Models;
-  using SFMBE.Shared.Gear;
   using System;
-  using System.Collections.Generic;
-  using System.Text;
+  using System.Linq.Expressions;
   using System.Threading.Tasks;
 
   public interface IGearsService
   {
-    Task<GearResponseModel> GetGearById(int gearId);
+    Task<T> GetGear<T>();
+    Task Equip(int id);
+    Task<Gear> GetGear();
   }
 }

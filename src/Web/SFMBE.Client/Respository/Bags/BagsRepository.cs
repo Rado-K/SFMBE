@@ -7,7 +7,7 @@
 
   public class BagsRepository : IBagsRepository
   {
-    private const string URL = "api/bags";
+    private  const string URL = "api/bags";
     private readonly IHttpService httpService;
 
     public BagsRepository(IHttpService httpService)

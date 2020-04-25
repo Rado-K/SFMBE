@@ -1,6 +1,8 @@
 ﻿namespace SFMBE.Client.Pages.Character
 {
   using Microsoft.AspNetCore.Components;
+  using SFMBE.Client.Respository.Bags;
+  using SFMBE.Client.Respository.Gears;
   using SFMBE.Client.Respository.Items;
   using SFMBE.Services.Mapping;
   using SFMBE.Shared;
@@ -15,6 +17,9 @@
     [Inject]
     public IItemsRepository ItemsRepository { get; set; }
 
+    [Inject]
+    public IGearsRepository GearsRepository { get; set; }
+
     [Parameter]
     public string TypeBoard { get; set; }
 
@@ -28,7 +33,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-      var requestModel = QueryableMappingExtensions.To<ItemsRequestModel>(this.Items);
+      var requestModel = MappingExtensions.To<ItemsRequestModel>(this.Items);
 
       this.items = await this.ItemsRepository.GetItems(requestModel);
 
@@ -44,6 +49,11 @@
           this.BoardRows = (int)Math.Ceiling((decimal)(this.items.Data.Items.Count) / 3);
         }
       }
+    }
+
+    internal  void Equip(int id)
+    {
+      Console.WriteLine(id);
     }
 
     private void OrderItems()

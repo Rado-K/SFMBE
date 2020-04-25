@@ -3,9 +3,11 @@
   using Microsoft.AspNetCore.Components;
   using SFMBE.Client.Respository.Bags;
   using SFMBE.Client.Respository.Characters;
+  using SFMBE.Client.Respository.Gears;
   using SFMBE.Shared;
   using SFMBE.Shared.Bags;
   using SFMBE.Shared.Character;
+  using SFMBE.Shared.Gear;
   using System.Collections.Generic;
   using System.Linq;
   using System.Threading.Tasks;
@@ -14,9 +16,12 @@
   {
     [Inject] public ICharactersRepository CharactersRepository { get; set; }
     [Inject] public IBagsRepository BagsRepository { get; set; }
+    [Inject] public IGearsRepository GearsRepository { get; set; }
 
     private ApiResponse<CharacterResponseModel> character;
     private ApiResponse<BagResponseModel> bag;
+    private ApiResponse<GearResponseModel> gear;
+
     private readonly CharacterRequestModel characterRequestModel = new CharacterRequestModel();
 
     private IList<int> GearItems { get; set; }
@@ -30,9 +35,10 @@
       {
         this.bag = await this.BagsRepository.GetBag();
         this.BagItems = this.bag.Data.Items;
-      }
 
-      this.GearItems = new List<int>() { };
+        //this.gear = await this.GearsRepository.GetGear();
+        //this.GearItems = this.gear.Data.Items;
+      }
     }
 
     private async Task CreateCharacter()

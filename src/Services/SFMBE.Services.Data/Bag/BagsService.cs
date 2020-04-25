@@ -6,7 +6,11 @@
   using SFMBE.Services.Data.Character;
   using SFMBE.Services.Mapping;
   using SFMBE.Shared.Bags;
+  using SFMBE.Shared.Character;
+  using System;
   using System.Linq;
+  using System.Linq.Expressions;
+  using System.Security.Cryptography.X509Certificates;
   using System.Threading.Tasks;
 
   public class BagsService : IBagsService
@@ -22,14 +26,14 @@
       this.charactersService = charactersService;
     }
 
-    public async Task<BagResponseModel> GetBag()
+    public async Task<T> GetBag<T>(params Expression<Func<Bag, object>>[] properties)
     {
-      var character = await this.charactersService.GetCharacter<Character>();
+      var character = await this.charactersService.GetCharacter<CharacterGetBagModel>();
 
       var bag = await this.bagsRepository
         .All()
         .Where(x => x.Id == character.BagId)
-        .To<BagResponseModel>()
+        .To<T>()
         .FirstOrDefaultAsync();
 
       return bag;

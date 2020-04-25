@@ -4,13 +4,15 @@
   using SFMBE.Client.Respository.Characters;
   using SFMBE.Services.Mapping;
   using SFMBE.Shared.Character;
+  using System.Threading.Tasks;
 
   public partial class CharacterInfo
   {
     [Parameter]
     public CharacterResponseModel Character { get; set; }
 
-    [Inject] public ICharactersRepository CharactersRepository { get; set; }
+    [Inject]
+    public ICharactersRepository CharactersRepository { get; set; }
 
     private CharacterUpdateModel characterUpdateModel = new CharacterUpdateModel();
 
@@ -19,37 +21,37 @@
       this.characterUpdateModel = this.Character.To<CharacterUpdateModel>();
     }
 
-    private void UpdateStamina(int value)
+    private async Task UpdateStamina(int value)
     {
       this.characterUpdateModel.Stamina = value;
 
-      this.UpdateCharacter();
+      await this.UpdateCharacter();
     }
 
-    private void UpdateStrength(int value)
+    private async Task UpdateStrength(int value)
     {
       this.characterUpdateModel.Strength = value;
 
-      this.UpdateCharacter();
+      await this.UpdateCharacter();
     }
 
-    private void UpdateAgility(int value)
+    private async Task UpdateAgility(int value)
     {
       this.characterUpdateModel.Agility = value;
 
-      this.UpdateCharacter();
+      await this.UpdateCharacter();
     }
 
-    private void UpdateIntelligence(int value)
+    private async Task UpdateIntelligence(int value)
     {
       this.characterUpdateModel.Intelligence = value;
 
-      this.UpdateCharacter();
+      await this.UpdateCharacter();
     }
 
-    private void UpdateCharacter()
+    private async Task UpdateCharacter()
     {
-      this.CharactersRepository.UpdateCharacter(this.characterUpdateModel);
+      await this.CharactersRepository.UpdateCharacter(this.characterUpdateModel);
     }
   }
 }

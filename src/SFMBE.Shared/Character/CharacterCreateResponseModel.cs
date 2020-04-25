@@ -1,7 +1,7 @@
 ﻿namespace SFMBE.Shared.Character
 {
-  using SFMBE.Services.Mapping;
-  using SFMBE.Data.Models;
+  using Services.Mapping;
+  using Data.Models;
 
   public class CharacterCreateResponseModel : IMapFrom<Character>
   {

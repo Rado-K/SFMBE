@@ -7,6 +7,7 @@
   public interface IItemsService
   {
     Task<ItemCreateResponseModel> CreateItem(ItemCreateRequestModel userModel);
-    Task<ItemsResponseModel> GetItemsById(ItemsRequestModel itemsRequestModel);
+    Task<T> GetItemById<T>(int id);
+    Task<T> GetItemsById<T>(ItemsRequestModel itemsRequestModel);
   }
 }

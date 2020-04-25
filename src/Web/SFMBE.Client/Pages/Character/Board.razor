@@ -9,14 +9,15 @@
     }
     else
     {
+        <CascadingValue Value="this.GearsRepository">
+            @for (int i = 0; i < this.BoardRows; i++)
+            {
+                //TODO: Check For Empty Space
 
-        @for (int i = 0; i < this.BoardRows; i++)
-        {
-            //TODO: Check For Empty Space
-
-            <ItemRow Type="@this.TypeBoard"
-                     Items="@this.ItemsPerRow()"
-                     Border="@(this.TypeBoard == "bag" ? "border-bottom" : string.Empty)" />
-        }
+                <ItemRow Type="@this.TypeBoard"
+                         Items="@this.ItemsPerRow()"
+                         Border="@(this.TypeBoard == "bag" ? "border-bottom" : string.Empty)" />
+            }
+        </CascadingValue>
     }
 </div>

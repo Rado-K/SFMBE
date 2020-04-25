@@ -18,9 +18,16 @@
     [Parameter]
     public string Border { get; set; } = "";
 
+    public EventCallback<int> Event { get; set; }
+
     protected override void OnInitialized()
     {
       this.Border = "row p-4 align-self-center " + this.Border;
+    }
+
+    private void Equip(int id)
+    {
+      this.Event.InvokeAsync(id);
     }
   }
 }

@@ -6,7 +6,7 @@
   using AutoMapper;
   using AutoMapper.QueryableExtensions;
 
-  public static class QueryableMappingExtensions
+  public static class MappingExtensions
   {
     public static IQueryable<TDestination> To<TDestination>(
         this IQueryable source,

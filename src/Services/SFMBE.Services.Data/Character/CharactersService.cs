@@ -60,7 +60,7 @@
         .All()
         .FirstOrDefaultAsync(x => x.Name == characterUpdateModel.Name);
 
-      QueryableMappingExtensions.To(characterUpdateModel, character);
+      MappingExtensions.To(characterUpdateModel, character);
 
       this.characterRepository.Update(character);
       await this.characterRepository.SaveChangesAsync();

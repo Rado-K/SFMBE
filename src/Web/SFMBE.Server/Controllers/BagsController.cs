@@ -6,6 +6,7 @@
   using SFMBE.Shared.Bags;
   using System;
   using System.Collections.Specialized;
+  using System.Security.Cryptography.X509Certificates;
   using System.Threading.Tasks;
 
   public class BagsController : BaseController
@@ -20,7 +21,7 @@
     [HttpGet]
     public async Task<ActionResult<ApiResponse<BagResponseModel>>> GetBag()
     {
-      var response = await this.bagsService.GetBag();
+      var response = await this.bagsService.GetBag<BagResponseModel>(x => x.Items);
 
       if (response is null)
       {

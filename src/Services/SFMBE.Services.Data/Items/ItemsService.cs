@@ -43,7 +43,17 @@
       return new ItemCreateResponseModel { Id = item.Id };
     }
 
-    public async Task<ItemsResponseModel> GetItemsById(ItemsRequestModel itemsRequestModel)
+    public async Task<T> GetItemById<T>(int id)
+    {
+      var item = await this.itemsRepository
+        .All()
+        .Where(x => x.Id == id)
+        .FirstOrDefaultAsync();
+
+      return item.To<T>();
+    }
+
+    public async Task<T> GetItemsById<T>(ItemsRequestModel itemsRequestModel)
     {
       var items = await this.itemsRepository
         .All()
@@ -51,8 +61,9 @@
         .To<ItemResponseModel>()
         .ToListAsync();
 
-      var answer = QueryableMappingExtensions.To<ItemsResponseModel>(items);
-      return answer;
+      var asnwer = MappingExtensions.To<T>(items);
+
+      return asnwer;
     }
   }
 }

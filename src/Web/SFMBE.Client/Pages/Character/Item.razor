@@ -1,26 +1,18 @@
-﻿    @*<div class="col-md-4">
-            <img class="@(this.ClassName == "gear" ? "border" : string.Empty)" src="Items/@(this.ItemName).png" alt="">
-        </div>*@
+﻿<div class="dropdown">
+    <img src="Items/@(this.Model.ItemType).png"
+         alt="dropdown image"
+         class="btn btn-outline-danger img-responsive @(this.ClassName == "gear" ? "border" : default)">
+    <ul class="dropdown-menu text-center">
 
-    <div class="dropdown">
-        <img src="Items/@(this.ItemName).png"
-             alt="dropdown image"
-             class="btn btn-outline-danger img-responsive @(this.ClassName == "gear" ? "border" : default)">
-        <ul class="dropdown-menu text-center">
-            <li><a href="#">Equit</a></li>
-            <li><a href="#">Info</a></li>
-        </ul>
-    </div>
+        @if (this.ClassName == "gear")
+        {
+            <li><a>Unequip</a></li>
+        }
+        else
+        {
+            <li><a @onclick="this.Equip" href="#">Equip</a></li>
+        }
 
-@code {
-  //protected override void OnInitialized()
-  //{
-  //    Console.WriteLine($"~/Items/{this.ItemName}.png");
-  //}
-
-  [Parameter]
-  public string ClassName { get; set; } = string.Empty;
-
-  [Parameter]
-  public string ItemName { get; set; }
-}
+        <li><a href="#">Info</a></li>
+    </ul>
+</div>

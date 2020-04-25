@@ -52,7 +52,7 @@
       query = properties
                  .Aggregate(query, (current, property) => current.Include(property));
 
-      return query.AsNoTracking().Where(where);
+      return query.Where(where);
     }
 
     public virtual void Delete(TEntity entity) => this.DbSet.Remove(entity);

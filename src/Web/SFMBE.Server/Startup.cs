@@ -54,7 +54,11 @@ namespace SFMBE.Server
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
+                options =>
+                {
+                  options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
+                  options.EnableSensitiveDataLogging();
+                });
 
 
       services

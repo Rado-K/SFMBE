@@ -19,6 +19,9 @@ namespace SFMBE.Client
   using SFMBE.Services.Mapping;
   using SFMBE.Shared;
   using System.Reflection;
+  using SFMBE.Client.Respository.Gears;
+  using SFMBE.Data.Models;
+  using SFMBE.Shared.Gear;
 
   public class Program
   {
@@ -53,6 +56,7 @@ namespace SFMBE.Client
       services.AddSingleton<ICharactersRepository, CharactersRepository>();
       services.AddSingleton<IBagsRepository, BagsRepository>();
       services.AddSingleton<IItemsRepository, ItemsRepository>();
+      services.AddSingleton<IGearsRepository, GearsRepository>();
 
 
       services.AddApiAuthorization();

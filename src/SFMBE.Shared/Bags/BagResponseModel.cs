@@ -14,7 +14,10 @@
     {
       configuration
         .CreateMap<Bag, BagResponseModel>()
-        .ForMember(d => d.Items, o => o.MapFrom(c => c.Items.Select(x => x.Id)));
+        .ForMember(
+              d => d.Items,
+              o => o.MapFrom(
+                  c => c.Items.Where(x => !x.GearId.HasValue).Select(x => x.Id)));
     }
   }
 }
