@@ -36,8 +36,8 @@
         this.bag = await this.BagsRepository.GetBag();
         this.BagItems = this.bag.Data.Items;
 
-        //this.gear = await this.GearsRepository.GetGear();
-        //this.GearItems = this.gear.Data.Items;
+        this.gear = await this.GearsRepository.GetGear();
+        this.GearItems = this.gear.Data.Items;
       }
     }
 

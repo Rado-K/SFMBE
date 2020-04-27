@@ -71,9 +71,15 @@
         "Empty", "Boots", "Empty",
       };
 
+      this.items.Data.Items.ForEach(x => Console.WriteLine(x.ItemType));
+
       for (int i = 0; i < 9; i++)
       {
         var temp = this.items.Data.Items.FirstOrDefault(x => x.ItemType == gearItemsPosition[i]);
+        if (temp is null)
+        {
+          continue;
+        }
         var currItem = this.items.Data.Items.IndexOf(temp);
         this.items.Data.Items[currItem] = this.items.Data.Items[i];
         this.items.Data.Items[i] = temp;
