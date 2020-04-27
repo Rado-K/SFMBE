@@ -8,5 +8,6 @@
   {
     Task<ApiResponse<object>> Equip(int id);
     Task<ApiResponse<GearResponseModel>> GetGear();
+    Task<ApiResponse<object>> Unequip(int id);
   }
 }

@@ -47,7 +47,7 @@
 
     public async Task Equip(int id)
     {
-      var character = await this.charactersService.GetCharacter<Character>();
+      var character = await this.charactersService.GetCharacter<CharacterGetBagModel>();
       var item = await this.itemsService.GetItemById<Item>(id);
       var gear = await this.GetGear();
 
@@ -68,5 +68,28 @@
 
       await this.gearRepository.SaveChangesAsync();
     }
+
+    public async Task Unequip(int id)
+    {
+      var character = await this.charactersService.GetCharacter<CharacterGetBagModel>();
+      var item = await this.itemsService.GetItemById<Item>(id);
+      var gear = await this.GetGear();
+
+      if (character.BagId != item.BagId)
+      {
+        throw new InvalidOperationException();
+      }
+
+      if (gear.EquippedItems.Any(x => x.ItemType == item.ItemType))
+      {
+        gear
+          .EquippedItems
+          .Remove(
+              gear.EquippedItems.First(x => x.ItemType == item.ItemType));
+
+        await this.gearRepository.SaveChangesAsync();
+      }
+    }
+
   }
 }

@@ -1,7 +1,5 @@
 ﻿namespace SFMBE.Client.Respository.Gears
 {
-  using Microsoft.AspNetCore.Authorization;
-  using Microsoft.EntityFrameworkCore.Migrations.Operations;
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Shared;
   using SFMBE.Shared.Gear;
@@ -31,7 +29,19 @@
 
     public async Task<ApiResponse<object>> Equip(int id)
     {
-      var httpResponse = await this.httpService.Post<object>($"{URL}", id);
+      var httpResponse = await this.httpService.Post<object>($"{URL}/{nameof(Equip)}", id);
+
+      if (!httpResponse.IsOk)
+      {
+        return new ApiResponse<object>(httpResponse.Errors);
+      }
+
+      return httpResponse;
+    }
+
+    public async Task<ApiResponse<object>> Unequip(int id)
+    {
+      var httpResponse = await this.httpService.Post<object>($"{URL}/{nameof(Unequip)}", id);
 
       if (!httpResponse.IsOk)
       {

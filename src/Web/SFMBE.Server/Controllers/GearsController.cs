@@ -4,6 +4,7 @@
   using SFMBE.Services.Data.Gear;
   using SFMBE.Shared;
   using SFMBE.Shared.Gear;
+  using System.Net.NetworkInformation;
   using System.Threading.Tasks;
 
   public class GearsController : BaseController
@@ -30,9 +31,19 @@
 
 
     [HttpPost]
+    [Route(nameof(Equip))]
     public async Task<IActionResult> Equip([FromBody] int id)
     {
       await this.gearsService.Equip(id);
+
+      return this.Ok();
+    }
+
+    [HttpPost]
+    [Route(nameof(Unequip))]
+    public async Task<IActionResult> Unequip([FromBody] int id)
+    {
+      await this.gearsService.Unequip(id);
 
       return this.Ok();
     }

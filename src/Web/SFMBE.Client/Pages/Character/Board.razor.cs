@@ -51,11 +51,6 @@
       }
     }
 
-    internal  void Equip(int id)
-    {
-      Console.WriteLine(id);
-    }
-
     private void OrderItems()
     {
       int emptyItemsCount = (9 - this.items.Data.Items.Count);
