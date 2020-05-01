@@ -1,22 +1,22 @@
 ﻿<div class="overflow card border-danger col-md-4">
-    @if (this.items is null)
+    @if (this.Items is null)
     {
         <p><em>Searching Items...</em></p>
     }
-    else if (this.items.Data is null)
+    else if (this.Items is null)
     {
         <p><em>YOU NEED TO PLAY MORE!</em></p>
     }
     else
     {
-        <CascadingValue Value="this.GearsRepository">
+        <CascadingValue Value="this">
             @for (int i = 0; i < this.BoardRows; i++)
             {
                 //TODO: Check For Empty Space
 
                 <ItemRow Type="@this.TypeBoard"
                          Items="@this.ItemsPerRow()"
-                         Border="@(this.TypeBoard == "bag" ? "border-bottom" : string.Empty)" />
+                         Border="@(this.TypeBoard == "Bag" ? "border-bottom" : string.Empty)" />
             }
         </CascadingValue>
     }

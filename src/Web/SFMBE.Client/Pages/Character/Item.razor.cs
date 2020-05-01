@@ -13,23 +13,17 @@
     [Parameter]
     public string ClassName { get; set; }
 
-    public Board Board { get; set; }
-
     [CascadingParameter]
-    public IGearsRepository GearsRepository { get; set; }
+    public Board Board { get; set; }
 
     private async Task Equip()
     {
-      await this.GearsRepository.Equip(this.Model.Id);
-
-      this.StateHasChanged();
+      //await this.Board.Equip(this.Model.Id);
     }
 
     private async Task Unequip()
     {
-      await this.GearsRepository.Unequip(this.Model.Id);
-
-      this.StateHasChanged();
+      //await this.Board.Unequip(this.Model.Id);
     }
   }
 }
