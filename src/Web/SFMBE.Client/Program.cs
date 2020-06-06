@@ -15,8 +15,8 @@ namespace SFMBE.Client
   using Respository.Items;
   using Services.Mapping;
   using SFMBE.Shared;
-  using Store.Bag;
-  using Store.Gear;
+  using State.Bag;
+  using State.Gear;
   using System;
   using System.Net.Http;
   using System.Reflection;

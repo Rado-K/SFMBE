@@ -1,4 +1,4 @@
-﻿namespace SFMBE.Client.Store.Bag
+﻿namespace SFMBE.Client.State.Bag
 {
   using Microsoft.Extensions.Logging;
   using SFMBE.Client.Respository.Bags;
@@ -26,7 +26,7 @@
 
     public int BoardRows
       => this.Bag is null
-        ? 0 : (int)Math.Ceiling((decimal)(this.Bag.Count) / 3);
+        ? 0 : (int)Math.Ceiling((decimal)this.Bag.Count / 3);
 
     public async Task Initialize()
     {

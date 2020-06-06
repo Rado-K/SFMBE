@@ -1,4 +1,4 @@
-﻿namespace SFMBE.Client.Store.Gear
+﻿namespace SFMBE.Client.State.Gear
 {
   using Microsoft.Extensions.Logging;
   using SFMBE.Client.Respository.Gears;
@@ -27,7 +27,7 @@
 
     public int BoardRows
       => this.Gear is null
-        ? 0 : (int)Math.Ceiling((decimal)(this.Gear.Count) / 3);
+        ? 0 : (int)Math.Ceiling((decimal)this.Gear.Count / 3);
 
     public async Task Initialize()
     {
@@ -79,7 +79,7 @@
       }
       else
       {
-        for (int i = 0; i < (9 - euquipetItems); i++)
+        for (var i = 0; i < 9 - euquipetItems; i++)
         {
           items.Add(emptyItem);
         }
@@ -92,7 +92,7 @@
         "Empty", "Boots", "Empty",
       };
 
-      for (int i = 0; i < 9; i++)
+      for (var i = 0; i < 9; i++)
       {
         var temp = items.FirstOrDefault(x => x.ItemType == gearItemsPosition[i]);
 
