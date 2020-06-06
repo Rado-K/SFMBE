@@ -12,7 +12,7 @@
 
     Task<ApiResponse<TResponse>> PostJson<T, TResponse>(string url, T data);
 
-    //Task<ApiResponse<object>> Put<T>(string url, T data);
+    //Task<ApiResponse<object>> Put<T>(string url,itemsdata);
 
     Task<ApiResponse<object>> Delete(string url);
 

@@ -34,8 +34,8 @@
       var request = new FormUrlEncodedContent(
                                new List<KeyValuePair<string, string>>
                                {
-                                           new KeyValuePair<string, string>("email", userLoginRequestModel.Email),
-                                           new KeyValuePair<string, string>("password", userLoginRequestModel.Password),
+                                 new KeyValuePair<string, string>("email", userLoginRequestModel.Email),
+                                 new KeyValuePair<string, string>("password", userLoginRequestModel.Password),
                                });
 
       var httpResponse = await this.httpService.Post<FormUrlEncodedContent, UserLoginResponseModel>($"{URL}/login", request);

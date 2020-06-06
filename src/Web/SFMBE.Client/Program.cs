@@ -1,27 +1,26 @@
 namespace SFMBE.Client
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Threading.Tasks;
-  using System.Text;
+  using Blazor.Extensions.Logging;
+  using Infrastructure;
+  using Infrastructure.Auth;
+  using Infrastructure.Http;
+  using Microsoft.AspNetCore.Components.Authorization;
   using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
   using Microsoft.Extensions.DependencyInjection;
-  using SFMBE.Client.Infrastructure.Auth;
-  using Microsoft.AspNetCore.Components.Authorization;
-  using SFMBE.Client.Infrastructure;
-  using SFMBE.Client.Infrastructure.Http;
-  using SFMBE.Client.Respository.Accounts;
-  using SFMBE.Client.Respository.Characters;
-  using SFMBE.Client.Respository.Bags;
-  using SFMBE.Client.Pages.Character;
-  using SFMBE.Client.Respository.Items;
-  using System.Net.Http;
-  using SFMBE.Services.Mapping;
+  using Microsoft.Extensions.Logging;
+  using Respository.Accounts;
+  using Respository.Bags;
+  using Respository.Characters;
+  using Respository.Gears;
+  using Respository.Items;
+  using Services.Mapping;
   using SFMBE.Shared;
+  using Store.Bag;
+  using Store.Gear;
+  using System;
+  using System.Net.Http;
   using System.Reflection;
-  using SFMBE.Client.Respository.Gears;
-  using SFMBE.Data.Models;
-  using SFMBE.Shared.Gear;
+  using System.Threading.Tasks;
 
   public class Program
   {
@@ -39,7 +38,10 @@ namespace SFMBE.Client
 
     private static void ConfigureServices(IServiceCollection services)
     {
-      //services.AddOptions();
+      services.AddLogging(builder => builder
+        .AddBrowserConsole()
+        .SetMinimumLevel(LogLevel.Debug));
+
       AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
       services.AddSingleton<JWTAuthenticationStateProvider>();
@@ -49,7 +51,6 @@ namespace SFMBE.Client
       services.AddSingleton<ILoginService, JWTAuthenticationStateProvider>(
         provider => provider.GetRequiredService<JWTAuthenticationStateProvider>());
 
-
       services.AddSingleton<IApplicationState, ApplicationState>();
       services.AddSingleton<IHttpService, HttpService>();
       services.AddSingleton<IAccountRepository, AccountRepository>();
@@ -58,6 +59,8 @@ namespace SFMBE.Client
       services.AddSingleton<IItemsRepository, ItemsRepository>();
       services.AddSingleton<IGearsRepository, GearsRepository>();
 
+      services.AddSingleton<BagState>();
+      services.AddSingleton<GearState>();
 
       services.AddApiAuthorization();
     }

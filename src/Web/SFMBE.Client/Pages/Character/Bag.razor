@@ -1,4 +1,4 @@
-﻿@if (this.bag != null)
+﻿@if (this.BagState.Bag != default)
 {
-    <Board TypeBoard="Bag" BoardRows="this.boardRows" Items="this.items.Data" />
+    <Board TypeBoard="Bag" BoardRows="this.BagState.BoardRows" Items="this.BagState.Bag" />
 }

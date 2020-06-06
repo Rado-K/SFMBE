@@ -2,12 +2,13 @@
 {
   using SFMBE.Shared;
   using SFMBE.Shared.Gear;
+  using System;
   using System.Threading.Tasks;
 
   public interface IGearsRepository
   {
-    Task<ApiResponse<object>> Equip(int id);
+    Task Equip(int id);
+    Task Unequip(int id);
     Task<ApiResponse<GearResponseModel>> GetGear();
-    Task<ApiResponse<object>> Unequip(int id);
   }
 }

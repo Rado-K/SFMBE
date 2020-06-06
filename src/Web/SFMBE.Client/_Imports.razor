@@ -11,5 +11,9 @@
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Authorization;
 
+@using Microsoft.Extensions.Logging
 
 @*@injectso IApplicationState *@
+
+@inject SFMBE.Client.Store.Gear.GearState GearState
+@inject SFMBE.Client.Store.Bag.BagState BagState

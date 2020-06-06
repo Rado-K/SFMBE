@@ -164,7 +164,7 @@ namespace SFMBE.Server
 
       app.UseJwtBearerTokens(
                 app.ApplicationServices.GetRequiredService<IOptions<TokenProviderOptions>>(),
-                PrincipalResolver);
+                this.PrincipalResolver);
 
       app.UseBlazorFrameworkFiles();
       app.UseStaticFiles();
@@ -213,7 +213,7 @@ namespace SFMBE.Server
           });
     };
 
-    private static async Task<GenericPrincipal> PrincipalResolver(HttpContext context)
+    private async Task<GenericPrincipal> PrincipalResolver(HttpContext context)
     {
       var userManager = context.RequestServices.GetRequiredService<UserManager<ApplicationUser>>();
       var email = context.Request.Form["email"];

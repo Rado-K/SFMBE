@@ -13,14 +13,30 @@
     public int BoardRows { get; set; }
 
     [Parameter]
-    public ItemsResponseModel Items { get; set; }
+    public List<ItemResponseModel> Items { get; set; }
 
-    private IList<ItemResponseModel> ItemsPerRow()
+    private IList<ItemResponseModel>[] ItemsPerRow()
     {
-      var rowCount = (this.Items.Items.Count < 3 ? this.Items.Items.Count : 3);
-      var itemsPerRow = this.Items.Items.GetRange(0, rowCount);
-      this.Items.Items.RemoveRange(0, rowCount);
-      return itemsPerRow;
+      var arr = new IList<ItemResponseModel>[this.BoardRows];
+
+      int x = 0;
+
+      for (int i = 0; i < this.BoardRows; i++)
+      {
+        arr[i] = new List<ItemResponseModel>();
+
+        for (int j = 0; j < 3; j++)
+        {
+          if (x == this.Items.Count)
+          {
+            break;
+          }
+
+          arr[i].Add(this.Items[x++]);
+        }
+      }
+
+      return arr;
     }
   }
 }

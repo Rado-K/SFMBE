@@ -3,6 +3,7 @@
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Shared;
   using SFMBE.Shared.Gear;
+  using System;
   using System.Threading.Tasks;
 
   public class GearsRepository : IGearsRepository
@@ -23,32 +24,28 @@
       {
         return new ApiResponse<GearResponseModel>(httpResponse.Errors);
       }
-
+ 
       return httpResponse;
     }
 
-    public async Task<ApiResponse<object>> Equip(int id)
+    public async Task Equip(int id)
     {
       var httpResponse = await this.httpService.Post<object>($"{URL}/{nameof(Equip)}", id);
 
       if (!httpResponse.IsOk)
       {
-        return new ApiResponse<object>(httpResponse.Errors);
+        throw new Exception();
       }
-
-      return httpResponse;
     }
 
-    public async Task<ApiResponse<object>> Unequip(int id)
+    public async Task Unequip(int id)
     {
       var httpResponse = await this.httpService.Post<object>($"{URL}/{nameof(Unequip)}", id);
 
       if (!httpResponse.IsOk)
       {
-        return new ApiResponse<object>(httpResponse.Errors);
+        throw new Exception();
       }
-
-      return httpResponse;
     }
   }
 }

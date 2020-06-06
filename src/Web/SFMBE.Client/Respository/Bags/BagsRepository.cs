@@ -3,12 +3,15 @@
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Shared;
   using SFMBE.Shared.Bags;
+  using System;
   using System.Threading.Tasks;
 
-  public class BagsRepository : IBagsRepository
+  public partial class BagsRepository : IBagsRepository
   {
-    private  const string URL = "api/bags";
+    private const string URL = "api/bags";
     private readonly IHttpService httpService;
+
+    public event Func<Task> NotifyDataChanged;
 
     public BagsRepository(IHttpService httpService)
     {

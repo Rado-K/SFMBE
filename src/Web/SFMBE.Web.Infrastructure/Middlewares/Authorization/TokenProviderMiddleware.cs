@@ -39,9 +39,7 @@
 
       if (context.Request.Method.Equals("POST") && context.Request.HasFormContentType)
       {
-        var t = this.GenerateToken(context);
-
-        return t;
+        return this.GenerateToken(context);
       }
 
       context.Response.StatusCode = (int)HttpStatusCode.BadRequest;

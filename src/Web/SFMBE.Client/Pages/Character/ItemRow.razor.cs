@@ -2,9 +2,7 @@
 {
   using Microsoft.AspNetCore.Components;
   using SFMBE.Shared.Items;
-  using System;
   using System.Collections.Generic;
-  using System.Linq;
   using System.Threading.Tasks;
 
   public partial class ItemRow
@@ -18,10 +16,7 @@
     [Parameter]
     public string Border { get; set; } = "";
 
-    protected override void OnInitialized()
-    {
-      this.Border = "row p-4 align-self-center " + this.Border;
-    }
-
+    private async Task OnNotifyDataChanged()
+      => await this.InvokeAsync(this.StateHasChanged);
   }
 }

@@ -4,13 +4,13 @@
 
 @using SFMBE.Client.Pages.Character;
 
-<ErrorList Errors="this.character?.Errors" />
+<ErrorList Errors="character?.Errors" />
 
-@if (this.character is null)
+@if (character is null)
 {
     <p><em>Searching Character...</em></p>
 }
-else if (this.character?.Data is null)
+else if (character?.Data is null)
 {
     <EditForm Model="this.characterRequestModel" OnValidSubmit="this.CreateCharacter">
         <div class="form-group">
@@ -26,15 +26,5 @@ else if (this.character?.Data is null)
 }
 else
 {
-    <div class="row">
-
-        <CharacterInfo Character="this.character?.Data" />
-
-        <Gear />
-        <Bag />
-        @*<Board TypeBoard="gear" Items="this.GearItems" BoardRows="3" />
-
-        <Board TypeBoard="bag" Items="this.BagItems" />*@
-
-    </div>
+    <Character CharacterModel="character?.Data" />
 }

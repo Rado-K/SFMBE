@@ -1,28 +1,27 @@
 ﻿namespace SFMBE.Client.Pages
 {
   using Microsoft.AspNetCore.Components;
-  using SFMBE.Client.Respository.Bags;
   using SFMBE.Client.Respository.Characters;
-  using SFMBE.Client.Respository.Gears;
   using SFMBE.Shared;
-  using SFMBE.Shared.Bags;
   using SFMBE.Shared.Character;
-  using SFMBE.Shared.Gear;
-  using System.Collections.Generic;
-  using System.Linq;
   using System.Threading.Tasks;
 
   public partial class Index
   {
     [Inject] public ICharactersRepository CharactersRepository { get; set; }
 
-    private ApiResponse<CharacterResponseModel> character;
+    private static ApiResponse<CharacterResponseModel> character;
 
     private readonly CharacterRequestModel characterRequestModel = new CharacterRequestModel();
 
     protected override async Task OnInitializedAsync()
     {
-      this.character = await this.CharactersRepository.GetCharacter();
+      if (character == null)
+      {
+        character = await this.CharactersRepository.GetCharacter();
+        await this.BagState.Initialize();
+        await this.GearState.Initialize();
+      }
     }
 
     private async Task CreateCharacter()
@@ -31,7 +30,7 @@
 
       if (characterId.IsOk)
       {
-        this.character = this.character = await this.CharactersRepository.GetCharacter();
+        character = await this.CharactersRepository.GetCharacter();
       }
     }
   }

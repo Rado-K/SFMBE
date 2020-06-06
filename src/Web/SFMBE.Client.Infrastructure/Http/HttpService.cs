@@ -39,8 +39,8 @@
       return new ApiResponse<object>(response);
     }
 
-    public async Task<ApiResponse<TResponse>> Post<T, TResponse>(string url, T data)
-      where T : HttpContent
+    public async Task<ApiResponse<TResponse>> Post<T, TResponse>(string url,T data)
+      where T: HttpContent
     {
       var response = await this.httpClient.PostAsync(url, data);
 

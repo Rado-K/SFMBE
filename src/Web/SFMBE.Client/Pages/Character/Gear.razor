@@ -1,4 +1,4 @@
-﻿@if (this.gear != null)
+﻿@if (this.GearState.Gear != null)
 {
-    <Board TypeBoard="Gear" BoardRows="3" Items="@this.items.Data" />
+    <Board TypeBoard="Gear" BoardRows="this.GearState.BoardRows" Items="this.GearState.Gear" />
 }
