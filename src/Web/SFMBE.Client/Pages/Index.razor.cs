@@ -10,27 +10,31 @@
   {
     [Inject] public ICharactersRepository CharactersRepository { get; set; }
 
-    private static ApiResponse<CharacterResponseModel> character;
+    private ApiResponse<CharacterResponseModel> character;
 
     private readonly CharacterRequestModel characterRequestModel = new CharacterRequestModel();
 
     protected override async Task OnInitializedAsync()
     {
-      if (character == null)
+      if (character == null || character?.Data == null)
       {
         character = await this.CharactersRepository.GetCharacter();
-        await this.BagState.Initialize();
-        await this.GearState.Initialize();
+
+        if (character.IsOk)
+        {
+          await this.BagState.Initialize();
+          await this.GearState.Initialize();
+        }
       }
     }
 
     private async Task CreateCharacter()
     {
-      var characterId = await this.CharactersRepository.CreateCharacter(this.characterRequestModel.CharacterName);
+      var characterCreatedResponse = await this.CharactersRepository.CreateCharacter(this.characterRequestModel.CharacterName);
 
-      if (characterId.IsOk)
+      if (characterCreatedResponse.IsOk)
       {
-        character = await this.CharactersRepository.GetCharacter();
+        await this.OnInitializedAsync();
       }
     }
   }

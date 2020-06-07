@@ -1,7 +1,7 @@
 ﻿namespace SFMBE.Client.Pages.Character
 {
   using Microsoft.AspNetCore.Components;
-  using System;
+  using System.Threading.Tasks;
 
   public partial class StatsLine
   {
@@ -11,16 +11,17 @@
     [Parameter]
     public int Value { get; set; }
 
-    [Parameter] public EventCallback<int> Update{ get; set; }
+    [Parameter]
+    public EventCallback<int> Update { get; set; }
 
-    private void Decreased()
+    private async Task Decreased()
     {
-      this.Update.InvokeAsync(--this.Value);
+      await this.Update.InvokeAsync(--this.Value);
     }
 
-    private void Increased()
+    private async Task Increased()
     {
-      this.Update.InvokeAsync(++this.Value);
+      await this.Update.InvokeAsync(++this.Value);
     }
   }
 }

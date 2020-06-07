@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Respository\User\**" />
+    <Content Remove="Respository\User\**" />
+    <EmbeddedResource Remove="Respository\User\**" />
+    <None Remove="Respository\User\**" />
+  </ItemGroup>
+
+  <ItemGroup>
 
     <PackageReference Include="Blazor.Extensions.Logging" Version="1.1.1" />
 
@@ -19,9 +26,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\SFMBE.Shared\SFMBE.Shared.csproj" />
     <ProjectReference Include="..\SFMBE.Client.Infrastructure\SFMBE.Client.Infrastructure.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Respository\User\" />
   </ItemGroup>
 
 </Project>

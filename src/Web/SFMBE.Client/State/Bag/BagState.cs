@@ -1,6 +1,5 @@
 ﻿namespace SFMBE.Client.State.Bag
 {
-  using Microsoft.Extensions.Logging;
   using SFMBE.Client.Respository.Bags;
   using SFMBE.Client.Respository.Items;
   using SFMBE.Services.Mapping;
@@ -39,12 +38,14 @@
     public async Task Equip(ItemResponseModel item)
     {
       this.Bag.Add(item);
+
       await this.Change();
     }
 
     public async Task Unequip(ItemResponseModel item)
     {
       this.Bag.Remove(item);
+
       await this.Change();
     }
 

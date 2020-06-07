@@ -1,6 +1,5 @@
 ﻿namespace SFMBE.Client.State.Gear
 {
-  using Microsoft.Extensions.Logging;
   using SFMBE.Client.Respository.Gears;
   using SFMBE.Client.Respository.Items;
   using SFMBE.Services.Mapping;
@@ -43,6 +42,7 @@
     public async Task Equip(ItemResponseModel item)
     {
       this.Gear.Add(item);
+
       await this.gearsRepository.Equip(item.Id);
 
       this.Gear = this.OrderItems(this.Gear);
@@ -53,6 +53,7 @@
     public async Task Unequip(ItemResponseModel item)
     {
       this.Gear.Remove(item);
+
       await this.gearsRepository.Unequip(item.Id);
 
       this.Gear = this.OrderItems(this.Gear);
@@ -100,13 +101,12 @@
         {
           continue;
         }
-        else
-        {
-          var currItem = items.IndexOf(temp);
-          items[currItem] = items[i];
-          items[i] = temp;
-        }
+
+        var currItem = items.IndexOf(temp);
+        items[currItem] = items[i];
+        items[i] = temp;
       }
+
       return items;
     }
 
