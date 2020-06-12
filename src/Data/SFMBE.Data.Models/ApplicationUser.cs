@@ -1,5 +1,4 @@
-﻿// ReSharper disable VirtualMemberCallInConstructor
-namespace SFMBE.Data.Models
+﻿namespace SFMBE.Data.Models
 {
   using System;
   using System.Collections.Generic;

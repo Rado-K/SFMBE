@@ -36,7 +36,7 @@
 
       this.Gear = (await this.itemsRepository.GetItems(requestModel)).Data.Items;
 
-      this.Gear = this.OrderItems(this.Gear);
+      this.Gear = this.OrderItems();
     }
 
     public async Task Equip(ItemResponseModel item)
@@ -45,7 +45,7 @@
 
       await this.gearsRepository.Equip(item.Id);
 
-      this.Gear = this.OrderItems(this.Gear);
+      this.Gear = this.OrderItems();
 
       await this.Change();
     }
@@ -56,13 +56,15 @@
 
       await this.gearsRepository.Unequip(item.Id);
 
-      this.Gear = this.OrderItems(this.Gear);
+      this.Gear = this.OrderItems();
 
       await this.Change();
     }
 
-    private List<ItemResponseModel> OrderItems(List<ItemResponseModel> items)
+    private List<ItemResponseModel> OrderItems()
     {
+      var items = this.Gear;
+
       var euquipetItems = items.Where(x => x.ItemType != "Empty").Count();
 
       if (euquipetItems == 0)
@@ -82,6 +84,10 @@
       {
         for (var i = 0; i < 9 - euquipetItems; i++)
         {
+          if (items.Count == 9)
+          {
+            break;
+          }
           items.Add(emptyItem);
         }
       }

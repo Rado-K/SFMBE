@@ -1,8 +1,7 @@
-﻿// ReSharper disable VirtualMemberCallInConstructor
-using SFMBE.Data.Common.Models;
-
-namespace SFMBE.Data.Models
+﻿namespace SFMBE.Data.Models
 {
+  using SFMBE.Data.Common.Models;
+
   public class Character : BaseModel<int>
   {
     public string Name { get; set; }

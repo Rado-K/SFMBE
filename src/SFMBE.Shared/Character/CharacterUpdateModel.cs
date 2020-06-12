@@ -1,6 +1,5 @@
 ﻿namespace SFMBE.Shared.Character
 {
-  using AutoMapper;
   using Data.Models;
   using Services.Mapping;
 
