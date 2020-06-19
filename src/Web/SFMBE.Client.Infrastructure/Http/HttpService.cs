@@ -4,6 +4,7 @@
   using System.Text;
   using System.Text.Json;
   using System.Threading.Tasks;
+  using SFMBE.Common;
   using SFMBE.Shared;
 
   public class HttpService : IHttpService
@@ -34,7 +35,7 @@
     public async Task<ApiResponse<object>> Post<T>(string url, T data)
     {
       var dataJson = JsonSerializer.Serialize(data);
-      var stringContent = new StringContent(dataJson, Encoding.UTF8, "application/json");
+      var stringContent = new StringContent(dataJson, Encoding.UTF8, GlobalConstants.JsonContentType);
       var response = await this.httpClient.PostAsync(url, stringContent);
       return new ApiResponse<object>(response);
     }
@@ -56,7 +57,7 @@
     public async Task<ApiResponse<TResponse>> PostJson<T, TResponse>(string url, T data)
     {
       var dataJson = JsonSerializer.Serialize(data);
-      var stringContent = new StringContent(dataJson, Encoding.UTF8, "application/json");
+      var stringContent = new StringContent(dataJson, Encoding.UTF8, GlobalConstants.JsonContentType);
 
       return await this.Post<StringContent, TResponse>(url, stringContent);
     }
@@ -64,7 +65,7 @@
     public async Task<ApiResponse<T>> Put<T>(string url, T data)
     {
       var dataJson = JsonSerializer.Serialize(data);
-      var stringContent = new StringContent(dataJson, Encoding.UTF8, "application/json");
+      var stringContent = new StringContent(dataJson, Encoding.UTF8, GlobalConstants.JsonContentType);
       var response = await this.httpClient.PutAsync(url, stringContent);
       if (response.IsSuccessStatusCode)
       {

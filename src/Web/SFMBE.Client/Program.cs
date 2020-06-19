@@ -56,7 +56,6 @@ namespace SFMBE.Client
       services.AddSingleton<ILoginService, JWTAuthenticationStateProvider>(
         provider => provider.GetRequiredService<JWTAuthenticationStateProvider>());
 
-      services.AddSingleton<IApplicationState, ApplicationState>();
       services.AddSingleton<IHttpService, HttpService>();
       services.AddSingleton<IAccountRepository, AccountRepository>();
       services.AddSingleton<ICharactersRepository, CharactersRepository>();
