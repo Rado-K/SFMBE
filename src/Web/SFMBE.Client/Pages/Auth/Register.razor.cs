@@ -2,12 +2,9 @@
 {
   using Microsoft.AspNetCore.Components;
   using SFMBE.Client.Infrastructure.Auth;
-  using SFMBE.Client.Respository.Accounts;
+  using SFMBE.Client.Repositories.Accounts;
   using SFMBE.Shared;
   using SFMBE.Shared.Account;
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
   using System.Threading.Tasks;
 
   public partial class Register

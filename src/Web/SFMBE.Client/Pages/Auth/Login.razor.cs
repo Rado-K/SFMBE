@@ -3,7 +3,7 @@
   using System.Threading.Tasks;
   using Microsoft.AspNetCore.Components;
   using SFMBE.Client.Infrastructure.Auth;
-  using SFMBE.Client.Respository.Accounts;
+  using SFMBE.Client.Repositories.Accounts;
   using SFMBE.Shared;
   using SFMBE.Shared.Account;
 

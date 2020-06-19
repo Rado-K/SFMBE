@@ -2,29 +2,6 @@
 @page "/index"
 @attribute [Authorize]
 
-@using SFMBE.Client.Pages.Character;
+@using SFMBE.Client.Shared.Character;
 
-<ErrorList Errors="character?.Errors" />
-
-@if (character is null)
-{
-    <p><em>Searching Character...</em></p>
-}
-else if (character?.Data is null)
-{
-    <EditForm Model="this.characterRequestModel" OnValidSubmit="this.CreateCharacter">
-        <div class="form-group">
-            <label>Character name:</label>
-            <div>
-                <InputText class="form-control" @bind-Value="this.characterRequestModel.CharacterName" />
-                <ValidationMessage For="(() => this.characterRequestModel.CharacterName)" />
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-block text-right">Create</button>
-    </EditForm>
-}
-else
-{
-    <Character CharacterModel="character?.Data" />
-}
+<CharacterPage />

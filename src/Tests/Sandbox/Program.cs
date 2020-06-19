@@ -6,7 +6,6 @@
   using Microsoft.Extensions.DependencyInjection;
   using Microsoft.Extensions.Logging;
   using SFMBE.Client.Infrastructure.Http;
-  using SFMBE.Client.Respository.Accounts;
   using SFMBE.Data;
   using SFMBE.Data.Common;
   using SFMBE.Data.Common.Repositories;
@@ -76,16 +75,6 @@
 
       // Application services
       //services.AddTransient<IEmailSender, NullMessageSender>();
-
-
-
-
-
-      services.AddScoped<IHttpService, HttpService>();
-      //services.AddTransient<IApiClient, ApiClient>();
-
-
-      services.AddScoped<IAccountRepository, AccountRepository>();
     }
   }
 }

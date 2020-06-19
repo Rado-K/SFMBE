@@ -4,9 +4,6 @@
   using SFMBE.Services.Data.Bag;
   using SFMBE.Shared;
   using SFMBE.Shared.Bags;
-  using System;
-  using System.Collections.Specialized;
-  using System.Security.Cryptography.X509Certificates;
   using System.Threading.Tasks;
 
   public class BagsController : BaseController
@@ -32,5 +29,3 @@
     }
   }
 }
-//.Where(i => (i.Id == itemId && i.IsEquip == false)
-//         || (i.IsEquip && i.ItemType.ToString() == itemType))

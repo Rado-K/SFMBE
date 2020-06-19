@@ -1,22 +1,27 @@
 namespace SFMBE.Client
 {
   using Blazor.Extensions.Logging;
+  using BlazorState;
   using Infrastructure;
   using Infrastructure.Auth;
-  using Infrastructure.Http;
+  using MediatR;
   using Microsoft.AspNetCore.Components.Authorization;
   using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
   using Microsoft.Extensions.DependencyInjection;
   using Microsoft.Extensions.Logging;
-  using Respository.Accounts;
-  using Respository.Bags;
-  using Respository.Characters;
-  using Respository.Gears;
-  using Respository.Items;
   using Services.Mapping;
+  using SFMBE.Client.Features.Bag;
+  using SFMBE.Client.Features.Character;
+  using SFMBE.Client.Features.Counter;
+  using SFMBE.Client.Features.EventStream;
+  using SFMBE.Client.Features.Gear;
+  using SFMBE.Client.Infrastructure.Http;
+  using SFMBE.Client.Repositories.Accounts;
+  using SFMBE.Client.Repositories.Bags;
+  using SFMBE.Client.Repositories.Characters;
+  using SFMBE.Client.Repositories.Gears;
+  using SFMBE.Client.Repositories.Items;
   using SFMBE.Shared;
-  using State.Bag;
-  using State.Gear;
   using System;
   using System.Net.Http;
   using System.Reflection;
@@ -59,8 +64,20 @@ namespace SFMBE.Client
       services.AddSingleton<IItemsRepository, ItemsRepository>();
       services.AddSingleton<IGearsRepository, GearsRepository>();
 
-      services.AddSingleton<BagState>();
-      services.AddSingleton<GearState>();
+      services.AddBlazorState
+      (
+        (option) =>
+        {
+          option.UseReduxDevToolsBehavior = true;
+          option.Assemblies =
+          new[]
+          {
+            typeof(Program).GetTypeInfo().Assembly,
+          };
+        }
+      );
+
+      services.AddScoped(typeof(IPipelineBehavior<,>), typeof(EventStreamBehavior<,>));
 
       services.AddApiAuthorization();
     }

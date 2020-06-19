@@ -3,7 +3,7 @@
   using Data.Models;
   using Services.Mapping;
 
-  public class CharacterUpdateModel : IMapFrom<CharacterResponseModel>, IMapTo<Character>
+  public class CharacterUpdateModel : IMapFrom<CharacterResponseModel>, IMapTo<Character>, IMapFrom<Character>
   {
     public string Name { get; set; }
 

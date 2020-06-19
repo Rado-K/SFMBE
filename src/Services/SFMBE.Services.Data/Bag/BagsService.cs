@@ -5,12 +5,10 @@
   using SFMBE.Data.Models;
   using SFMBE.Services.Data.Character;
   using SFMBE.Services.Mapping;
-  using SFMBE.Shared.Bags;
   using SFMBE.Shared.Character;
   using System;
   using System.Linq;
   using System.Linq.Expressions;
-  using System.Security.Cryptography.X509Certificates;
   using System.Threading.Tasks;
 
   public class BagsService : IBagsService

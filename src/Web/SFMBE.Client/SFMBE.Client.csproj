@@ -6,26 +6,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Respository\User\**" />
-    <Content Remove="Respository\User\**" />
-    <EmbeddedResource Remove="Respository\User\**" />
-    <None Remove="Respository\User\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-
+    <PackageReference Include="Blazor-State" Version="3.2.1" />
     <PackageReference Include="Blazor.Extensions.Logging" Version="1.1.1" />
-
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.0-preview.1.20124.5" />
+    <PackageReference Include="Dawn.Guard" Version="1.12.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="3.2.0" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.2.0-preview3.20168.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.Net.Http.Json" Version="3.2.1" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.0-preview.1.20124.5" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="3.2.0" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\SFMBE.Shared\SFMBE.Shared.csproj" />
     <ProjectReference Include="..\SFMBE.Client.Infrastructure\SFMBE.Client.Infrastructure.csproj" />
+    <ProjectReference Include="..\SFMBE.Client.Repositories\SFMBE.Client.Repositories.csproj" />
   </ItemGroup>
 
 </Project>

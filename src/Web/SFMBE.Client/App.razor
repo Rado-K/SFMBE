@@ -1,20 +1,25 @@
-<Router AppAssembly="@typeof(Program).Assembly">
-    <Found Context="routeData">
-        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
-            <Authorizing>
-                <text>Custom Auth</text>
-            </Authorizing>
-
-            <NotAuthorized>
-                <text>Custom Not Auth</text>
-            </NotAuthorized>
-        </AuthorizeRouteView>
-    </Found>
-    <NotFound>
-        <CascadingAuthenticationState>
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(Program).Assembly">
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="@routeData"
+                                DefaultLayout="@typeof(MainLayout)">
+                <NotAuthorized>
+                    <p>
+                        You are not authorized to access
+                        this resource.
+                    </p>
+                </NotAuthorized>
+            </AuthorizeRouteView>
+            <AuthorizeView>
+                <Authorized>
+                    <StateInitializer />
+                </Authorized>
+            </AuthorizeView>
+        </Found>
+        <NotFound>
             <LayoutView Layout="@typeof(MainLayout)">
-                <p>POPRAVI GO TVA</p>>
+                <p>Sorry, there's nothing at this address.</p>
             </LayoutView>
-        </CascadingAuthenticationState>
-    </NotFound>
-</Router>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>

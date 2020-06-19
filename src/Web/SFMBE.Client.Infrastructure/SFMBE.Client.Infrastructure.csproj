@@ -13,4 +13,8 @@
     <ProjectReference Include="..\..\SFMBE.Shared\SFMBE.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Bag\" />
+  </ItemGroup>
+
 </Project>

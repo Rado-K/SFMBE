@@ -1,7 +1,9 @@
 ﻿@using System.Net.Http
+@using System.Net.Http.Json
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Routing
 @using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.WebAssembly.Http
 @using Microsoft.JSInterop
 @using SFMBE.Client
 @using SFMBE.Client.Shared
@@ -13,5 +15,4 @@
 
 @using Microsoft.Extensions.Logging
 
-@inject SFMBE.Client.State.Gear.GearState GearState
-@inject SFMBE.Client.State.Bag.BagState BagState
+@using SFMBE.Client.Features.Base.Components

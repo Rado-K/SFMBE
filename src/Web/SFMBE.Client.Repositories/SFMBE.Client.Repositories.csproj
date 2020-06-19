@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SFMBE.Shared\SFMBE.Shared.csproj" />
+    <ProjectReference Include="..\SFMBE.Client.Infrastructure\SFMBE.Client.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
