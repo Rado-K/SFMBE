@@ -6,7 +6,8 @@
   using SFMBE.Services.Data.Character;
   using SFMBE.Services.Data.Items;
   using SFMBE.Services.Mapping;
-  using SFMBE.Shared.Character;
+  using SFMBE.Shared.Character.GetBag;
+  using SFMBE.Shared.Character.GetGear;
   using System;
   using System.Linq;
   using System.Threading.Tasks;
@@ -29,7 +30,7 @@
 
     public async Task<Gear> GetGear()
     {
-      var character = await this.charactersService.GetCharacter<CharacterGetGearModel>();
+      var character = await this.charactersService.GetCharacter<GetGearCharacterResponse>();
 
       var gear = await this.gearRepository
         .GetWithProperties(x => x.Id == character.GearId, x => x.EquippedItems)
@@ -47,7 +48,7 @@
 
     public async Task Equip(int id)
     {
-      var character = await this.charactersService.GetCharacter<CharacterGetBagModel>();
+      var character = await this.charactersService.GetCharacter<GetBagCharacterResponse>();
       var item = await this.itemsService.GetItemById<Item>(id);
       var gear = await this.GetGear();
 
@@ -71,7 +72,7 @@
 
     public async Task Unequip(int id)
     {
-      var character = await this.charactersService.GetCharacter<CharacterGetBagModel>();
+      var character = await this.charactersService.GetCharacter<GetBagCharacterResponse>();
       var item = await this.itemsService.GetItemById<Item>(id);
       var gear = await this.GetGear();
 

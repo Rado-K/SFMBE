@@ -1,7 +1,7 @@
 ﻿namespace SFMBE.Client.Features.Items
 {
   using Microsoft.AspNetCore.Components;
-  using SFMBE.Shared.Items;
+  using SFMBE.Shared.Items.Get;
   using System.Collections.Generic;
 
   public partial class ItemRow
@@ -10,7 +10,7 @@
     public string Type { get; set; }
 
     [Parameter]
-    public IList<ItemResponseModel> Items { get; set; }
+    public IList<GetItemResponse> Items { get; set; }
 
     [Parameter]
     public string Border { get; set; } = "";

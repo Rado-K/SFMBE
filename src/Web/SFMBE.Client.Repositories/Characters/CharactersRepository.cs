@@ -2,7 +2,9 @@
 {
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Shared;
-  using SFMBE.Shared.Character;
+  using SFMBE.Shared.Character.Create;
+  using SFMBE.Shared.Character.Get;
+  using SFMBE.Shared.Character.Update;
   using System;
   using System.Threading.Tasks;
 
@@ -16,49 +18,49 @@
       this.httpService = httpService;
     }
 
-    public async Task<ApiResponse<CharacterResponseModel>> GetCharacter()
+    public async Task<ApiResponse<GetCharacterResponse>> GetCharacter()
     {
-      var httpResponse = await this.httpService.Get<CharacterResponseModel>($"{URL}/GetCharacter");
+      var httpResponse = await this.httpService.Get<GetCharacterResponse>($"{URL}/GetCharacter");
 
       if (!httpResponse.IsOk)
       {
-        return new ApiResponse<CharacterResponseModel>(httpResponse.Errors);
+        return new ApiResponse<GetCharacterResponse>(httpResponse.Errors);
       }
 
       return httpResponse;
     }
 
-    public async Task<ApiResponse<CharacterResponseModel>> GetCharacter(int characterId)
+    public async Task<ApiResponse<GetCharacterResponse>> GetCharacter(int characterId)
     {
-      var httpResponse = await this.httpService.Get<CharacterResponseModel>($"{URL}/{characterId}");
+      var httpResponse = await this.httpService.Get<GetCharacterResponse>($"{URL}/{characterId}");
 
       if (!httpResponse.IsOk)
       {
-        return new ApiResponse<CharacterResponseModel>(httpResponse.Errors);
+        return new ApiResponse<GetCharacterResponse>(httpResponse.Errors);
       }
 
       return httpResponse;
     }
 
-    public async Task<ApiResponse<CharacterCreateResponseModel>> CreateCharacter(string name)
+    public async Task<ApiResponse<CreateCharacterResponse>> CreateCharacter(string name)
     {
-      var httpResponse = await this.httpService.PostJson<string, CharacterCreateResponseModel>($"{URL}/CreateCharacter", name);
+      var httpResponse = await this.httpService.PostJson<string, CreateCharacterResponse>($"{URL}/CreateCharacter", name);
 
       if (!httpResponse.IsOk)
       {
-        return new ApiResponse<CharacterCreateResponseModel>(httpResponse.Errors);
+        return new ApiResponse<CreateCharacterResponse>(httpResponse.Errors);
       }
 
       return httpResponse;
     }
 
-    public async Task<ApiResponse<CharacterUpdateModel>> UpdateCharacter(CharacterUpdateModel characterResponseModel)
+    public async Task<ApiResponse<UpdateCharacter>> UpdateCharacter(UpdateCharacter characterResponseModel)
     {
       var httpResponse = await this.httpService.Put(URL, characterResponseModel);
 
       if (!httpResponse.IsOk)
       {
-        return new ApiResponse<CharacterUpdateModel>(httpResponse.Errors);
+        return new ApiResponse<UpdateCharacter>(httpResponse.Errors);
       }
 
       return httpResponse;

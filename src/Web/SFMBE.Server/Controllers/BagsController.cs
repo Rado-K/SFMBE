@@ -3,7 +3,7 @@
   using Microsoft.AspNetCore.Mvc;
   using SFMBE.Services.Data.Bag;
   using SFMBE.Shared;
-  using SFMBE.Shared.Bags;
+  using SFMBE.Shared.Bags.Get;
   using System.Threading.Tasks;
 
   public class BagsController : BaseController
@@ -16,9 +16,9 @@
     }
 
     [HttpGet]
-    public async Task<ActionResult<ApiResponse<BagResponseModel>>> GetBag()
+    public async Task<ActionResult<ApiResponse<GetBagResponse>>> GetBag()
     {
-      var response = await this.bagsService.GetBag<BagResponseModel>(x => x.Items);
+      var response = await this.bagsService.GetBag<GetBagResponse>(x => x.Items);
 
       if (response is null)
       {

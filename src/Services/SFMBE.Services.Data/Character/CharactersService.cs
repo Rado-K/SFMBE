@@ -5,7 +5,9 @@
   using SFMBE.Data.Models;
   using SFMBE.Services.Data.User;
   using SFMBE.Services.Mapping;
-  using SFMBE.Shared.Character;
+  using SFMBE.Shared.Character.Create;
+  using SFMBE.Shared.Character.Get;
+  using SFMBE.Shared.Character.Update;
   using System.Linq;
   using System.Threading.Tasks;
 
@@ -20,18 +22,18 @@
       this.userService = userService;
     }
 
-    public async Task<CharacterResponseModel> GetCharacterById(int characterId)
+    public async Task<GetCharacterResponse> GetCharacterById(int characterId)
     {
       var character = await this.characterRepository
         .All()
         .Where(x => x.Id == characterId)
-        .To<CharacterResponseModel>()
+        .To<GetCharacterResponse>()
         .FirstOrDefaultAsync();
 
       return character;
     }
 
-    public async Task<CharacterCreateResponseModel> CreateCharacter(string name)
+    public async Task<CreateCharacterResponse> CreateCharacter(string name)
     {
       var character = new Character { Name = name };
       character.User = await this.userService.GetUser();
@@ -39,7 +41,7 @@
       await this.characterRepository.AddAsync(character);
       await this.characterRepository.SaveChangesAsync();
 
-      return character.To<CharacterCreateResponseModel>();
+      return character.To<CreateCharacterResponse>();
     }
 
     public async Task<T> GetCharacter<T>()
@@ -54,7 +56,7 @@
       return user.Character.To<T>();
     }
 
-    public async Task<CharacterUpdateModel> UpdateCharacter(CharacterUpdateModel characterUpdateModel)
+    public async Task<UpdateCharacter> UpdateCharacter(UpdateCharacter characterUpdateModel)
     {
       var character = await this.characterRepository
         .All()
@@ -65,7 +67,7 @@
       this.characterRepository.Update(character);
       await this.characterRepository.SaveChangesAsync();
 
-      return character.To<CharacterUpdateModel>();
+      return character.To<UpdateCharacter>();
     }
   }
 }

@@ -3,22 +3,23 @@
   using Microsoft.AspNetCore.Components;
   using SFMBE.Client.Repositories.Characters;
   using SFMBE.Services.Mapping;
-  using SFMBE.Shared.Character;
+  using SFMBE.Shared.Character.Get;
+  using SFMBE.Shared.Character.Update;
   using System.Threading.Tasks;
 
   public partial class CharacterInfo
   {
     [Parameter]
-    public CharacterResponseModel Character { get; set; }
+    public GetCharacterResponse Character { get; set; }
 
     [Inject]
     public ICharactersRepository CharactersRepository { get; set; }
 
-    private CharacterUpdateModel characterUpdateModel;
+    private UpdateCharacter characterUpdateModel;
 
     protected override void OnInitialized()
     {
-      this.characterUpdateModel = this.Character.To<CharacterUpdateModel>();
+      this.characterUpdateModel = this.Character.To<UpdateCharacter>();
     }
 
     private async Task UpdateStamina(int value)

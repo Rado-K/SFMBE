@@ -6,7 +6,7 @@
   using SFMBE.Client.Features.Items;
   using SFMBE.Client.Repositories.Bags;
   using SFMBE.Services.Mapping;
-  using SFMBE.Shared.Items;
+  using SFMBE.Shared.Items.GetItems;
   using System.Threading;
   using System.Threading.Tasks;
 
@@ -26,8 +26,8 @@
       public override async Task<Unit> Handle(FetchBagAction fetchBagAction, CancellationToken cancellationToken)
       {
         var bag = await this.bagsRepository.GetBag();
-        var requestModel = bag.Data.Items.To<ItemsRequestModel>();
-        var response = await this.mediator.Send(new GetItemsAction(requestModel));
+        var requestModel = bag.Data.Items.To<GetItemsRequest>();
+        var response = await this.mediator.Send(new ItemState.GetItemsAction(requestModel));
         this.BagState.Bag = response.Items;
 
         return await Unit.Task;

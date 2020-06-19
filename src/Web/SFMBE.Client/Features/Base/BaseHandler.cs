@@ -16,7 +16,7 @@
     protected CharacterState CharacterState => this.Store.GetState<CharacterState>();
     protected BagState BagState => this.Store.GetState<BagState>();
     protected GearState GearState => this.Store.GetState<GearState>();
-    protected ItemState ItemsState => this.Store.GetState<ItemState>();
+    protected ItemState ItemState => this.Store.GetState<ItemState>();
 
     protected BaseHandler(IStore store) : base(store) { }
   }

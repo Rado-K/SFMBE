@@ -1,17 +1,17 @@
 ﻿namespace SFMBE.Client.Features.Gear
 {
   using BlazorState;
-  using SFMBE.Shared.Items;
+  using SFMBE.Shared.Items.Get;
   using System.Collections.Generic;
   using System.Linq;
 
   internal partial class GearState : State<GearState>
   {
-    public List<ItemResponseModel> Gear { get; set; }
+    public List<GetItemResponse> Gear { get; set; }
 
     public override void Initialize() { }
 
-    public ItemResponseModel AddItem(ItemResponseModel item)
+    public GetItemResponse AddItem(GetItemResponse item)
     {
       var existsSecondItem = this.Gear.FirstOrDefault(x => x.ItemType == item.ItemType && x.Id != item.Id);
 

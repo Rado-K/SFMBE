@@ -1,6 +1,6 @@
 ﻿namespace SFMBE.Client.Features.Gear
 {
-  using SFMBE.Shared.Items;
+  using SFMBE.Shared.Items.Get;
   using System;
   using System.Collections.Generic;
   using System.Linq;
@@ -8,13 +8,13 @@
 
   public partial class Gear
   {
-    private List<ItemResponseModel> Items => this.GearState.Gear;
+    private List<GetItemResponse> Items => this.GearState.Gear;
 
     private int BoardRows
       => this.Items is null
         ? 0 : (int)Math.Ceiling((decimal)this.Items.Count / 3);
 
-    private List<ItemResponseModel> OrderItems()
+    private List<GetItemResponse> OrderItems()
     {
       var items = this.Items;
 
@@ -25,7 +25,7 @@
         return items.Where(x => x.ItemType != "Empty").ToList();
       }
 
-      var emptyItem = new ItemResponseModel();
+      var emptyItem = new GetItemResponse();
 
       if (euquipetItems != 0 && items.Count > 9)
       {

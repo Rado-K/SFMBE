@@ -2,7 +2,8 @@
 {
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Shared;
-  using SFMBE.Shared.Items;
+  using SFMBE.Shared.Items.Create;
+  using SFMBE.Shared.Items.GetItems;
   using System.Threading.Tasks;
 
   public class ItemsRepository : IItemsRepository
@@ -15,27 +16,27 @@
       this.httpService = httpService;
     }
 
-    public async Task<ApiResponse<ItemsResponseModel>> GetItems(ItemsRequestModel itemsRequestModel)
+    public async Task<ApiResponse<GetItemsResponse>> GetItems(GetItemsRequest itemsRequestModel)
     {
       var requestString = "Items=0" + string.Join("&Items=", itemsRequestModel.Items);
 
-      var httpResponse = await this.httpService.Get<ItemsResponseModel>($"{URL}?{requestString}");
+      var httpResponse = await this.httpService.Get<GetItemsResponse>($"{URL}?{requestString}");
 
       if (!httpResponse.IsOk)
       {
-        return new ApiResponse<ItemsResponseModel>(httpResponse.Errors);
+        return new ApiResponse<GetItemsResponse>(httpResponse.Errors);
       }
 
       return httpResponse;
     }
 
-    public async Task<ApiResponse<ItemCreateResponseModel>> CreateItem(ItemCreateRequestModel itemCreateRequestModel)
+    public async Task<ApiResponse<CreateItemResponse>> CreateItem(CreateItemRequest itemCreateRequestModel)
     {
-      var httpResponse = await this.httpService.PostJson<ItemCreateRequestModel, ItemCreateResponseModel>($"{URL}/CreateItem", itemCreateRequestModel);
+      var httpResponse = await this.httpService.PostJson<CreateItemRequest, CreateItemResponse>($"{URL}/CreateItem", itemCreateRequestModel);
 
       if (!httpResponse.IsOk)
       {
-        return new ApiResponse<ItemCreateResponseModel>(httpResponse.Errors);
+        return new ApiResponse<CreateItemResponse>(httpResponse.Errors);
       }
 
       return httpResponse;

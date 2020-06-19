@@ -1,15 +1,18 @@
 ﻿namespace SFMBE.Client.Features.Items
 {
   using MediatR;
-  using SFMBE.Shared.Items;
+  using SFMBE.Shared.Items.GetItems;
 
-  public class GetItemsAction : IRequest<ItemsResponseModel>
+  internal partial class ItemState
   {
-    public GetItemsAction(ItemsRequestModel itemsRequestModel)
+    public class GetItemsAction : IRequest<GetItemsResponse>
     {
-      this.ItemsRequestModel = itemsRequestModel;
-    }
+      public GetItemsAction(GetItemsRequest itemsRequestModel)
+      {
+        this.ItemsRequestModel = itemsRequestModel;
+      }
 
-    public ItemsRequestModel ItemsRequestModel { get; }
+      public GetItemsRequest ItemsRequestModel { get; }
+    }
   }
 }

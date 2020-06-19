@@ -5,7 +5,7 @@
   using SFMBE.Data.Models;
   using SFMBE.Services.Data.Character;
   using SFMBE.Services.Mapping;
-  using SFMBE.Shared.Character;
+  using SFMBE.Shared.Character.GetBag;
   using System;
   using System.Linq;
   using System.Linq.Expressions;
@@ -26,7 +26,7 @@
 
     public async Task<T> GetBag<T>(params Expression<Func<Bag, object>>[] properties)
     {
-      var character = await this.charactersService.GetCharacter<CharacterGetBagModel>();
+      var character = await this.charactersService.GetCharacter<GetBagCharacterResponse>();
 
       var bag = await this.bagsRepository
         .All()

@@ -1,8 +1,8 @@
-﻿namespace SFMBE.Shared.Account
+﻿namespace SFMBE.Shared.Account.Register
 {
   using System.ComponentModel.DataAnnotations;
 
-  public class UserRegisterRequestModel
+  public class RegisterUserRequest
   {
     [Required]
     [EmailAddress]

@@ -5,13 +5,13 @@
   using SFMBE.Client.Infrastructure.Auth;
   using SFMBE.Client.Repositories.Accounts;
   using SFMBE.Shared;
-  using SFMBE.Shared.Account;
+  using SFMBE.Shared.Account.Login;
 
   public partial class Login
   {
-    private readonly UserLoginRequestModel userLoginRequestModel = new UserLoginRequestModel();
+    private readonly LoginUserRequest userLoginRequestModel = new LoginUserRequest();
 
-    private ApiResponse<UserLoginResponseModel> response;
+    private ApiResponse<LoginUserResponse> response;
 
     [Inject] public IAccountRepository AccountRepository { get; set; }
 

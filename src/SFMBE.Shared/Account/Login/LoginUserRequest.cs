@@ -1,8 +1,8 @@
-﻿namespace SFMBE.Shared.Account
+﻿namespace SFMBE.Shared.Account.Login
 {
   using System.ComponentModel.DataAnnotations;
 
-  public class UserLoginRequestModel
+  public class LoginUserRequest
   {
     [Required]
     public string Email { get; set; }

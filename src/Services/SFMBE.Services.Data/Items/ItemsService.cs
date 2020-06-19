@@ -4,9 +4,10 @@
   using SFMBE.Data.Common.Repositories;
   using SFMBE.Data.Models;
   using SFMBE.Services.Mapping;
-  using SFMBE.Shared.Items;
+  using SFMBE.Shared.Items.Create;
+  using SFMBE.Shared.Items.Get;
+  using SFMBE.Shared.Items.GetItems;
   using System;
-  using System.Collections.Generic;
   using System.Linq;
   using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@
       this.itemsRepository = itemsRepository;
     }
 
-    public async Task<ItemCreateResponseModel> CreateItem(ItemCreateRequestModel userModel)
+    public async Task<CreateItemResponse> CreateItem(CreateItemRequest userModel)
     {
       var rnd = new Random();
 
@@ -40,7 +41,7 @@
       await this.itemsRepository.AddAsync(item);
       await this.itemsRepository.SaveChangesAsync();
 
-      return new ItemCreateResponseModel { Id = item.Id };
+      return new CreateItemResponse { Id = item.Id };
     }
 
     public async Task<T> GetItemById<T>(int id)
@@ -53,12 +54,12 @@
       return item.To<T>();
     }
 
-    public async Task<T> GetItemsById<T>(ItemsRequestModel itemsRequestModel)
+    public async Task<T> GetItemsById<T>(GetItemsRequest itemsRequestModel)
     {
       var items = await this.itemsRepository
         .All()
         .Where(x => itemsRequestModel.Items.Contains(x.Id))
-        .To<ItemResponseModel>()
+        .To<GetItemResponse>()
         .ToListAsync();
 
       var asnwer = MappingExtensions.To<T>(items);

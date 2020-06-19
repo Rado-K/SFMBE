@@ -3,13 +3,13 @@
   using Microsoft.AspNetCore.Components;
   using SFMBE.Client.Features.Bag;
   using SFMBE.Client.Features.Gear;
-  using SFMBE.Shared.Items;
+  using SFMBE.Shared.Items.Get;
   using System.Threading.Tasks;
 
   public partial class Item
   {
     [Parameter]
-    public ItemResponseModel Model { get; set; }
+    public GetItemResponse Model { get; set; }
 
     [Parameter]
     public string ClassName { get; set; }

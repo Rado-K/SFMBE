@@ -1,8 +1,8 @@
-﻿namespace SFMBE.Shared.Account
+﻿namespace SFMBE.Shared.Account.Login
 {
   using System;
 
-  public class UserLoginResponseModel
+  public class LoginUserResponse
   {
     public string Token { get; set; }
 

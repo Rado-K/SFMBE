@@ -1,4 +1,4 @@
-﻿namespace SFMBE.Client.Infrastructure.Base
+﻿namespace SFMBE.Shared.Base
 {
   using System;
 

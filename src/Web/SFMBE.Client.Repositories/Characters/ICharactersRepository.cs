@@ -1,7 +1,9 @@
 ﻿namespace SFMBE.Client.Repositories.Characters
 {
   using SFMBE.Shared;
-  using SFMBE.Shared.Character;
+  using SFMBE.Shared.Character.Create;
+  using SFMBE.Shared.Character.Get;
+  using SFMBE.Shared.Character.Update;
   using System;
   using System.Collections.Generic;
   using System.Linq;
@@ -9,9 +11,9 @@
 
   public interface ICharactersRepository
   {
-    Task<ApiResponse<CharacterCreateResponseModel>> CreateCharacter(string name);
-    Task<ApiResponse<CharacterResponseModel>> GetCharacter(int characterId);
-    Task<ApiResponse<CharacterResponseModel>> GetCharacter();
-    Task<ApiResponse<CharacterUpdateModel>> UpdateCharacter(CharacterUpdateModel characterResponseModel);
+    Task<ApiResponse<CreateCharacterResponse>> CreateCharacter(string name);
+    Task<ApiResponse<GetCharacterResponse>> GetCharacter(int characterId);
+    Task<ApiResponse<GetCharacterResponse>> GetCharacter();
+    Task<ApiResponse<UpdateCharacter>> UpdateCharacter(UpdateCharacter characterResponseModel);
   }
 }

@@ -2,29 +2,32 @@
 {
   using MediatR;
   using SFMBE.Client.Repositories.Items;
-  using SFMBE.Shared.Items;
+  using SFMBE.Shared.Items.GetItems;
   using System.Threading;
   using System.Threading.Tasks;
 
-  public class GetItemsHandler : IRequestHandler<GetItemsAction, ItemsResponseModel>
+  internal partial class ItemState
   {
-    private readonly IItemsRepository itemsRepository;
-
-    public GetItemsHandler(IItemsRepository itemsRepository)
+    internal class GetItemsHandler : IRequestHandler<GetItemsAction, GetItemsResponse>
     {
-      this.itemsRepository = itemsRepository;
-    }
+      private readonly IItemsRepository itemsRepository;
 
-    public async Task<ItemsResponseModel> Handle(GetItemsAction request, CancellationToken cancellationToken)
-    {
-      var response = await this.itemsRepository.GetItems(request.ItemsRequestModel);
-
-      if (response.IsOk)
+      public GetItemsHandler(IItemsRepository itemsRepository)
       {
-        return response.Data;
+        this.itemsRepository = itemsRepository;
       }
 
-      throw new System.InvalidOperationException();
+      public async Task<GetItemsResponse> Handle(GetItemsAction request, CancellationToken cancellationToken)
+      {
+        var response = await this.itemsRepository.GetItems(request.ItemsRequestModel);
+
+        if (response.IsOk)
+        {
+          return response.Data;
+        }
+
+        throw new System.InvalidOperationException();
+      }
     }
   }
 }

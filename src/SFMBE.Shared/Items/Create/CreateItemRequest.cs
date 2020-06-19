@@ -1,9 +1,9 @@
-﻿namespace SFMBE.Shared.Items
+﻿namespace SFMBE.Shared.Items.Create
 {
-  using SFMBE.Services.Mapping;
   using SFMBE.Data.Models;
+  using SFMBE.Services.Mapping;
 
-  public class ItemCreateRequestModel : IMapFrom<Character>
+  public class CreateItemRequest : IMapFrom<Character>
   {
     public string ItemType { get; set; }
 

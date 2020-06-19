@@ -1,4 +1,4 @@
-﻿namespace SFMBE.Shared.Bags
+﻿namespace SFMBE.Shared.Bags.Get
 {
   using AutoMapper;
   using SFMBE.Data.Models;
@@ -6,14 +6,14 @@
   using System.Collections.Generic;
   using System.Linq;
 
-  public class BagResponseModel : IMapFrom<Bag>, IHaveCustomMappings
+  public class GetBagResponse : IMapFrom<Bag>, IHaveCustomMappings
   {
     public IList<int> Items { get; set; }
 
     public void CreateMappings(IProfileExpression configuration)
     {
       configuration
-        .CreateMap<Bag, BagResponseModel>()
+        .CreateMap<Bag, GetBagResponse>()
         .ForMember(
               d => d.Items,
               o => o.MapFrom(

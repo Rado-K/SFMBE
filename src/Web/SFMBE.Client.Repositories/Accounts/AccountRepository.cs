@@ -2,7 +2,8 @@
 {
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Shared;
-  using SFMBE.Shared.Account;
+  using SFMBE.Shared.Account.Login;
+  using SFMBE.Shared.Account.Register;
   using System.Collections.Generic;
   using System.Net.Http;
   using System.Threading.Tasks;
@@ -17,19 +18,19 @@
       this.httpService = httpService;
     }
 
-    public async Task<ApiResponse<UserRegisterResponseModel>> Register(UserRegisterRequestModel userRegisterRequestModel)
+    public async Task<ApiResponse<RegisterUserResponse>> Register(RegisterUserRequest userRegisterRequestModel)
     {
-      var httpResponse = await this.httpService.PostJson<UserRegisterRequestModel, UserRegisterResponseModel>($"{URL}/register", userRegisterRequestModel);
+      var httpResponse = await this.httpService.PostJson<RegisterUserRequest, RegisterUserResponse>($"{URL}/register", userRegisterRequestModel);
 
       if (!httpResponse.IsOk)
       {
-        return new ApiResponse<UserRegisterResponseModel>(httpResponse.Errors);
+        return new ApiResponse<RegisterUserResponse>(httpResponse.Errors);
       }
 
       return httpResponse;
     }
 
-    public async Task<ApiResponse<UserLoginResponseModel>> Login(UserLoginRequestModel userLoginRequestModel)
+    public async Task<ApiResponse<LoginUserResponse>> Login(LoginUserRequest userLoginRequestModel)
     {
       var request = new FormUrlEncodedContent(
                                new List<KeyValuePair<string, string>>
@@ -38,11 +39,11 @@
                                  new KeyValuePair<string, string>("password", userLoginRequestModel.Password),
                                });
 
-      var httpResponse = await this.httpService.Post<FormUrlEncodedContent, UserLoginResponseModel>($"{URL}/login", request);
+      var httpResponse = await this.httpService.Post<FormUrlEncodedContent, LoginUserResponse>($"{URL}/login", request);
 
       if (!httpResponse.IsOk)
       {
-        return new ApiResponse<UserLoginResponseModel>(httpResponse.Errors);
+        return new ApiResponse<LoginUserResponse>(httpResponse.Errors);
       }
 
       return httpResponse;

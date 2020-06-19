@@ -4,14 +4,14 @@
   using SFMBE.Client.Infrastructure.Auth;
   using SFMBE.Client.Repositories.Accounts;
   using SFMBE.Shared;
-  using SFMBE.Shared.Account;
+  using SFMBE.Shared.Account.Register;
   using System.Threading.Tasks;
 
   public partial class Register
   {
-    private readonly UserRegisterRequestModel userLoginRequestModel = new UserRegisterRequestModel();
+    private readonly RegisterUserRequest userLoginRequestModel = new RegisterUserRequest();
 
-    private ApiResponse<UserRegisterResponseModel> response;
+    private ApiResponse<RegisterUserResponse> response;
 
     [Inject] public IAccountRepository AccountRepository { get; set; }
 

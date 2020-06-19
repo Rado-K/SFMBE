@@ -1,15 +1,17 @@
-﻿namespace SFMBE.Shared.Character
+﻿namespace SFMBE.Shared.Character.Get
 {
   using Data.Models;
   using Services.Mapping;
 
-  public class CharacterUpdateModel : IMapFrom<CharacterResponseModel>, IMapTo<Character>, IMapFrom<Character>
+  public class GetCharacterResponse : IMapFrom<Character>
   {
     public string Name { get; set; }
 
     public int Level { get; set; }
 
     public int Money { get; set; }
+
+    public byte[] Image { get; set; }
 
     public int Experience { get; set; }
 

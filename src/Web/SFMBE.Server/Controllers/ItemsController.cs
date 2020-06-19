@@ -3,7 +3,8 @@
   using Microsoft.AspNetCore.Mvc;
   using SFMBE.Services.Data.Items;
   using SFMBE.Shared;
-  using SFMBE.Shared.Items;
+  using SFMBE.Shared.Items.Create;
+  using SFMBE.Shared.Items.GetItems;
   using System;
   using System.Threading.Tasks;
 
@@ -16,14 +17,14 @@
       this.itemsService = itemsService;
     }
 
-    public async Task<ActionResult<ApiResponse<ItemsResponseModel>>> GetItems([FromQuery] ItemsRequestModel itemsRequestModel)
+    public async Task<ActionResult<ApiResponse<GetItemsResponse>>> GetItems([FromQuery] GetItemsRequest itemsRequestModel)
     {
       if (itemsRequestModel is null || !this.ModelState.IsValid)
       {
-        return this.ModelStateErrors<ItemsResponseModel>();
+        return this.ModelStateErrors<GetItemsResponse>();
       }
 
-      var response = await this.itemsService.GetItemsById<ItemsResponseModel>(itemsRequestModel);
+      var response = await this.itemsService.GetItemsById<GetItemsResponse>(itemsRequestModel);
 
       if (response is null)
       {
@@ -34,7 +35,7 @@
     }
 
     [HttpPost]
-    public async Task<ActionResult<ApiResponse<ItemCreateResponseModel>>> CreateItem([FromBody] ItemCreateRequestModel itemCreateRequestModel)
+    public async Task<ActionResult<ApiResponse<ItemCreateResponseModel>>> CreateItem([FromBody] CreateItemRequest itemCreateRequestModel)
     {
       if (itemCreateRequestModel is null || !this.ModelState.IsValid)
       {

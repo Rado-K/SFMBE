@@ -3,7 +3,7 @@
   using Microsoft.AspNetCore.Identity;
   using SFMBE.Data.Models;
   using SFMBE.Services.Data.Bag;
-  using SFMBE.Shared.Account;
+  using SFMBE.Shared.Account.Register;
   using System.Threading.Tasks;
 
   public class AccountService : IAccountService
@@ -16,7 +16,7 @@
       this.userManager = userManager;
     }
 
-    public async Task<UserRegisterResponseModel> Register(UserRegisterRequestModel userRegisterRequestModel)
+    public async Task<RegisterUserResponse> Register(RegisterUserRequest userRegisterRequestModel)
     {
       var user = new ApplicationUser { UserName = userRegisterRequestModel.Email, Email = userRegisterRequestModel.Email};
 
@@ -27,7 +27,7 @@
         return default;
       }
 
-      return new UserRegisterResponseModel { Id = user.Id };
+      return new RegisterUserResponse { Id = user.Id };
     }
   }
 }

@@ -2,7 +2,7 @@
 {
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Shared;
-  using SFMBE.Shared.Gear;
+  using SFMBE.Shared.Gear.Get;
   using System;
   using System.Threading.Tasks;
 
@@ -16,13 +16,13 @@
       this.httpService = httpService;
     }
 
-    public async Task<ApiResponse<GearResponseModel>> GetGear()
+    public async Task<ApiResponse<GetGearResponseModel>> GetGear()
     {
-      var httpResponse = await this.httpService.Get<GearResponseModel>($"{URL}");
+      var httpResponse = await this.httpService.Get<GetGearResponseModel>($"{URL}");
 
       if (!httpResponse.IsOk)
       {
-        return new ApiResponse<GearResponseModel>(httpResponse.Errors);
+        return new ApiResponse<GetGearResponseModel>(httpResponse.Errors);
       }
 
       return httpResponse;

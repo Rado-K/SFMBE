@@ -2,7 +2,7 @@
 {
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Shared;
-  using SFMBE.Shared.Bags;
+  using SFMBE.Shared.Bags.Get;
   using System;
   using System.Threading.Tasks;
 
@@ -16,13 +16,13 @@
       this.httpService = httpService;
     }
 
-    public async Task<ApiResponse<BagResponseModel>> GetBag()
+    public async Task<ApiResponse<GetBagResponse>> GetBag()
     {
-      var httpResponse = await this.httpService.Get<BagResponseModel>($"{URL}");
+      var httpResponse = await this.httpService.Get<GetBagResponse>($"{URL}");
 
       if (!httpResponse.IsOk)
       {
-        return new ApiResponse<BagResponseModel>(httpResponse.Errors);
+        return new ApiResponse<GetBagResponse>(httpResponse.Errors);
       }
 
       return httpResponse;

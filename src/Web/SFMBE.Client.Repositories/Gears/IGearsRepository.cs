@@ -1,7 +1,7 @@
 ﻿namespace SFMBE.Client.Repositories.Gears
 {
   using SFMBE.Shared;
-  using SFMBE.Shared.Gear;
+  using SFMBE.Shared.Gear.Get;
   using System;
   using System.Threading.Tasks;
 
@@ -9,6 +9,6 @@
   {
     Task Equip(int id);
     Task Unequip(int id);
-    Task<ApiResponse<GearResponseModel>> GetGear();
+    Task<ApiResponse<GetGearResponseModel>> GetGear();
   }
 }

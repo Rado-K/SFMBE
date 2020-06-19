@@ -1,7 +1,7 @@
 ﻿namespace SFMBE.Client.Repositories.Bags
 {
   using SFMBE.Shared;
-  using SFMBE.Shared.Bags;
+  using SFMBE.Shared.Bags.Get;
   using System;
   using System.Collections.Generic;
   using System.Linq;
@@ -9,6 +9,6 @@
 
   public interface IBagsRepository
   {
-    Task<ApiResponse<BagResponseModel>> GetBag();
+    Task<ApiResponse<GetBagResponse>> GetBag();
   }
 }

@@ -3,7 +3,7 @@
   using Microsoft.AspNetCore.Mvc;
   using SFMBE.Services.Data.Gear;
   using SFMBE.Shared;
-  using SFMBE.Shared.Gear;
+  using SFMBE.Shared.Gear.Get;
   using System.Net.NetworkInformation;
   using System.Threading.Tasks;
 
@@ -17,9 +17,9 @@
     }
 
 
-    public async Task<ActionResult<ApiResponse<GearResponseModel>>> GetGear()
+    public async Task<ActionResult<ApiResponse<GetGearResponseModel>>> GetGear()
     {
-      var response = await this.gearsService.GetGear<GearResponseModel>();
+      var response = await this.gearsService.GetGear<GetGearResponseModel>();
 
       if (response is null)
       {

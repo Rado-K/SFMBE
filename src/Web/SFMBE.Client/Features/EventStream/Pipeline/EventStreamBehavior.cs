@@ -6,8 +6,8 @@
   using System;
   using System.Threading;
   using System.Threading.Tasks;
-  using SFMBE.Client.Infrastructure.Base;
   using static SFMBE.Client.Features.EventStream.EventStreamState;
+  using SFMBE.Shared.Base;
 
   public class EventStreamBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
   {
