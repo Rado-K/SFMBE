@@ -6,6 +6,7 @@ namespace SFMBE.Server
   using Data.Common.Repositories;
   using Data.Models;
   using Data.Repositories;
+  using MediatR;
   using Microsoft.AspNetCore.Authentication.JwtBearer;
   using Microsoft.AspNetCore.Builder;
   using Microsoft.AspNetCore.Diagnostics;
@@ -114,6 +115,7 @@ namespace SFMBE.Server
 
       services.AddScoped<IFileStorageService, StorageService>();
       services.AddHttpContextAccessor();
+      services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
 
       // Data repositories
       services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));

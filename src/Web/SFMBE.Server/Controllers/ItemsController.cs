@@ -5,7 +5,6 @@
   using SFMBE.Shared;
   using SFMBE.Shared.Items.Create;
   using SFMBE.Shared.Items.GetItems;
-  using System;
   using System.Threading.Tasks;
 
   public class ItemsController : BaseController
@@ -35,11 +34,11 @@
     }
 
     [HttpPost]
-    public async Task<ActionResult<ApiResponse<ItemCreateResponseModel>>> CreateItem([FromBody] CreateItemRequest itemCreateRequestModel)
+    public async Task<ActionResult<ApiResponse<CreateItemResponse>>> CreateItem([FromBody] CreateItemRequest itemCreateRequestModel)
     {
       if (itemCreateRequestModel is null || !this.ModelState.IsValid)
       {
-        return this.ModelStateErrors<ItemCreateResponseModel>();
+        return this.ModelStateErrors<CreateItemResponse>();
       }
 
       var response = await this.itemsService.CreateItem(itemCreateRequestModel);

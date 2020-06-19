@@ -2,7 +2,6 @@
 {
   using System.Collections.Generic;
   using System.Linq;
-  using System.Text;
 
   public class ApiResponse<T>
   {
@@ -37,17 +36,5 @@
     public T Data { get; set; }
 
     public bool IsOk => !this.Errors?.Any() ?? true;
-
-    public string GetBody()
-    {
-      var sb = new StringBuilder();
-
-      foreach (var i in this.Errors)
-      {
-        sb.AppendLine($"{i.Error} - {i.Item}");
-      }
-
-      return sb.ToString();
-    }
   }
 }
