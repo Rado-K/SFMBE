@@ -23,11 +23,7 @@
     <ProjectReference Include="..\..\Services\SFMBE.Services.Mapping\SFMBE.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Services\SFMBE.Services.Messaging\SFMBE.Services.Messaging.csproj" />
     <ProjectReference Include="..\SFMBE.Client\SFMBE.Client.csproj" />
-    <ProjectReference Include="..\SFMBE.Web.Infrastructure\SFMBE.Server.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <ProjectReference Include="..\SFMBE.Server.Infrastructure\SFMBE.Server.Infrastructure.csproj" />
   </ItemGroup>
 
 
