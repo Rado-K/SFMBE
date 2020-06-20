@@ -1,4 +1,4 @@
-﻿namespace SFMBE.Server.Controllers.Account.Register
+﻿namespace SFMBE.Server.Controllers.Accounts.Register
 {
   using Microsoft.AspNetCore.Mvc;
   using SFMBE.Server.Controllers.Base;

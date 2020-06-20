@@ -6,18 +6,18 @@
   using System.Collections.Generic;
   using System.Linq;
 
-  public class GetBagResponse : IMapFrom<Bag>, IHaveCustomMappings
+  public class GetBagResponse : IMapFrom<IEnumerable<int>>, IHaveCustomMappings
   {
     public IList<int> Items { get; set; }
 
     public void CreateMappings(IProfileExpression configuration)
     {
       configuration
-        .CreateMap<Bag, GetBagResponse>()
+        .CreateMap<IEnumerable<int>, GetBagResponse>()
         .ForMember(
               d => d.Items,
               o => o.MapFrom(
-                  c => c.Items.Where(x => !x.GearId.HasValue).Select(x => x.Id)));
+                  c => c));
     }
   }
 }

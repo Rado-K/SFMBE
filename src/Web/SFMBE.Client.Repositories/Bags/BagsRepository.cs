@@ -16,9 +16,9 @@
       this.httpService = httpService;
     }
 
-    public async Task<ApiResponse<GetBagResponse>> GetBag()
+    public async Task<ApiResponse<GetBagResponse>> GetBag(GetBagRequest request)
     {
-      var httpResponse = await this.httpService.Get<GetBagResponse>($"{URL}");
+      var httpResponse = await this.httpService.Get<GetBagResponse>(request.RouteFactory);
 
       if (!httpResponse.IsOk)
       {

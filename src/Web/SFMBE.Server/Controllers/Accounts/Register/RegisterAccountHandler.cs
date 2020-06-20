@@ -1,4 +1,4 @@
-﻿namespace SFMBE.Server.Controllers.Account.Register
+﻿namespace SFMBE.Server.Controllers.Accounts.Register
 {
   using MediatR;
   using Microsoft.AspNetCore.Identity;
