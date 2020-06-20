@@ -9,6 +9,6 @@
   {
     Task Equip(int id);
     Task Unequip(int id);
-    Task<ApiResponse<GetGearResponseModel>> GetGear();
+    Task<ApiResponse<GetGearResponse>> GetGear(GetGearRequest getGearRequest);
   }
 }

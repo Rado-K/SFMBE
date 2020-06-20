@@ -17,19 +17,6 @@
     }
 
 
-    public async Task<ActionResult<ApiResponse<GetGearResponseModel>>> GetGear()
-    {
-      var response = await this.gearsService.GetGear<GetGearResponseModel>();
-
-      if (response is null)
-      {
-        return this.BadRequest();
-      }
-
-      return this.Ok(response.ToApiResponse());
-    }
-
-
     [HttpPost]
     [Route(nameof(Equip))]
     public async Task<IActionResult> Equip([FromBody] int id)

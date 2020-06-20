@@ -5,8 +5,6 @@
 
   public class GetCharacterResponse : IMapFrom<Character>
   {
-    public int BagId { get; set; }
-
     public string Name { get; set; }
 
     public int Level { get; set; }
@@ -24,5 +22,9 @@
     public int Intelligence { get; set; }
 
     public int Strength { get; set; }
+
+    public int BagId { get; set; }
+
+    public int GearId { get; set; }
   }
 }

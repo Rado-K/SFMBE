@@ -16,13 +16,13 @@
       this.httpService = httpService;
     }
 
-    public async Task<ApiResponse<GetGearResponseModel>> GetGear()
+    public async Task<ApiResponse<GetGearResponse>> GetGear(GetGearRequest getGearRequest)
     {
-      var httpResponse = await this.httpService.Get<GetGearResponseModel>($"{URL}");
+      var httpResponse = await this.httpService.Get<GetGearResponse>(getGearRequest.RouteFactory);
 
       if (!httpResponse.IsOk)
       {
-        return new ApiResponse<GetGearResponseModel>(httpResponse.Errors);
+        return new ApiResponse<GetGearResponse>(httpResponse.Errors);
       }
 
       return httpResponse;

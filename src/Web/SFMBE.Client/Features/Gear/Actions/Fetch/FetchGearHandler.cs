@@ -6,6 +6,7 @@
   using SFMBE.Client.Features.Items;
   using SFMBE.Client.Repositories.Gears;
   using SFMBE.Services.Mapping;
+  using SFMBE.Shared.Gear.Get;
   using SFMBE.Shared.Items.GetItems;
   using System.Threading;
   using System.Threading.Tasks;
@@ -25,7 +26,8 @@
 
       public override async Task<Unit> Handle(FetchGearAction aAction, CancellationToken aCancellationToken)
       {
-        var gear = await this.gearsRepository.GetGear();
+        var getGearRequest = new GetGearRequest { GearId = this.CharacterState.Character.Data.GearId };
+        var gear = await this.gearsRepository.GetGear(getGearRequest);
         var requestModel = gear.Data.Items.To<GetItemsRequest>();
         var response = await this.mediator.Send(new ItemState.GetItemsAction(requestModel));
         this.GearState.Gear = response.Items;
