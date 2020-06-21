@@ -8,7 +8,6 @@
 
   public class ItemsRepository : IItemsRepository
   {
-    private const string URL = "api/items";
     private readonly IHttpService httpService;
 
     public ItemsRepository(IHttpService httpService)
@@ -16,11 +15,9 @@
       this.httpService = httpService;
     }
 
-    public async Task<ApiResponse<GetItemsResponse>> GetItems(GetItemsRequest itemsRequestModel)
+    public async Task<ApiResponse<GetItemsResponse>> GetItems(GetItemsRequest getItemRequest)
     {
-      var requestString = "Items=0" + string.Join("&Items=", itemsRequestModel.Items);
-
-      var httpResponse = await this.httpService.Get<GetItemsResponse>($"{URL}?{requestString}");
+      var httpResponse = await this.httpService.Get<GetItemsResponse>(getItemRequest.RouteFactory);
 
       if (!httpResponse.IsOk)
       {
@@ -30,9 +27,9 @@
       return httpResponse;
     }
 
-    public async Task<ApiResponse<CreateItemResponse>> CreateItem(CreateItemRequest itemCreateRequestModel)
+    public async Task<ApiResponse<CreateItemResponse>> CreateItem(CreateItemRequest createItemRequest)
     {
-      var httpResponse = await this.httpService.PostJson<CreateItemRequest, CreateItemResponse>($"{URL}/CreateItem", itemCreateRequestModel);
+      var httpResponse = await this.httpService.PostJson<CreateItemRequest, CreateItemResponse>(createItemRequest.RouteFactory, createItemRequest);
 
       if (!httpResponse.IsOk)
       {

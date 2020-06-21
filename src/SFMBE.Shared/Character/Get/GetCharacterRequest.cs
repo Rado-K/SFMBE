@@ -1,7 +1,13 @@
 ﻿namespace SFMBE.Shared.Character.Get
 {
-  public class GetCharacterRequest
+  using MediatR;
+  using Newtonsoft.Json;
+
+  public class GetCharacterRequest : IRequest<ApiResponse<GetCharacterResponse>>
   {
-    public string CharacterName { get; set; }
+    public const string Route = "api/characters/get";
+
+    [JsonIgnore]
+    public string RouteFactory => $"{Route}";
   }
 }

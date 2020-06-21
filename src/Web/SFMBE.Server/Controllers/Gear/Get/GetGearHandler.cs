@@ -24,8 +24,6 @@
 
     public async Task<ApiResponse<GetGearResponse>> Handle(GetGearRequest request, CancellationToken cancellationToken)
     {
-      var testgear = await this.gearsService.GetGear<GetGearResponse>();
-
       var gear = await this.db
         .Gears
         .Where(x => x.Id == request.GearId)

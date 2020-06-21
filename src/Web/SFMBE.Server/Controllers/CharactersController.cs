@@ -16,18 +16,18 @@
       this.characterService = characterService;
     }
 
-    [Route(nameof(GetCharacter))]
-    public async Task<ActionResult<ApiResponse<GetCharacterResponse>>> GetCharacter()
-    {
-      var response = await this.characterService.GetCharacter<GetCharacterResponse>();
+    //[Route(nameof(GetCharacter))]
+    //public async Task<ActionResult<ApiResponse<GetCharacterResponse>>> GetCharacter()
+    //{
+    //  var response = await this.characterService.GetCharacter<GetCharacterResponse>();
 
-      if (response is null)
-      {
-        return this.BadRequest("Not found character, please create to begin.");
-      }
+    //  if (response is null)
+    //  {
+    //    return this.BadRequest("Not found character, please create to begin.");
+    //  }
 
-      return this.Ok(response.ToApiResponse());
-    }
+    //  return this.Ok(response.ToApiResponse());
+    //}
 
     [Route("{id:int}")]
     public async Task<ActionResult<ApiResponse<GetCharacterResponse>>> GetCharacterById([FromBody] int id)
@@ -51,12 +51,12 @@
     //  return this.Ok(response.ToApiResponse());
     //}
 
-    [HttpPut]
-    public async Task<ActionResult<ApiResponse<UpdateCharacter>>> UpdateCharacter([FromBody] UpdateCharacter characterResponseModel)
-    {
-      var response = await this.characterService.UpdateCharacter(characterResponseModel);
+    //[HttpPut]
+    //public async Task<ActionResult<ApiResponse<UpdateCharacter>>> UpdateCharacter([FromBody] UpdateCharacter characterResponseModel)
+    //{
+    //  var response = await this.characterService.UpdateCharacter(characterResponseModel);
 
-      return this.Ok(response.ToApiResponse());
-    }
+    //  return this.Ok(response.ToApiResponse());
+    //}
   }
 }

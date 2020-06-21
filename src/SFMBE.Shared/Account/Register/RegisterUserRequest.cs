@@ -1,6 +1,7 @@
 ﻿namespace SFMBE.Shared.Account.Register
 {
   using MediatR;
+  using Newtonsoft.Json;
   using System.ComponentModel.DataAnnotations;
 
   public class RegisterUserRequest : IRequest<ApiResponse<RegisterUserResponse>>
@@ -16,5 +17,8 @@
 
     [Compare(nameof(Password))]
     public string ConfirmPassword { get; set; }
+
+    [JsonIgnore]
+    public string RouteFactory => $"{Route}";
   }
 }

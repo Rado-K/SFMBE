@@ -5,12 +5,10 @@
   using SFMBE.Shared.Character.Create;
   using SFMBE.Shared.Character.Get;
   using SFMBE.Shared.Character.Update;
-  using System;
   using System.Threading.Tasks;
 
   public class CharactersRepository : ICharactersRepository
   {
-    private const string URL = "api/characters";
     private readonly IHttpService httpService;
 
     public CharactersRepository(IHttpService httpService)
@@ -20,19 +18,8 @@
 
     public async Task<ApiResponse<GetCharacterResponse>> GetCharacter()
     {
-      var httpResponse = await this.httpService.Get<GetCharacterResponse>($"{URL}/GetCharacter");
-
-      if (!httpResponse.IsOk)
-      {
-        return new ApiResponse<GetCharacterResponse>(httpResponse.Errors);
-      }
-
-      return httpResponse;
-    }
-
-    public async Task<ApiResponse<GetCharacterResponse>> GetCharacter(int characterId)
-    {
-      var httpResponse = await this.httpService.Get<GetCharacterResponse>($"{URL}/{characterId}");
+      var request = new GetCharacterRequest();
+      var httpResponse = await this.httpService.Get<GetCharacterResponse>(request.RouteFactory);
 
       if (!httpResponse.IsOk)
       {

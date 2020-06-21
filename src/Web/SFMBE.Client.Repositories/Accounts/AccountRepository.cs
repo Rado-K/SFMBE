@@ -18,9 +18,9 @@
       this.httpService = httpService;
     }
 
-    public async Task<ApiResponse<RegisterUserResponse>> Register(RegisterUserRequest userRegisterRequestModel)
+    public async Task<ApiResponse<RegisterUserResponse>> Register(RegisterUserRequest userRegisterRequest)
     {
-      var httpResponse = await this.httpService.PostJson<RegisterUserRequest, RegisterUserResponse>($"{URL}/register", userRegisterRequestModel);
+      var httpResponse = await this.httpService.PostJson<RegisterUserRequest, RegisterUserResponse>(userRegisterRequest.RouteFactory, userRegisterRequest);
 
       if (!httpResponse.IsOk)
       {
@@ -30,13 +30,13 @@
       return httpResponse;
     }
 
-    public async Task<ApiResponse<LoginUserResponse>> Login(LoginUserRequest userLoginRequestModel)
+    public async Task<ApiResponse<LoginUserResponse>> Login(LoginUserRequest userLoginRequest)
     {
       var request = new FormUrlEncodedContent(
                                new List<KeyValuePair<string, string>>
                                {
-                                 new KeyValuePair<string, string>("email", userLoginRequestModel.Email),
-                                 new KeyValuePair<string, string>("password", userLoginRequestModel.Password),
+                                 new KeyValuePair<string, string>("email", userLoginRequest.Email),
+                                 new KeyValuePair<string, string>("password", userLoginRequest.Password),
                                });
 
       var httpResponse = await this.httpService.Post<FormUrlEncodedContent, LoginUserResponse>($"{URL}/login", request);

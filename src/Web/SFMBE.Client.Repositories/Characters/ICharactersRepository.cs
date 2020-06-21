@@ -12,7 +12,6 @@
   public interface ICharactersRepository
   {
     Task<ApiResponse<CreateCharacterResponse>> CreateCharacter(string name);
-    Task<ApiResponse<GetCharacterResponse>> GetCharacter(int characterId);
     Task<ApiResponse<GetCharacterResponse>> GetCharacter();
     Task<ApiResponse<UpdateCharacter>> UpdateCharacter(UpdateCharacter characterResponseModel);
   }
