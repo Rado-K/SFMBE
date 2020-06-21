@@ -10,7 +10,6 @@
 
   public class GearsRepository : IGearsRepository
   {
-    private const string URL = "api/gears";
     private readonly IHttpService httpService;
 
     public GearsRepository(IHttpService httpService)

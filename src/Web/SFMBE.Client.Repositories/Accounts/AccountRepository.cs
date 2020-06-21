@@ -10,7 +10,6 @@
 
   public class AccountRepository : IAccountRepository
   {
-    private const string URL = "api/account";
     private readonly IHttpService httpService;
 
     public AccountRepository(IHttpService httpService)
@@ -39,7 +38,7 @@
                                  new KeyValuePair<string, string>("password", userLoginRequest.Password),
                                });
 
-      var httpResponse = await this.httpService.Post<FormUrlEncodedContent, LoginUserResponse>($"{URL}/login", request);
+      var httpResponse = await this.httpService.Post<FormUrlEncodedContent, LoginUserResponse>(userLoginRequest.RouteFactory, request);
 
       if (!httpResponse.IsOk)
       {

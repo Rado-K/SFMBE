@@ -1,8 +1,9 @@
 ﻿namespace SFMBE.Shared.Items.Unequip
 {
+  using MediatR;
   using Newtonsoft.Json;
 
-  public class UnequipItemRequest
+  public class UnequipItemRequest : IRequest
   {
     public const string Route = "api/items/unequip";
 

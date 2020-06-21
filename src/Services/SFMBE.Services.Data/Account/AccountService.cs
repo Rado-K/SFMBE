@@ -2,7 +2,6 @@
 {
   using Microsoft.AspNetCore.Identity;
   using SFMBE.Data.Models;
-  using SFMBE.Services.Data.Bag;
   using SFMBE.Shared.Account.Register;
   using System.Threading.Tasks;
 
@@ -16,11 +15,11 @@
       this.userManager = userManager;
     }
 
-    public async Task<RegisterUserResponse> Register(RegisterUserRequest userRegisterRequestModel)
+    public async Task<RegisterUserResponse> Register(RegisterUserRequest registerUserRequest)
     {
-      var user = new ApplicationUser { UserName = userRegisterRequestModel.Email, Email = userRegisterRequestModel.Email};
+      var user = new ApplicationUser { UserName = registerUserRequest.Email, Email = registerUserRequest.Email };
 
-      var result = await this.userManager.CreateAsync(user, userRegisterRequestModel.Password);
+      var result = await this.userManager.CreateAsync(user, registerUserRequest.Password);
 
       if (!result.Succeeded)
       {
