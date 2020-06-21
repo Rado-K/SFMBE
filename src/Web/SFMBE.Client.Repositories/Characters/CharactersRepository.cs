@@ -44,7 +44,8 @@
 
     public async Task<ApiResponse<CreateCharacterResponse>> CreateCharacter(string name)
     {
-      var httpResponse = await this.httpService.PostJson<string, CreateCharacterResponse>($"{URL}/CreateCharacter", name);
+      var request = new CreateCharacterRequest { Name = name };
+      var httpResponse = await this.httpService.PostJson<CreateCharacterRequest, CreateCharacterResponse>(request.RouteFactory, request);
 
       if (!httpResponse.IsOk)
       {
