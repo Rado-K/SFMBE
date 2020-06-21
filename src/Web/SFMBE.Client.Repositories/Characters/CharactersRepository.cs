@@ -57,7 +57,7 @@
 
     public async Task<ApiResponse<UpdateCharacter>> UpdateCharacter(UpdateCharacter characterResponseModel)
     {
-      var httpResponse = await this.httpService.Put(URL, characterResponseModel);
+      var httpResponse = await this.httpService.Put(characterResponseModel.RouteFactory, characterResponseModel);
 
       if (!httpResponse.IsOk)
       {

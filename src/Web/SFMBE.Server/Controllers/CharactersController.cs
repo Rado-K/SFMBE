@@ -42,14 +42,14 @@
       return this.Ok(response.ToApiResponse());
     }
 
-    [HttpPost]
-    [Route(nameof(CreateCharacter))]
-    public async Task<ActionResult<ApiResponse<GetCharacterResponse>>> CreateCharacter([FromBody] string name)
-    {
-      var response = await this.characterService.CreateCharacter(name);
+    //[HttpPost]
+    //[Route(nameof(CreateCharacter))]
+    //public async Task<ActionResult<ApiResponse<GetCharacterResponse>>> CreateCharacter([FromBody] string name)
+    //{
+    //  var response = await this.characterService.CreateCharacter(name);
 
-      return this.Ok(response.ToApiResponse());
-    }
+    //  return this.Ok(response.ToApiResponse());
+    //}
 
     [HttpPut]
     public async Task<ActionResult<ApiResponse<UpdateCharacter>>> UpdateCharacter([FromBody] UpdateCharacter characterResponseModel)
