@@ -3,6 +3,8 @@
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Shared;
   using SFMBE.Shared.Gear.Get;
+  using SFMBE.Shared.Items.Equip;
+  using SFMBE.Shared.Items.Unequip;
   using System;
   using System.Threading.Tasks;
 
@@ -28,9 +30,9 @@
       return httpResponse;
     }
 
-    public async Task Equip(int id)
+    public async Task Equip(EquipItemRequest equipItemRequest)
     {
-      var httpResponse = await this.httpService.Post<object>($"{URL}/{nameof(Equip)}", id);
+      var httpResponse = await this.httpService.Post<object>(equipItemRequest.RouteFactory, equipItemRequest);
 
       if (!httpResponse.IsOk)
       {
@@ -38,9 +40,9 @@
       }
     }
 
-    public async Task Unequip(int id)
+    public async Task Unequip(UnequipItemRequest unequipItemRequest)
     {
-      var httpResponse = await this.httpService.Post<object>($"{URL}/{nameof(Unequip)}", id);
+      var httpResponse = await this.httpService.Post<object>(unequipItemRequest.RouteFactory, unequipItemRequest);
 
       if (!httpResponse.IsOk)
       {

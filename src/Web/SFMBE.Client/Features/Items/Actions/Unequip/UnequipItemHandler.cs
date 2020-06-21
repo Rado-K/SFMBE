@@ -4,6 +4,7 @@
   using MediatR;
   using SFMBE.Client.Features.Base;
   using SFMBE.Client.Repositories.Gears;
+  using SFMBE.Shared.Items.Unequip;
   using System.Threading;
   using System.Threading.Tasks;
 
@@ -22,7 +23,7 @@
       {
         this.GearState.Gear.Remove(action.Item);
         this.BagState.Bag.Add(action.Item);
-        await this.gearsRepository.Unequip(action.Item.Id);
+        await this.gearsRepository.Unequip(new UnequipItemRequest { ItemId = action.Item.Id });
 
         return await Unit.Task;
       }

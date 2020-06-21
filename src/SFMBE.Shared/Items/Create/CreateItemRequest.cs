@@ -1,10 +1,14 @@
 ﻿namespace SFMBE.Shared.Items.Create
 {
+  using MediatR;
+  using Newtonsoft.Json;
   using SFMBE.Data.Models;
   using SFMBE.Services.Mapping;
 
-  public class CreateItemRequest : IMapFrom<Character>
+  public class CreateItemRequest : IMapFrom<Character>, IRequest<ApiResponse<CreateItemResponse>>
   {
+    public const string Route = "api/items/create";
+
     public string ItemType { get; set; }
 
     public int Level { get; set; }
@@ -18,5 +22,8 @@
     public int Intelligence { get; set; }
 
     public int BagId { get; set; }
+
+    [JsonIgnore]
+    public string RouteFactory => $"{Route}";
   }
 }

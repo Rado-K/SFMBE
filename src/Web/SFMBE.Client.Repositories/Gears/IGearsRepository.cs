@@ -2,13 +2,14 @@
 {
   using SFMBE.Shared;
   using SFMBE.Shared.Gear.Get;
-  using System;
+  using SFMBE.Shared.Items.Equip;
+  using SFMBE.Shared.Items.Unequip;
   using System.Threading.Tasks;
 
   public interface IGearsRepository
   {
-    Task Equip(int id);
-    Task Unequip(int id);
+    Task Equip(EquipItemRequest equipItemRequest);
+    Task Unequip(UnequipItemRequest unequipItemRequest);
     Task<ApiResponse<GetGearResponse>> GetGear(GetGearRequest getGearRequest);
   }
 }

@@ -3,7 +3,10 @@
   using Microsoft.EntityFrameworkCore;
   using SFMBE.Data.Common.Repositories;
   using SFMBE.Data.Models;
+  using SFMBE.Services.Data.Character;
+  using SFMBE.Services.Data.Gear;
   using SFMBE.Services.Mapping;
+  using SFMBE.Shared.Character.GetBag;
   using SFMBE.Shared.Items.Create;
   using SFMBE.Shared.Items.Get;
   using SFMBE.Shared.Items.GetItems;
@@ -14,10 +17,20 @@
   public class ItemsService : IItemsService
   {
     private readonly IDeletableEntityRepository<Item> itemsRepository;
+    private readonly IRepository<Gear> gearRepository;
+    private readonly ICharactersService charactersService;
+    private readonly IGearsService gearsService;
 
-    public ItemsService(IDeletableEntityRepository<Item> itemsRepository)
+    public ItemsService(
+      IDeletableEntityRepository<Item> itemsRepository,
+      IRepository<Gear> gearRepository,
+      ICharactersService charactersService,
+      IGearsService gearsService)
     {
       this.itemsRepository = itemsRepository;
+      this.gearRepository = gearRepository;
+      this.charactersService = charactersService;
+      this.gearsService = gearsService;
     }
 
     public async Task<CreateItemResponse> CreateItem(CreateItemRequest userModel)
@@ -41,7 +54,7 @@
       await this.itemsRepository.AddAsync(item);
       await this.itemsRepository.SaveChangesAsync();
 
-      return new CreateItemResponse { Id = item.Id };
+      return item.To<CreateItemResponse>();
     }
 
     public async Task<T> GetItemById<T>(int id)
@@ -62,9 +75,53 @@
         .To<GetItemResponse>()
         .ToListAsync();
 
-      var asnwer = MappingExtensions.To<T>(items);
+      return items.To<T>();
+    }
 
-      return asnwer;
+    public async Task Equip(int id)
+    {
+      var character = await this.charactersService.GetCharacter<GetBagCharacterResponse>();
+      var item = await this.GetItemById<Item>(id);
+      var gear = await this.gearsService.GetGear();
+
+      if (character.BagId != item.BagId)
+      {
+        throw new InvalidOperationException();
+      }
+
+      if (gear.EquippedItems.Any(x => x.ItemType == item.ItemType))
+      {
+        gear
+          .EquippedItems
+          .Remove(
+              gear.EquippedItems.First(x => x.ItemType == item.ItemType));
+      }
+
+      gear.EquippedItems.Add(item);
+
+      await this.gearRepository.SaveChangesAsync();
+    }
+
+    public async Task Unequip(int id)
+    {
+      var character = await this.charactersService.GetCharacter<GetBagCharacterResponse>();
+      var item = await this.GetItemById<Item>(id);
+      var gear = await this.gearsService.GetGear();
+
+      if (character.BagId != item.BagId)
+      {
+        throw new InvalidOperationException();
+      }
+
+      if (gear.EquippedItems.Any(x => x.ItemType == item.ItemType))
+      {
+        gear
+          .EquippedItems
+          .Remove(
+              gear.EquippedItems.First(x => x.ItemType == item.ItemType));
+
+        await this.gearRepository.SaveChangesAsync();
+      }
     }
   }
 }

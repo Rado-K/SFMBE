@@ -8,8 +8,6 @@
   public interface IGearsService
   {
     Task<T> GetGear<T>();
-    Task Equip(int id);
     Task<Gear> GetGear();
-    Task Unequip(int id);
   }
 }

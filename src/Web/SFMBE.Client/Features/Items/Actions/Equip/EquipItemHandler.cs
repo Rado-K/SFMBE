@@ -4,6 +4,7 @@
   using MediatR;
   using SFMBE.Client.Features.Base;
   using SFMBE.Client.Repositories.Gears;
+  using SFMBE.Shared.Items.Equip;
   using System.Threading;
   using System.Threading.Tasks;
 
@@ -26,7 +27,7 @@
         {
           this.BagState.Bag.Add(unequipItem);
         }
-        await this.gearsRepository.Equip(action.Item.Id);
+        await this.gearsRepository.Equip(new EquipItemRequest { ItemId = action.Item.Id });
 
         return await Unit.Task;
       }

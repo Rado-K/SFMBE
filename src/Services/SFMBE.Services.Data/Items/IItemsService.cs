@@ -9,5 +9,7 @@
     Task<CreateItemResponse> CreateItem(CreateItemRequest userModel);
     Task<T> GetItemById<T>(int id);
     Task<T> GetItemsById<T>(GetItemsRequest itemsRequestModel);
+    Task Equip(int id);
+    Task Unequip(int id);
   }
 }
