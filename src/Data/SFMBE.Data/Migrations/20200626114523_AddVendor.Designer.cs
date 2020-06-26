@@ -10,7 +10,7 @@ using SFMBE.Data;
 namespace SFMBE.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200626112110_AddVendor")]
+    [Migration("20200626114523_AddVendor")]
     partial class AddVendor
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
