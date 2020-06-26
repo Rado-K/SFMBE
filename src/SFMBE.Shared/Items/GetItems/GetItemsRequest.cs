@@ -13,7 +13,7 @@
     public IList<int> Items { get; set; }
 
     [JsonIgnore]
-    public string RouteFactory => $"{Route}?{(this.Items.Count == 0 ? default : "Items=0" + string.Join("&Items=", this.Items))}";
+    public string RouteFactory => $"{Route}?{"Items=0" + string.Join("&Items=", this.Items)}";
 
     public void CreateMappings(IProfileExpression configuration)
     {

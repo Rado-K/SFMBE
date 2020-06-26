@@ -1,9 +1,8 @@
-﻿namespace SFMBE.Data.Configurations.Character
+﻿namespace SFMBE.Data.Configurations
 {
   using Microsoft.EntityFrameworkCore;
   using Microsoft.EntityFrameworkCore.Metadata.Builders;
   using SFMBE.Data.Models;
-  using System;
 
   public class CharacterConfiguration : IEntityTypeConfiguration<Character>
   {

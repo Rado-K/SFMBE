@@ -14,7 +14,6 @@
     [Parameter]
     public string ClassName { get; set; }
 
-
     private async Task Equip()
     {
       await this.Mediator.Send(new ItemState.EquipItemAction { Item = this.Model });

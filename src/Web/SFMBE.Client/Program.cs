@@ -2,7 +2,6 @@ namespace SFMBE.Client
 {
   using Blazor.Extensions.Logging;
   using BlazorState;
-  using Infrastructure;
   using Infrastructure.Auth;
   using MediatR;
   using Microsoft.AspNetCore.Components.Authorization;
@@ -10,11 +9,7 @@ namespace SFMBE.Client
   using Microsoft.Extensions.DependencyInjection;
   using Microsoft.Extensions.Logging;
   using Services.Mapping;
-  using SFMBE.Client.Features.Bag;
-  using SFMBE.Client.Features.Character;
-  using SFMBE.Client.Features.Counter;
   using SFMBE.Client.Features.EventStream;
-  using SFMBE.Client.Features.Gear;
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Client.Repositories.Accounts;
   using SFMBE.Client.Repositories.Bags;
