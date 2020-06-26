@@ -15,6 +15,8 @@
     <Compile Remove="Migrations\20200422182107_UpdateRelations.Designer.cs" />
     <Compile Remove="Migrations\20200422183152_Initial.cs" />
     <Compile Remove="Migrations\20200422183152_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200626102429_AddVendor.cs" />
+    <Compile Remove="Migrations\20200626102429_AddVendor.Designer.cs" />
   </ItemGroup>
 
   

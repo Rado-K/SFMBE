@@ -28,6 +28,7 @@
     public DbSet<Item> Items { get; set; }
     public DbSet<Gear> Gears { get; set; }
     public DbSet<Bag> Bags { get; set; }
+    public DbSet<Vendor> Vendors { get; set; }
 
 
     public override int SaveChanges() => this.SaveChanges(true);

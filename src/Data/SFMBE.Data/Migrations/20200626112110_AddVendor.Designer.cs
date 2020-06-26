@@ -10,7 +10,7 @@ using SFMBE.Data;
 namespace SFMBE.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200626102429_AddVendor")]
+    [Migration("20200626112110_AddVendor")]
     partial class AddVendor
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -341,6 +341,9 @@ namespace SFMBE.Data.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("VendorId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BagId")
@@ -352,6 +355,9 @@ namespace SFMBE.Data.Migrations
                     b.HasIndex("UserId")
                         .IsUnique()
                         .HasFilter("[UserId] IS NOT NULL");
+
+                    b.HasIndex("VendorId")
+                        .IsUnique();
 
                     b.ToTable("Characters");
                 });
@@ -420,6 +426,9 @@ namespace SFMBE.Data.Migrations
                     b.Property<int>("Strength")
                         .HasColumnType("int");
 
+                    b.Property<int?>("VendorId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BagId");
@@ -427,6 +436,8 @@ namespace SFMBE.Data.Migrations
                     b.HasIndex("GearId");
 
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("VendorId");
 
                     b.ToTable("Items");
                 });
@@ -437,9 +448,6 @@ namespace SFMBE.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BagId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -452,9 +460,7 @@ namespace SFMBE.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BagId");
-
-                    b.ToTable("Vendor");
+                    b.ToTable("Vendors");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -538,6 +544,12 @@ namespace SFMBE.Data.Migrations
                         .WithOne("Character")
                         .HasForeignKey("SFMBE.Data.Models.Character", "UserId")
                         .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("SFMBE.Data.Models.Vendor", "Vendor")
+                        .WithOne("Character")
+                        .HasForeignKey("SFMBE.Data.Models.Character", "VendorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SFMBE.Data.Models.Item", b =>
@@ -552,15 +564,10 @@ namespace SFMBE.Data.Migrations
                         .WithMany("EquippedItems")
                         .HasForeignKey("GearId")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
 
-            modelBuilder.Entity("SFMBE.Data.Models.Vendor", b =>
-                {
-                    b.HasOne("SFMBE.Data.Models.Bag", "Bag")
-                        .WithMany()
-                        .HasForeignKey("BagId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("SFMBE.Data.Models.Vendor", null)
+                        .WithMany("Items")
+                        .HasForeignKey("VendorId");
                 });
 #pragma warning restore 612, 618
         }
