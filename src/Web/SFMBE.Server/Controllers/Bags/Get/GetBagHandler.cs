@@ -14,7 +14,6 @@
   public class GetBagHandler : IRequestHandler<GetBagRequest, ApiResponse<GetBagResponse>>
   {
     private readonly ApplicationDbContext db;
-    private readonly IMediator mediator;
 
     public GetBagHandler(ApplicationDbContext db)
     {

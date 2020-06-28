@@ -30,6 +30,7 @@ namespace SFMBE.Server
   using SFMBE.Services.Data.Character;
   using SFMBE.Services.Data.Gear;
   using SFMBE.Services.Data.User;
+  using SFMBE.Services.Data.Vendor;
   using SFMBE.Shared;
   using System;
   using System.Linq;
@@ -129,6 +130,7 @@ namespace SFMBE.Server
       services.AddScoped<IBagsService, BagsService>();
       services.AddScoped<IGearsService, GearsService>();
       services.AddScoped<IItemsService, ItemsService>();
+      services.AddScoped<IVendorService, VendorService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
