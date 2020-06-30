@@ -2,10 +2,8 @@
 {
   using MediatR;
   using SFMBE.Services.Data.Vendor;
-  using SFMBE.Services.Mapping;
   using SFMBE.Shared;
   using SFMBE.Shared.Vendors.Get;
-  using System;
   using System.Threading;
   using System.Threading.Tasks;
 

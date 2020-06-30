@@ -14,23 +14,18 @@
   public class BagsService : IBagsService
   {
     private readonly IDeletableEntityRepository<Bag> bagsRepository;
-    private readonly ICharactersService charactersService;
 
     public BagsService(
-      IDeletableEntityRepository<Bag> bagService,
-      ICharactersService charactersService)
+      IDeletableEntityRepository<Bag> bagsRepository)
     {
-      this.bagsRepository = bagService;
-      this.charactersService = charactersService;
+      this.bagsRepository = bagsRepository;
     }
 
-    public async Task<T> GetBag<T>(params Expression<Func<Bag, object>>[] properties)
+    public async Task<T> GetBagById<T>(int bagId)
     {
-      var character = await this.charactersService.GetCharacter<GetBagCharacterResponse>();
-
       var bag = await this.bagsRepository
-        .All()
-        .Where(x => x.Id == character.BagId)
+        .AllAsNoTracking()
+        .Where(x => x.Id == bagId)
         .To<T>()
         .FirstOrDefaultAsync();
 

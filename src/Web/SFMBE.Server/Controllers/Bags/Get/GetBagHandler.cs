@@ -3,6 +3,7 @@
   using MediatR;
   using Microsoft.EntityFrameworkCore;
   using SFMBE.Data;
+  using SFMBE.Services.Data.Bag;
   using SFMBE.Services.Mapping;
   using SFMBE.Shared;
   using SFMBE.Shared.Bags.Get;
@@ -13,24 +14,16 @@
 
   public class GetBagHandler : IRequestHandler<GetBagRequest, ApiResponse<GetBagResponse>>
   {
-    private readonly ApplicationDbContext db;
+    private readonly IBagsService bagsService;
 
-    public GetBagHandler(ApplicationDbContext db)
+    public GetBagHandler(IBagsService bagsService)
     {
-      this.db = db;
+      this.bagsService = bagsService;
     }
 
     public async Task<ApiResponse<GetBagResponse>> Handle(GetBagRequest request, CancellationToken cancellationToken)
     {
-      var bag = await this.db
-        .Bags
-        .Where(x => x.Id == request.BagId)
-        .Select(x =>
-              x.Items
-               .Where(i => !i.GearId.HasValue)
-               .Select(i => i.Id))
-        .To<GetBagResponse>()
-        .FirstOrDefaultAsync();
+      var bag = await this.bagsService.GetBagById<GetBagResponse>(request.BagId);
 
       return bag.ToApiResponse();
     }
