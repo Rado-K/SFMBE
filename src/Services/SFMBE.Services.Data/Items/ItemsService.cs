@@ -123,8 +123,8 @@
     private async Task<(GetBagCharacterResponse character, Item item, Gear gear)> GetEntities(int charachterId, int itemId)
     {
       var character = await this.charactersService.GetCharacterById<GetBagCharacterResponse>(charachterId);
-      var item = await this.GetItemById<Item>(itemId);
-      var gear = await this.gearsService.GetGear();
+      var item = await this.GetItemById(itemId);
+      var gear = await this.gearsService.GetGearById(character.GearId);
 
       if (character.BagId != item.BagId)
       {

@@ -6,5 +6,6 @@
   public class GetBagCharacterResponse : IMapFrom<Character>
   {
     public int BagId { get; set; }
+    public int GearId { get; set; }
   }
 }

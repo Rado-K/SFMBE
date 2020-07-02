@@ -7,7 +7,7 @@
 
   public interface IGearsService
   {
-    Task<T> GetGear<T>();
-    Task<Gear> GetGear();
+    Task<Gear> GetGearById(int id);
+    Task<T> GetGearById<T>(int id);
   }
 }
