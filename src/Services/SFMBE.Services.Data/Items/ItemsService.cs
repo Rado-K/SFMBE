@@ -90,7 +90,7 @@
 
     public async Task Equip(EquipItemRequest equipItemRequest)
     {
-      var (character, item, gear) = await this.GetEntities(equipItemRequest.ItemId);
+      var (character, item, gear) = await this.GetEntities(equipItemRequest.CharacterId, equipItemRequest.ItemId);
 
       if (gear.EquippedItems.Any(x => x.ItemType == item.ItemType))
       {
@@ -107,7 +107,7 @@
 
     public async Task Unequip(UnequipItemRequest unequipItemRequest)
     {
-      var (character, item, gear) = await this.GetEntities(unequipItemRequest.ItemId);
+      var (character, item, gear) = await this.GetEntities(unequipItemRequest.CharacterId, unequipItemRequest.ItemId);
 
       if (gear.EquippedItems.Any(x => x.ItemType == item.ItemType))
       {
@@ -120,9 +120,9 @@
       }
     }
 
-    private async Task<(GetBagCharacterResponse character, Item item, Gear gear)> GetEntities(int itemId)
+    private async Task<(GetBagCharacterResponse character, Item item, Gear gear)> GetEntities(int charachterId, int itemId)
     {
-      var character = await this.charactersService.GetCharacter<GetBagCharacterResponse>();
+      var character = await this.charactersService.GetCharacterById<GetBagCharacterResponse>(charachterId);
       var item = await this.GetItemById<Item>(itemId);
       var gear = await this.gearsService.GetGear();
 

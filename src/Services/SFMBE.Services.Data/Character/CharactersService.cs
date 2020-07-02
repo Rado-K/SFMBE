@@ -22,15 +22,21 @@
       this.userService = userService;
     }
 
-    public async Task<GetCharacterResponse> GetCharacterById(int characterId)
+    public async Task<Character> GetCharacterById(int characterId)
     {
       var character = await this.characterRepository
         .All()
         .Where(x => x.Id == characterId)
-        .To<GetCharacterResponse>()
         .FirstOrDefaultAsync();
 
       return character;
+    }
+
+    public async Task<T> GetCharacterById<T>(int characterId)
+    {
+      var character = await this.GetCharacterById(characterId);
+
+      return character.To<T>();
     }
 
     public async Task<CreateCharacterResponse> CreateCharacter(string name)
