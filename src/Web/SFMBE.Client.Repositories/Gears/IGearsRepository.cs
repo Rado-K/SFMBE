@@ -8,8 +8,6 @@
 
   public interface IGearsRepository
   {
-    Task Equip(EquipItemRequest equipItemRequest);
-    Task Unequip(UnequipItemRequest unequipItemRequest);
     Task<ApiResponse<GetGearResponse>> GetGear(GetGearRequest getGearRequest);
   }
 }

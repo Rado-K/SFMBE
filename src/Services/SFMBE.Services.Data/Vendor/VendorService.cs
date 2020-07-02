@@ -18,10 +18,16 @@
 
     public async Task<T> GetVendorById<T>(int id)
     {
+      var vendor = await this.GetVendorById(id);
+
+      return vendor.To<T>();
+    }
+
+    public async Task<Vendor> GetVendorById(int id)
+    {
       var vendor = await this.vendorRepository
         .AllAsNoTracking()
         .Where(x => x.Id == id)
-        .To<T>()
         .FirstOrDefaultAsync();
 
       return vendor;

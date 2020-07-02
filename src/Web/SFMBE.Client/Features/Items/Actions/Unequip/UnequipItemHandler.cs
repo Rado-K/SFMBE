@@ -3,7 +3,7 @@
   using BlazorState;
   using MediatR;
   using SFMBE.Client.Features.Base;
-  using SFMBE.Client.Repositories.Gears;
+  using SFMBE.Client.Repositories.Items;
   using SFMBE.Shared.Items.Unequip;
   using System.Threading;
   using System.Threading.Tasks;
@@ -12,11 +12,11 @@
   {
     internal class UnequipItemHandler : BaseHandler<UnequipItemAction>
     {
-      private readonly IGearsRepository gearsRepository;
+      private readonly IItemsRepository itemsRepository;
 
-      public UnequipItemHandler(IGearsRepository gearsRepository, IStore store) : base(store)
+      public UnequipItemHandler(IItemsRepository itemsRepository, IStore store) : base(store)
       {
-        this.gearsRepository = gearsRepository;
+        this.itemsRepository = itemsRepository;
       }
 
       public override async Task<Unit> Handle(UnequipItemAction action, CancellationToken cancellationToken)
@@ -25,7 +25,7 @@
         this.BagState.Bag.Add(action.Item);
 
         var characterId = this.CharacterState.Character.Data.Id;
-        await this.gearsRepository.Unequip(new UnequipItemRequest { CharacterId =characterId, ItemId = action.Item.Id });
+        await this.itemsRepository.Unequip(new UnequipItemRequest { CharacterId = characterId, ItemId = action.Item.Id });
 
         return await Unit.Task;
       }

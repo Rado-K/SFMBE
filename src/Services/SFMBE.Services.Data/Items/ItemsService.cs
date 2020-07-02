@@ -19,18 +19,15 @@
   public class ItemsService : IItemsService
   {
     private readonly IDeletableEntityRepository<Item> itemsRepository;
-    private readonly IRepository<Gear> gearRepository;
     private readonly ICharactersService charactersService;
     private readonly IGearsService gearsService;
 
     public ItemsService(
       IDeletableEntityRepository<Item> itemsRepository,
-      IRepository<Gear> gearRepository,
       ICharactersService charactersService,
       IGearsService gearsService)
     {
       this.itemsRepository = itemsRepository;
-      this.gearRepository = gearRepository;
       this.charactersService = charactersService;
       this.gearsService = gearsService;
     }
@@ -102,7 +99,7 @@
 
       gear.EquippedItems.Add(item);
 
-      await this.gearRepository.SaveChangesAsync();
+      await this.itemsRepository.SaveChangesAsync();
     }
 
     public async Task Unequip(UnequipItemRequest unequipItemRequest)
@@ -116,7 +113,7 @@
           .Remove(
               gear.EquippedItems.First(x => x.ItemType == item.ItemType));
 
-        await this.gearRepository.SaveChangesAsync();
+        await this.itemsRepository.SaveChangesAsync();
       }
     }
 

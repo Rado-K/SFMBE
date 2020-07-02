@@ -3,7 +3,10 @@
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Shared;
   using SFMBE.Shared.Items.Create;
+  using SFMBE.Shared.Items.Equip;
   using SFMBE.Shared.Items.GetItems;
+  using SFMBE.Shared.Items.Unequip;
+  using System;
   using System.Threading.Tasks;
 
   public class ItemsRepository : IItemsRepository
@@ -37,6 +40,26 @@
       }
 
       return httpResponse;
+    }
+
+    public async Task Equip(EquipItemRequest equipItemRequest)
+    {
+      var httpResponse = await this.httpService.Post<object>(equipItemRequest.RouteFactory, equipItemRequest);
+
+      if (!httpResponse.IsOk)
+      {
+        throw new Exception();
+      }
+    }
+
+    public async Task Unequip(UnequipItemRequest unequipItemRequest)
+    {
+      var httpResponse = await this.httpService.Post<object>(unequipItemRequest.RouteFactory, unequipItemRequest);
+
+      if (!httpResponse.IsOk)
+      {
+        throw new Exception();
+      }
     }
   }
 }
