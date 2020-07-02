@@ -8,8 +8,10 @@
   using SFMBE.Services.Mapping;
   using SFMBE.Shared.Character.GetBag;
   using SFMBE.Shared.Items.Create;
+  using SFMBE.Shared.Items.Equip;
   using SFMBE.Shared.Items.Get;
   using SFMBE.Shared.Items.GetItems;
+  using SFMBE.Shared.Items.Unequip;
   using System;
   using System.Linq;
   using System.Threading.Tasks;
@@ -57,12 +59,19 @@
       return item.To<CreateItemResponse>();
     }
 
-    public async Task<T> GetItemById<T>(int id)
+    public async Task<Item> GetItemById(int id)
     {
       var item = await this.itemsRepository
         .All()
         .Where(x => x.Id == id)
         .FirstOrDefaultAsync();
+
+      return item;
+    }
+
+    public async Task<T> GetItemById<T>(int id)
+    {
+      var item = await this.GetItemById(id);
 
       return item.To<T>();
     }
@@ -78,16 +87,10 @@
       return items.To<T>();
     }
 
-    public async Task Equip(int id)
-    {
-      var character = await this.charactersService.GetCharacter<GetBagCharacterResponse>();
-      var item = await this.GetItemById<Item>(id);
-      var gear = await this.gearsService.GetGear();
 
-      if (character.BagId != item.BagId)
-      {
-        throw new InvalidOperationException();
-      }
+    public async Task Equip(EquipItemRequest equipItemRequest)
+    {
+      var (character, item, gear) = await this.GetEntities(equipItemRequest.ItemId);
 
       if (gear.EquippedItems.Any(x => x.ItemType == item.ItemType))
       {
@@ -102,16 +105,9 @@
       await this.gearRepository.SaveChangesAsync();
     }
 
-    public async Task Unequip(int id)
+    public async Task Unequip(UnequipItemRequest unequipItemRequest)
     {
-      var character = await this.charactersService.GetCharacter<GetBagCharacterResponse>();
-      var item = await this.GetItemById<Item>(id);
-      var gear = await this.gearsService.GetGear();
-
-      if (character.BagId != item.BagId)
-      {
-        throw new InvalidOperationException();
-      }
+      var (character, item, gear) = await this.GetEntities(unequipItemRequest.ItemId);
 
       if (gear.EquippedItems.Any(x => x.ItemType == item.ItemType))
       {
@@ -122,6 +118,20 @@
 
         await this.gearRepository.SaveChangesAsync();
       }
+    }
+
+    private async Task<(GetBagCharacterResponse character, Item item, Gear gear)> GetEntities(int itemId)
+    {
+      var character = await this.charactersService.GetCharacter<GetBagCharacterResponse>();
+      var item = await this.GetItemById<Item>(itemId);
+      var gear = await this.gearsService.GetGear();
+
+      if (character.BagId != item.BagId)
+      {
+        throw new InvalidOperationException();
+      }
+
+      return (character, item, gear);
     }
   }
 }

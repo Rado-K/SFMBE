@@ -8,6 +8,7 @@
     public const string Route = "api/items/equip";
 
     public int ItemId { get; set; }
+    public int CharacterId { get; set; }
 
     [JsonIgnore]
     public string RouteFactory => $"{Route}";

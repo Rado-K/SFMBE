@@ -23,7 +23,9 @@
       {
         this.GearState.Gear.Remove(action.Item);
         this.BagState.Bag.Add(action.Item);
-        await this.gearsRepository.Unequip(new UnequipItemRequest { ItemId = action.Item.Id });
+
+        var characterId = this.CharacterState.Character.Data.Id;
+        await this.gearsRepository.Unequip(new UnequipItemRequest { CharacterId =characterId, ItemId = action.Item.Id });
 
         return await Unit.Task;
       }

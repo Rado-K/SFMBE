@@ -17,7 +17,7 @@
 
     public async Task<Unit> Handle(UnequipItemRequest request, CancellationToken cancellationToken)
     {
-      await this.itemsService.Unequip(request.ItemId);
+      await this.itemsService.Unequip(request);
 
       return await Unit.Task;
     }
