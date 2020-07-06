@@ -38,17 +38,30 @@
 
       var averageStats = userModel.Stamina + userModel.Stamina + userModel.Stamina + userModel.Agility + userModel.Level;
 
-      var item = new Item
+      var item = new Item();
+
+      if (userModel.VendorId is null)
       {
-        ItemType = Enum.Parse<ItemType>(userModel.ItemType),
-        Level = rnd.Next(userModel.Level - 1, userModel.Level + 1),
-        Stamina = rnd.Next(0, userModel.Stamina / 2),
-        Strength = rnd.Next(0, userModel.Strength / 2),
-        Agility = rnd.Next(0, userModel.Agility / 2),
-        Intelligence = rnd.Next(0, userModel.Intelligence / 2),
-        Price = rnd.Next(averageStats, averageStats * rnd.Next(1, 4)),
-        BagId = userModel.BagId
-      };
+        item.ItemType = Enum.Parse<ItemType>(userModel.ItemType);
+        item.Level = rnd.Next(userModel.Level - 1, userModel.Level + 1);
+        item.Stamina = rnd.Next(0, userModel.Stamina / 2);
+        item.Strength = rnd.Next(0, userModel.Strength / 2);
+        item.Agility = rnd.Next(0, userModel.Agility / 2);
+        item.Intelligence = rnd.Next(0, userModel.Intelligence / 2);
+        item.Price = rnd.Next(averageStats, averageStats * rnd.Next(1, 4));
+        item.BagId = userModel.BagId;
+      }
+      else
+      {
+        item.ItemType = Enum.Parse<ItemType>(userModel.ItemType);
+        item.Level = rnd.Next(userModel.Level - 1, userModel.Level + 1);
+        item.Stamina = rnd.Next(0, userModel.Stamina / 2);
+        item.Strength = rnd.Next(0, userModel.Strength / 2);
+        item.Agility = rnd.Next(0, userModel.Agility / 2);
+        item.Intelligence = rnd.Next(0, userModel.Intelligence / 2);
+        item.Price = rnd.Next(averageStats, averageStats * rnd.Next(1, 4));
+        item.VendorId = userModel.VendorId;
+      }
 
       await this.itemsRepository.AddAsync(item);
       await this.itemsRepository.SaveChangesAsync();

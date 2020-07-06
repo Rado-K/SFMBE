@@ -1,17 +1,18 @@
 ﻿namespace SFMBE.Data.Models
 {
   using SFMBE.Data.Common.Models;
-  using System;
   using System.Collections.Generic;
+  using System.ComponentModel.DataAnnotations;
 
   public class Bag : BaseDeletableModel<int>
   {
     private const int InitialCapacity = 10;
 
+    [Required]
     public int Capacity { get; set; } = InitialCapacity;
 
-    public virtual ICollection<Item> Items { get; set; } = new HashSet<Item>();
+    public ICollection<Item> Items { get; set; } = new HashSet<Item>();
 
-    public virtual Character Character { get; set; }
+    public Character Character { get; set; }
   }
 }

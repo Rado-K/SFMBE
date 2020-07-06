@@ -19,9 +19,12 @@
     public int Intelligence { get; set; } = 0;
 
     public int? GearId { get; set; }
-    public virtual Gear Gear { get; set; }
+    public Gear Gear { get; set; }
 
-    public int BagId { get; set; }
-    public virtual Bag Bag { get; set; }
+    public int? BagId { get; set; }
+    public Bag Bag { get; set; }
+
+    public int? VendorId { get; set; }
+    public Vendor Vendor { get; set; }
   }
 }

@@ -22,6 +22,7 @@
     public int Intelligence { get; set; }
 
     public int BagId { get; set; }
+    public int? VendorId { get; set; }
 
     [JsonIgnore]
     public string RouteFactory => $"{Route}";

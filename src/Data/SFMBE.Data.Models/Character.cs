@@ -1,9 +1,11 @@
 ﻿namespace SFMBE.Data.Models
 {
   using SFMBE.Data.Common.Models;
+  using System.ComponentModel.DataAnnotations;
 
   public class Character : BaseModel<int>
   {
+    [Required]
     public string Name { get; set; }
 
     public int Level { get; set; } = 0;
@@ -22,16 +24,19 @@
 
     public int Strength { get; set; } = 10;
 
-
+    [Required]
     public int GearId { get; set; }
-    public virtual Gear Gear { get; set; } = new Gear();
+    public Gear Gear { get; set; } = new Gear();
 
+    [Required]
     public int BagId { get; set; }
-    public virtual Bag Bag { get; set; } = new Bag();
+    public Bag Bag { get; set; } = new Bag();
 
+    [Required]
     public string UserId { get; set; }
-    public virtual ApplicationUser User { get; set; }
+    public ApplicationUser User { get; set; }
 
+    [Required]
     public int VendorId { get; set; }
     public Vendor Vendor { get; set; } = new Vendor();
   }

@@ -1,12 +1,10 @@
 ﻿namespace SFMBE.Data.Models
 {
+  using Microsoft.AspNetCore.Identity;
+  using SFMBE.Data.Common.Models;
   using System;
   using System.Collections.Generic;
   using System.ComponentModel.DataAnnotations;
-
-  using Microsoft.AspNetCore.Identity;
-
-  using SFMBE.Data.Common.Models;
 
   public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
   {
@@ -37,6 +35,7 @@
 
     #endregion
 
+    [Required]
     public int CharacterId { get; set; }
     public virtual Character Character { get; set; }
   }

@@ -10,12 +10,6 @@
     {
       builder
         .HasKey(x => x.Id);
-
-      builder
-        .HasOne(he => he.Bag)
-        .WithMany(i => i.Items)
-        .HasForeignKey(he => he.BagId)
-        .OnDelete(DeleteBehavior.Cascade);
     }
   }
 }
