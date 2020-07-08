@@ -3,12 +3,8 @@
   using Microsoft.EntityFrameworkCore;
   using SFMBE.Data.Common.Repositories;
   using SFMBE.Data.Models;
-  using SFMBE.Services.Data.Character;
   using SFMBE.Services.Mapping;
-  using SFMBE.Shared.Character.GetBag;
-  using System;
   using System.Linq;
-  using System.Linq.Expressions;
   using System.Threading.Tasks;
 
   public class BagsService : IBagsService
@@ -23,10 +19,17 @@
 
     public async Task<T> GetBagById<T>(int bagId)
     {
+      var bag = await this.GetBagById(bagId);
+
+      return bag.To<T>();
+    }
+
+    public async Task<Bag> GetBagById(int bagId)
+    {
       var bag = await this.bagsRepository
         .AllAsNoTracking()
         .Where(x => x.Id == bagId)
-        .To<T>()
+        .Include(x => x.Items)
         .FirstOrDefaultAsync();
 
       return bag;

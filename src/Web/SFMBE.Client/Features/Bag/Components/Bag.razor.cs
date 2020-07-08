@@ -6,7 +6,7 @@
 
   public partial class Bag
   {
-    private List<GetItemResponse> Items => this.BagState.Bag;
+    private IList<GetItemResponse> Items => this.BagState.Bag;
 
     private int BoardRows
     => this.Items is null

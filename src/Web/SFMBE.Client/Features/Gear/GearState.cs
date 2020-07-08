@@ -7,7 +7,7 @@
 
   internal partial class GearState : State<GearState>
   {
-    public List<GetItemResponse> Gear { get; set; }
+    public IList<GetItemResponse> Gear { get; set; }
 
     public override void Initialize() { }
 

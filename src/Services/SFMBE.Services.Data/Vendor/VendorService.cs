@@ -28,6 +28,7 @@
       var vendor = await this.vendorRepository
         .AllAsNoTracking()
         .Where(x => x.Id == id)
+        .Include(x => x.Items)
         .FirstOrDefaultAsync();
 
       return vendor;

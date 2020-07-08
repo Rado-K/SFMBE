@@ -16,10 +16,6 @@
     public async Task<ApiResponse<GetItemsResponse>> Handle(GetItemsRequest request, CancellationToken cancellationToken)
     {
       var items = await this.itemsService.GetItemsById<GetItemsResponse>(request);
-      //var items = await this.db
-      //  .Items
-      //  .Where(x => request.Items.Contains(x.Id))
-      //  .ToListAsync();
 
       return items.ToApiResponse();
     }

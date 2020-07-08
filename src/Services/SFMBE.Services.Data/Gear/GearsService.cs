@@ -30,7 +30,7 @@
 
     public async Task<T> GetGearById<T>(int id)
     {
-      var gear = await this.GetGearById<T>(id);
+      var gear = await this.GetGearById(id);
 
       return gear.To<T>();
     }

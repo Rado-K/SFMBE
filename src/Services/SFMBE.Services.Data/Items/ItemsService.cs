@@ -91,12 +91,10 @@
       var items = await this.itemsRepository
         .All()
         .Where(x => itemsRequestModel.Items.Contains(x.Id))
-        .To<GetItemResponse>()
         .ToListAsync();
 
       return items.To<T>();
     }
-
 
     public async Task Equip(EquipItemRequest equipItemRequest)
     {
@@ -106,10 +104,8 @@
       {
         gear
           .EquippedItems
-          .Remove(
-              gear.EquippedItems.First(x => x.ItemType == item.ItemType));
+          .Remove(gear.EquippedItems.First(x => x.ItemType == item.ItemType));
       }
-
       gear.EquippedItems.Add(item);
 
       await this.itemsRepository.SaveChangesAsync();

@@ -8,13 +8,13 @@
 
   public partial class Gear
   {
-    private List<GetItemResponse> Items => this.GearState.Gear;
+    private IList<GetItemResponse> Items => this.GearState.Gear;
 
     private int BoardRows
       => this.Items is null
         ? 0 : (int)Math.Ceiling((decimal)this.Items.Count / 3);
 
-    private List<GetItemResponse> OrderItems()
+    private IList<GetItemResponse> OrderItems()
     {
       var items = this.Items;
 

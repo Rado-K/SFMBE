@@ -6,7 +6,7 @@
 
   internal partial class BagState : State<BagState>
   {
-    public List<GetItemResponse> Bag { get; set; }
+    public IList<GetItemResponse> Bag { get; set; }
 
     public override void Initialize() { }
   }

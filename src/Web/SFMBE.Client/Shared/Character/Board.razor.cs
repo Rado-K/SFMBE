@@ -13,7 +13,7 @@
     public int BoardRows { get; set; }
 
     [Parameter]
-    public List<GetItemResponse> Items { get; set; }
+    public IList<GetItemResponse> Items { get; set; }
 
     private IList<GetItemResponse>[] ItemsPerRow()
     {
