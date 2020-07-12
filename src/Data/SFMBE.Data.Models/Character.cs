@@ -1,6 +1,7 @@
 ﻿namespace SFMBE.Data.Models
 {
   using SFMBE.Data.Common.Models;
+  using System.Collections.Generic;
   using System.ComponentModel.DataAnnotations;
 
   public class Character : BaseModel<int>
@@ -24,13 +25,7 @@
 
     public int Strength { get; set; } = 10;
 
-    [Required]
-    public int GearId { get; set; }
-    public Gear Gear { get; set; } = new Gear();
-
-    [Required]
-    public int BagId { get; set; }
-    public Bag Bag { get; set; } = new Bag();
+    public ICollection<Item> Items { get; set; } = new HashSet<Item>();
 
     [Required]
     public string UserId { get; set; }

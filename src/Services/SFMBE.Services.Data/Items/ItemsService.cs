@@ -4,32 +4,25 @@
   using SFMBE.Data.Common.Repositories;
   using SFMBE.Data.Models;
   using SFMBE.Services.Data.Character;
-  using SFMBE.Services.Data.Gear;
   using SFMBE.Services.Mapping;
   using SFMBE.Shared.Character.GetBag;
   using SFMBE.Shared.Items.Create;
   using SFMBE.Shared.Items.Equip;
-  using SFMBE.Shared.Items.Get;
   using SFMBE.Shared.Items.GetItems;
   using SFMBE.Shared.Items.Unequip;
   using System;
+  using System.Collections.Generic;
   using System.Linq;
   using System.Threading.Tasks;
 
   public class ItemsService : IItemsService
   {
     private readonly IDeletableEntityRepository<Item> itemsRepository;
-    private readonly ICharactersService charactersService;
-    private readonly IGearsService gearsService;
 
     public ItemsService(
-      IDeletableEntityRepository<Item> itemsRepository,
-      ICharactersService charactersService,
-      IGearsService gearsService)
+      IDeletableEntityRepository<Item> itemsRepository)
     {
       this.itemsRepository = itemsRepository;
-      this.charactersService = charactersService;
-      this.gearsService = gearsService;
     }
 
     public async Task<CreateItemResponse> CreateItem(CreateItemRequest userModel)
@@ -49,7 +42,7 @@
         item.Agility = rnd.Next(0, userModel.Agility / 2);
         item.Intelligence = rnd.Next(0, userModel.Intelligence / 2);
         item.Price = rnd.Next(averageStats, averageStats * rnd.Next(1, 4));
-        item.BagId = userModel.BagId;
+        item.CharacterId = userModel.CharacterId;
       }
       else
       {
@@ -86,58 +79,39 @@
       return item.To<T>();
     }
 
-    public async Task<T> GetItemsById<T>(GetItemsRequest itemsRequestModel)
+    public async Task<ICollection<Item>> GetItemsByCharacterId(int characterId)
     {
       var items = await this.itemsRepository
         .All()
-        .Where(x => itemsRequestModel.Items.Contains(x.Id))
+        .Where(x => x.CharacterId == characterId)
         .ToListAsync();
+
+      return items;
+    }
+
+    public async Task<T> GetItemsByCharacterId<T>(int characterId)
+    {
+      var items = await this.GetItemsByCharacterId(characterId);
 
       return items.To<T>();
     }
 
     public async Task Equip(EquipItemRequest equipItemRequest)
     {
-      var (character, item, gear) = await this.GetEntities(equipItemRequest.CharacterId, equipItemRequest.ItemId);
+      var item = await this.GetItemById(equipItemRequest.ItemId);
 
-      if (gear.EquippedItems.Any(x => x.ItemType == item.ItemType))
-      {
-        gear
-          .EquippedItems
-          .Remove(gear.EquippedItems.First(x => x.ItemType == item.ItemType));
-      }
-      gear.EquippedItems.Add(item);
+      item.IsEquip = true;
 
       await this.itemsRepository.SaveChangesAsync();
     }
 
     public async Task Unequip(UnequipItemRequest unequipItemRequest)
     {
-      var (character, item, gear) = await this.GetEntities(unequipItemRequest.CharacterId, unequipItemRequest.ItemId);
+      var item = await this.GetItemById(unequipItemRequest.ItemId);
 
-      if (gear.EquippedItems.Any(x => x.ItemType == item.ItemType))
-      {
-        gear
-          .EquippedItems
-          .Remove(
-              gear.EquippedItems.First(x => x.ItemType == item.ItemType));
+      item.IsEquip = false;
 
-        await this.itemsRepository.SaveChangesAsync();
-      }
-    }
-
-    private async Task<(GetBagCharacterResponse character, Item item, Gear gear)> GetEntities(int charachterId, int itemId)
-    {
-      var character = await this.charactersService.GetCharacterById<GetBagCharacterResponse>(charachterId);
-      var item = await this.GetItemById(itemId);
-      var gear = await this.gearsService.GetGearById(character.GearId);
-
-      if (character.BagId != item.BagId)
-      {
-        throw new InvalidOperationException();
-      }
-
-      return (character, item, gear);
+      await this.itemsRepository.SaveChangesAsync();
     }
   }
 }

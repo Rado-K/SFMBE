@@ -3,10 +3,10 @@
   using Microsoft.EntityFrameworkCore;
   using SFMBE.Data.Common.Repositories;
   using SFMBE.Data.Models;
+  using SFMBE.Services.Data.Items;
   using SFMBE.Services.Data.User;
   using SFMBE.Services.Mapping;
   using SFMBE.Shared.Character.Create;
-  using SFMBE.Shared.Character.Get;
   using SFMBE.Shared.Character.Update;
   using System.Linq;
   using System.Threading.Tasks;
@@ -15,11 +15,16 @@
   {
     private readonly IRepository<Character> characterRepository;
     private readonly IUserService userService;
+    private readonly IItemsService itemsService;
 
-    public CharactersService(IRepository<Character> characterRepository, IUserService userService)
+    public CharactersService(
+      IRepository<Character> characterRepository,
+      IUserService userService,
+      IItemsService itemsService)
     {
       this.characterRepository = characterRepository;
       this.userService = userService;
+      this.itemsService = itemsService;
     }
 
     public async Task<Character> GetCharacterById(int characterId)
@@ -28,6 +33,10 @@
         .All()
         .Where(x => x.Id == characterId)
         .FirstOrDefaultAsync();
+
+      var items = await this.itemsService.GetItemsByCharacterId(characterId);
+
+      character.Items = items;
 
       return character;
     }
@@ -54,12 +63,9 @@
     {
       var user = await this.userService.GetUser(x => x.Character);
 
-      if (user.Character is null)
-      {
-        return default;
-      }
+      var character = await this.GetCharacterById<T>(user.Character.Id);
 
-      return user.Character.To<T>();
+      return character;
     }
 
     public async Task<UpdateCharacter> UpdateCharacter(UpdateCharacter characterUpdateModel)

@@ -5,6 +5,7 @@
   using SFMBE.Client.Features.Base;
   using SFMBE.Client.Repositories.Items;
   using SFMBE.Shared.Items.Equip;
+  using SFMBE.Shared.Items.Unequip;
   using System.Threading;
   using System.Threading.Tasks;
 
@@ -22,12 +23,16 @@
       public override async Task<Unit> Handle(EquipItemAction action, CancellationToken cancellationToken)
       {
         this.BagState.Bag.Remove(action.Item);
+
         var unequipItem = this.GearState.AddItem(action.Item);
+
+        var characterId = this.CharacterState.Character.Data.Id;
         if (unequipItem != null)
         {
           this.BagState.Bag.Add(unequipItem);
+          await this.itemsRepository.Unequip(new UnequipItemRequest { CharacterId = characterId, ItemId = unequipItem.Id });
         }
-        var characterId = this.CharacterState.Character.Data.Id;
+
         await this.itemsRepository.Equip(new EquipItemRequest { CharacterId = characterId, ItemId = action.Item.Id });
 
         return await Unit.Task;

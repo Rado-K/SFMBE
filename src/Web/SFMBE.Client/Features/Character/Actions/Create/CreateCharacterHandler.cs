@@ -26,7 +26,7 @@
 
         if (characterCreatedResponse.IsOk)
         {
-          await this.mediator.Send(new FetchCharacterAction());
+          await this.mediator.Send(new FetchCharacterAction { CharacterId = characterCreatedResponse.Data.Id });
         }
 
         return await Unit.Task;

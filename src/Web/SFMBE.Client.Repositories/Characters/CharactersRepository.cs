@@ -16,9 +16,9 @@
       this.httpService = httpService;
     }
 
-    public async Task<ApiResponse<GetCharacterResponse>> GetCharacter()
+    public async Task<ApiResponse<GetCharacterResponse>> GetCharacter(int characterId)
     {
-      var request = new GetCharacterRequest();
+      var request = new GetCharacterRequest { CharacterId = characterId };
       var httpResponse = await this.httpService.Get<GetCharacterResponse>(request.RouteFactory);
 
       if (!httpResponse.IsOk)

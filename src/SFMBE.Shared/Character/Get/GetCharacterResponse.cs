@@ -1,9 +1,13 @@
 ﻿namespace SFMBE.Shared.Character.Get
 {
+  using AutoMapper;
   using Data.Models;
   using Services.Mapping;
+  using SFMBE.Shared.Items.Get;
+  using System.Collections.Generic;
+  using System.Linq;
 
-  public class GetCharacterResponse : IMapFrom<Character>
+  public class GetCharacterResponse : IMapFrom<Character>, IHaveCustomMappings
   {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -24,8 +28,24 @@
 
     public int Strength { get; set; }
 
-    public int BagId { get; set; }
+    public IList<GetItemResponse> Gear { get; set; }
 
-    public int GearId { get; set; }
+    public IList<GetItemResponse> Bag { get; set; }
+
+    public void CreateMappings(IProfileExpression configuration)
+    {
+      configuration
+        .CreateMap<Character, GetCharacterResponse>()
+        .ForMember(x => x.Gear,
+                   o => o.MapFrom(
+                     x => x.Items
+                     .Where(x => x.IsEquip.HasValue && x.IsEquip.Value)
+                     .Select(x => x.To<GetItemResponse>())))
+        .ForMember(x => x.Bag,
+                   o => o.MapFrom(
+                     x => x.Items
+                     .Where(x => x.IsEquip.HasValue && !x.IsEquip.Value)
+                     .Select(x => x.To<GetItemResponse>())));
+    }
   }
 }

@@ -15,7 +15,7 @@
 
     public async Task<ApiResponse<GetItemsResponse>> Handle(GetItemsRequest request, CancellationToken cancellationToken)
     {
-      var items = await this.itemsService.GetItemsById<GetItemsResponse>(request);
+      var items = await this.itemsService.GetItemsByCharacterId<GetItemsResponse>(default);
 
       return items.ToApiResponse();
     }

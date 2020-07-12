@@ -4,6 +4,9 @@
 
   internal partial class CharacterState
   {
-    public class FetchCharacterAction : BaseAction { }
+    public class FetchCharacterAction : BaseAction
+    {
+      public int CharacterId { get; set; }
+    }
   }
 }

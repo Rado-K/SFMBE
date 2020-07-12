@@ -12,9 +12,7 @@ namespace SFMBE.Client
   using SFMBE.Client.Features.EventStream;
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Client.Repositories.Accounts;
-  using SFMBE.Client.Repositories.Bags;
   using SFMBE.Client.Repositories.Characters;
-  using SFMBE.Client.Repositories.Gears;
   using SFMBE.Client.Repositories.Items;
   using SFMBE.Shared;
   using System;
@@ -54,9 +52,7 @@ namespace SFMBE.Client
       services.AddSingleton<IHttpService, HttpService>();
       services.AddSingleton<IAccountRepository, AccountRepository>();
       services.AddSingleton<ICharactersRepository, CharactersRepository>();
-      services.AddSingleton<IBagsRepository, BagsRepository>();
       services.AddSingleton<IItemsRepository, ItemsRepository>();
-      services.AddSingleton<IGearsRepository, GearsRepository>();
 
       services.AddBlazorState
       (

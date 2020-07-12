@@ -23,12 +23,10 @@ namespace SFMBE.Server
 
   using Newtonsoft.Json;
   using Services.Data.Account;
-  using Services.Data.Bag;
   using Services.Data.Items;
   using Services.Data.Storage;
   using Services.Mapping;
   using SFMBE.Services.Data.Character;
-  using SFMBE.Services.Data.Gear;
   using SFMBE.Services.Data.User;
   using SFMBE.Services.Data.Vendor;
   using SFMBE.Shared;
@@ -116,7 +114,7 @@ namespace SFMBE.Server
 
       services.AddScoped<IFileStorageService, StorageService>();
       services.AddHttpContextAccessor();
-      services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
+      services.AddMediatR(typeof(Startup));
 
       // Data repositories
       services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
@@ -127,8 +125,6 @@ namespace SFMBE.Server
       services.AddScoped<IAccountService, AccountService>();
       services.AddScoped<IUserService, UserService>();
       services.AddScoped<ICharactersService, CharactersService>();
-      services.AddScoped<IBagsService, BagsService>();
-      services.AddScoped<IGearsService, GearsService>();
       services.AddScoped<IItemsService, ItemsService>();
       services.AddScoped<IVendorService, VendorService>();
     }

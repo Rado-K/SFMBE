@@ -7,7 +7,11 @@
   {
     public const string Route = "api/characters/get";
 
+    public int CharacterId { get; set; }
+
     [JsonIgnore]
     public string RouteFactory => $"{Route}";
+
+    //public string RouteFactory => $"{Route}?{nameof(this.CharacterId)}={this.CharacterId}";
   }
 }

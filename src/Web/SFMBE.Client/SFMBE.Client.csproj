@@ -25,4 +25,9 @@
     <ProjectReference Include="..\SFMBE.Client.Repositories\SFMBE.Client.Repositories.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Bag\Actions\" />
+    <Folder Include="Features\Gear\Actions\" />
+  </ItemGroup>
+
 </Project>

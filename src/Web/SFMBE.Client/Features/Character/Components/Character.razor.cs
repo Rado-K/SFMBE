@@ -13,11 +13,11 @@
       if (this.CharacterState.Character is null || this.CharacterState.Character.Data is null)
       {
         await this.Mediator.Send(new CharacterState.FetchCharacterAction());
-        if (this.CharacterState.Character.Data != null)
-        {
-          await this.Mediator.Send(new GearState.FetchGearAction());
-          await this.Mediator.Send(new BagState.FetchBagAction());
-        }
+        //if (this.CharacterState.Character.Data != null)
+        //{
+        //  await this.Mediator.Send(new GearState.FetchGearAction());
+        //  await this.Mediator.Send(new BagState.FetchBagAction());
+        //}
       }
     }
 

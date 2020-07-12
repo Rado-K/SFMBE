@@ -38,7 +38,6 @@
     <ProjectReference Include="..\..\Services\SFMBE.Services.Mapping\SFMBE.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Services\SFMBE.Services.Messaging\SFMBE.Services.Messaging.csproj" />
     <ProjectReference Include="..\..\Web\SFMBE.Client.Infrastructure\SFMBE.Client.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\Web\SFMBE.Client\SFMBE.Client.Old.csproj" />
   </ItemGroup>
 
 </Project>

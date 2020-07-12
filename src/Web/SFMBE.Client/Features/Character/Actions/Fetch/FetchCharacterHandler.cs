@@ -20,9 +20,11 @@
 
       public override async Task<Unit> Handle(FetchCharacterAction action, CancellationToken cancellationToken)
       {
-        var character = await this.charactersRepository.GetCharacter();
+        var character = await this.charactersRepository.GetCharacter(action.CharacterId);
 
         this.CharacterState.Character = character;
+        this.BagState.Bag = this.CharacterState.Character.Data.Bag;
+        this.GearState.Gear = this.CharacterState.Character.Data.Gear;
 
         return await Unit.Task;
       }

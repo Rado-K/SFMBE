@@ -11,32 +11,6 @@
 
   internal class ItemSeeder : ISeeder
   {
-    public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
-    {
-      if (dbContext.Items.Any())
-      {
-        return;
-      }
-
-      var itemsService = serviceProvider.GetRequiredService<IItemsService>();
-
-      var itemsTypes = new List<string>
-      {
-        "Head",
-        "Head",
-        "Boots",
-        "Head",
-        "Chest",
-        "Boots",
-      };
-    }
-
-    private async Task SeedItems(IItemsService itemsService, List<string> itemsTypes)
-    {
-      foreach (var item in itemsTypes)
-      {
-
-      }
-    }
+    public Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider) => throw new NotImplementedException();
   }
 }
