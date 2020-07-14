@@ -17,5 +17,7 @@
     Task<Item> GetItemById(int id);
     Task Unequip(UnequipItemRequest unequipItemRequest);
     Task Equip(EquipItemRequest equipItemRequest);
+    Task<T> GetItemsByVendorId<T>(int vendorId);
+    Task<ICollection<Item>> GetItemsByVendorId(int vendorId);
   }
 }

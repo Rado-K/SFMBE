@@ -3,12 +3,9 @@
   using Microsoft.EntityFrameworkCore;
   using SFMBE.Data.Common.Repositories;
   using SFMBE.Data.Models;
-  using SFMBE.Services.Data.Character;
   using SFMBE.Services.Mapping;
-  using SFMBE.Shared.Character.GetBag;
   using SFMBE.Shared.Items.Create;
   using SFMBE.Shared.Items.Equip;
-  using SFMBE.Shared.Items.GetItems;
   using SFMBE.Shared.Items.Unequip;
   using System;
   using System.Collections.Generic;
@@ -92,6 +89,23 @@
     public async Task<T> GetItemsByCharacterId<T>(int characterId)
     {
       var items = await this.GetItemsByCharacterId(characterId);
+
+      return items.To<T>();
+    }
+
+    public async Task<ICollection<Item>> GetItemsByVendorId(int vendorId)
+    {
+      var items = await this.itemsRepository
+        .All()
+        .Where(x => x.VendorId == vendorId && !x.IsEquip.HasValue)
+        .ToListAsync();
+
+      return items;
+    }
+
+    public async Task<T> GetItemsByVendorId<T>(int vendorId)
+    {
+      var items = await this.GetItemsByVendorId(vendorId);
 
       return items.To<T>();
     }
