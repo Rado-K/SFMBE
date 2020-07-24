@@ -24,6 +24,6 @@
     public int? VendorId { get; set; }
     public Vendor Vendor { get; set; }
 
-    public bool? IsEquip { get; set; }
+    public EquipType IsEquip { get; set; }
   }
 }

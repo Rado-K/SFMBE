@@ -15,6 +15,7 @@
 
     public async Task<ApiResponse<GetItemsResponse>> Handle(GetItemsRequest request, CancellationToken cancellationToken)
     {
+      throw new System.Exception("Popravi go tva");
       var items = await this.itemsService.GetItemsByCharacterId<GetItemsResponse>(default);
 
       return items.ToApiResponse();

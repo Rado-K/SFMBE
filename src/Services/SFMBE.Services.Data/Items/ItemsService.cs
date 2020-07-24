@@ -97,7 +97,7 @@
     {
       var items = await this.itemsRepository
         .All()
-        .Where(x => x.VendorId == vendorId && !x.IsEquip.HasValue)
+        .Where(x => x.VendorId == vendorId && x.IsEquip == EquipType.InVendor)
         .ToListAsync();
 
       return items;
@@ -114,7 +114,7 @@
     {
       var item = await this.GetItemById(equipItemRequest.ItemId);
 
-      item.IsEquip = true;
+      item.IsEquip = EquipType.InGear;
 
       await this.itemsRepository.SaveChangesAsync();
     }
@@ -123,7 +123,7 @@
     {
       var item = await this.GetItemById(unequipItemRequest.ItemId);
 
-      item.IsEquip = false;
+      item.IsEquip = EquipType.InBag;
 
       await this.itemsRepository.SaveChangesAsync();
     }

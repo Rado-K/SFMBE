@@ -4,12 +4,14 @@
   using Data.Models;
   using Services.Mapping;
   using SFMBE.Shared.Items.Get;
+  using System;
   using System.Collections.Generic;
   using System.Linq;
 
   public class GetCharacterResponse : IMapFrom<Character>, IHaveCustomMappings
   {
     public int Id { get; set; }
+
     public string Name { get; set; }
 
     public int Level { get; set; }
@@ -38,14 +40,12 @@
         .CreateMap<Character, GetCharacterResponse>()
         .ForMember(x => x.Gear,
                    o => o.MapFrom(
-                     x => x.Items
-                     .Where(x => x.IsEquip.HasValue && x.IsEquip.Value)
-                     .Select(x => x.To<GetItemResponse>())))
+                    x => x.Items
+                    .Where(x => x.IsEquip == EquipType.InGear)))
         .ForMember(x => x.Bag,
                    o => o.MapFrom(
-                     x => x.Items
-                     .Where(x => x.IsEquip.HasValue && !x.IsEquip.Value)
-                     .Select(x => x.To<GetItemResponse>())));
+                    x => x.Items
+                    .Where(x => x.IsEquip == EquipType.InBag)));
     }
   }
 }
