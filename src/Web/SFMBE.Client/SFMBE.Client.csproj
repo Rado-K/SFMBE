@@ -28,6 +28,7 @@
   <ItemGroup>
     <Folder Include="Features\Bag\Actions\" />
     <Folder Include="Features\Gear\Actions\" />
+    <Folder Include="Features\Vendor\Actions\Fetch\" />
   </ItemGroup>
 
 </Project>

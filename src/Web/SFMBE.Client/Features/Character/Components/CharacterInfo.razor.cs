@@ -52,6 +52,7 @@
 
     private async Task UpdateCharacter()
     {
+      //TODO: Use Mediator!
       await this.CharactersRepository.UpdateCharacter(this.characterUpdateModel);
     }
   }

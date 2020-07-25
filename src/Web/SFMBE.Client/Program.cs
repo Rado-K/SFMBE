@@ -38,7 +38,7 @@ namespace SFMBE.Client
     {
       services.AddLogging(builder => builder
         .AddBrowserConsole()
-        .SetMinimumLevel(LogLevel.Debug));
+        .SetMinimumLevel(LogLevel.Error));
 
       AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
