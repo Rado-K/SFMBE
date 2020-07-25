@@ -7,6 +7,7 @@
   using SFMBE.Client.Features.EventStream;
   using SFMBE.Client.Features.Gear;
   using SFMBE.Client.Features.Items;
+  using SFMBE.Client.Features.Vendor;
   using System.Threading.Tasks;
 
   public class BaseComponent : BlazorStateDevToolsComponent
@@ -17,6 +18,7 @@
     internal CharacterState CharacterState => this.GetState<CharacterState>();
     internal GearState GearState => this.GetState<GearState>();
     internal ItemState ItemsState => this.GetState<ItemState>();
+    internal VendorState VendorState => this.GetState<VendorState>();
 
     internal async Task ChangeState<T>()
     {

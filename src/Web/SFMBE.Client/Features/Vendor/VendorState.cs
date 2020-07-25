@@ -6,7 +6,7 @@
 
   public partial class VendorState : State<VendorState>
   {
-    public ApiResponse<GetVendorResponse> Vandor { get; set; }
+    public ApiResponse<GetVendorResponse> Vendor { get; set; }
 
     public override void Initialize() { }
   }
