@@ -24,8 +24,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Web\SFMBE.Server\SFMBE.Server.csproj" />
-  </ItemGroup>
-
 </Project>

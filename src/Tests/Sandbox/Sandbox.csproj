@@ -31,13 +31,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\SFMBE.Common\SFMBE.Common.csproj" />
-    <ProjectReference Include="..\..\Data\SFMBE.Data.Common\SFMBE.Data.Common.csproj" />
-    <ProjectReference Include="..\..\Data\SFMBE.Data.Models\SFMBE.Data.Models.csproj" />
-    <ProjectReference Include="..\..\Data\SFMBE.Data\SFMBE.Data.csproj" />
-    <ProjectReference Include="..\..\Services\SFMBE.Services.Data\SFMBE.Services.Data.csproj" />
-    <ProjectReference Include="..\..\Services\SFMBE.Services.Mapping\SFMBE.Services.Mapping.csproj" />
-    <ProjectReference Include="..\..\Services\SFMBE.Services.Messaging\SFMBE.Services.Messaging.csproj" />
-    <ProjectReference Include="..\..\Web\SFMBE.Client.Infrastructure\SFMBE.Client.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
