@@ -1,25 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="8.0.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <Compile Remove="Authentication\Login\**" />
+    <EmbeddedResource Remove="Authentication\Login\**" />
+    <None Remove="Authentication\Login\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Data\SFMBE.Data.Models\SFMBE.Data.Models.csproj" />
-    <ProjectReference Include="..\Services\SFMBE.Services.Mapping\SFMBE.Services.Mapping.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Account\Login\LoginUserRequest.cs">
-      <ExcludeFromSourceAnalysis>True</ExcludeFromSourceAnalysis>
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
-    </Compile>
+    <ProjectReference Include="..\SFMBE.Data.Models\SFMBE.Data.Models.csproj" />
   </ItemGroup>
 
 </Project>

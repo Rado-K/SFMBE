@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SFMBE.Shared\SFMBE.Shared.csproj" />
     <ProjectReference Include="..\SFMBE.Client.Infrastructure\SFMBE.Client.Infrastructure.csproj" />
     <ProjectReference Include="..\SFMBE.Client.Repositories\SFMBE.Client.Repositories.csproj" />
   </ItemGroup>

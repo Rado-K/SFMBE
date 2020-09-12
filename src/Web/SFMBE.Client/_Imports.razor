@@ -1,18 +1,16 @@
 ﻿@using System.Net.Http
-@using System.Net.Http.Json
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Routing
 @using Microsoft.AspNetCore.Components.Web
-@using Microsoft.AspNetCore.Components.WebAssembly.Http
+@using Microsoft.AspNetCore.Authorization.Infrastructure
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Authorization
 @using Microsoft.JSInterop
+@using SFMBE.Shared
 @using SFMBE.Client
 @using SFMBE.Client.Shared
-
-@using SFMBE.Shared
-@using SFMBE.Client.Infrastructure
-@using Microsoft.AspNetCore.Components.Authorization
-@using Microsoft.AspNetCore.Authorization;
-
-@using Microsoft.Extensions.Logging
-
-@using SFMBE.Client.Features.Base.Components
+@using SFMBE.Shared.Authentication.Commands
+@using SFMBE.Client.Services.Contracts
+@using SFMBE.Client.Services.Implementations
+@using System.Security.Claims
+@using System.Net.Http.Json

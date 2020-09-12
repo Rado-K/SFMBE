@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200906145754_Initial.cs" />
+    <Compile Remove="Migrations\20200906145754_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200906145902_Initial.cs" />
+    <Compile Remove="Migrations\20200906145902_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200906153917_Initial.cs" />
+    <Compile Remove="Migrations\20200906153917_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200906155208_Initial.cs" />
+    <Compile Remove="Migrations\20200906155208_Initial.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ardalis.Specification" Version="4.1.0" />
+    <PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="4.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SFMBE.Data.Models\SFMBE.Data.Models.csproj" />
+    <ProjectReference Include="..\SFMBE.Shared\SFMBE.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

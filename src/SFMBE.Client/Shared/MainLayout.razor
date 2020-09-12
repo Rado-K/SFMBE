@@ -1,0 +1,16 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager navigationManager
+@inject IdentityAuthenticationStateProvider authStateProvider
+
+<div class="sidebar">
+    <NavMenu />
+</div>
+
+<div class="main">
+
+    <LoginLinks />
+
+    <div class="content px-4">
+        @Body
+    </div>
+</div>
