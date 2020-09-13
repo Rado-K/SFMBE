@@ -1,10 +1,11 @@
-﻿namespace UnitTests.SFMBE.Server
+﻿namespace Tests.SFMBE.Server.UnitTests
 {
   using global::SFMBE.Data;
   using global::SFMBE.Data.Seeding;
   using global::SFMBE.Server;
   using Microsoft.AspNetCore.Hosting;
   using Microsoft.AspNetCore.Mvc.Testing;
+  using Microsoft.AspNetCore.TestHost;
   using Microsoft.EntityFrameworkCore;
   using Microsoft.Extensions.DependencyInjection;
   using Microsoft.Extensions.Logging;
@@ -16,6 +17,7 @@
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
       builder
+          .UseTestServer()
           //.UseSolutionRelativeContentRoot("sample/SampleEndpointApp")
           .ConfigureServices(services =>
           {

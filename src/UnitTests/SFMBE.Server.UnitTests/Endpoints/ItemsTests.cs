@@ -1,4 +1,4 @@
-﻿namespace UnitTests.SFMBE.Server.Endpoints
+﻿namespace Tests.SFMBE.Server.UnitTests.Endpoints
 {
   using System.Collections.Generic;
   using System.Threading.Tasks;

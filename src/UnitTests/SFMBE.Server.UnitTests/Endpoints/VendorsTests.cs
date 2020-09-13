@@ -1,4 +1,4 @@
-﻿namespace UnitTests.SFMBE.Server.Endpoints
+﻿namespace Tests.SFMBE.Server.UnitTests.Endpoints
 {
   using global::SFMBE.Data;
   using global::SFMBE.Data.Models;

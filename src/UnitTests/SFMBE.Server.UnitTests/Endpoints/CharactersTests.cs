@@ -1,20 +1,19 @@
-﻿namespace UnitTests.SFMBE.Server.Endpoints
+﻿namespace Tests.SFMBE.Server.UnitTests.Endpoints
 {
   using global::SFMBE.Data;
   using global::SFMBE.Data.Models;
   using global::SFMBE.Data.Repositories;
-  using global::SFMBE.Server;
   using global::SFMBE.Server.Endpoints.Characters;
   using global::SFMBE.Server.Services;
   using global::SFMBE.Shared.Characters.Queries;
-  using System.Threading.Tasks;
-  using System.Collections.Generic;
   using Microsoft.AspNetCore.Mvc;
   using Microsoft.EntityFrameworkCore;
   using Moq;
+  using System.Collections.Generic;
+  using System.Threading.Tasks;
   using Xunit;
 
-  public class CharactersTests : IClassFixture<CustomWebApplicationFactory<Startup>>
+  public class CharactersTests
   {
     private readonly EfRepository<Character> repository;
     private readonly ApplicationDbContext context;
@@ -57,7 +56,7 @@
       Assert.IsAssignableFrom<ActionResult<int>>(result);
       var model = Assert.IsType<OkObjectResult>(result.Result);
 
-      Assert.Equal(2, model.Value);
+      Assert.Equal(3, model.Value);
     }
 
     public static IEnumerable<object[]> IsValidDataForGetOk =>
@@ -97,7 +96,7 @@
         {
           new dynamic[]
           {
-             new ApplicationUser { Id = "00000000-0000-0000-0000-000000000000" },
+             new ApplicationUser { Id = "00000000-1111-0000-0000-000000000000" },
             "Character not found",
           },
           new dynamic[]

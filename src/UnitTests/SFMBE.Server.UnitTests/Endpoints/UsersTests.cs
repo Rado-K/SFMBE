@@ -1,4 +1,4 @@
-﻿namespace UnitTests.SFMBE.Server.Endpoints
+﻿namespace Tests.SFMBE.Server.UnitTests.Endpoints
 {
   using global::SFMBE.Server.Endpoints.Authentication;
   using global::SFMBE.Server.Services;
