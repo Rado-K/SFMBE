@@ -33,31 +33,6 @@
       return result;
     }
 
-    public async Task<string> Login(LoginParametersCommand loginParameters)
-    {
-      var user = await this.userManager.FindByNameAsync(loginParameters.UserName);
-      if (user == null)
-      {
-        return "User does not exist";
-      }
-
-      var singInResult = await this.signInManager.CheckPasswordSignInAsync(user, loginParameters.Password, false);
-
-      if (!singInResult.Succeeded)
-      {
-        return "Invalid password";
-      }
-
-      await this.signInManager.SignInAsync(user, loginParameters.RememberMe);
-
-      return "You are login in";
-    }
-
-    public async Task Logout()
-    {
-      await this.signInManager.SignOutAsync();
-    }
-
     public async Task<ApplicationUser> GetUser()
       => await this.userManager.GetUserAsync(this.httpContext.HttpContext.User);
   }
