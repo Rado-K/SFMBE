@@ -1,10 +1,10 @@
 ﻿namespace SFMBE.Server.Endpoints.Authentication
 {
-  using System.Threading.Tasks;
   using Ardalis.ApiEndpoints;
   using Microsoft.AspNetCore.Mvc;
   using SFMBE.Server.Services;
   using SFMBE.Shared.Authentication.Commands;
+  using System.Threading.Tasks;
 
   public class Login : BaseAsyncEndpoint
   {
@@ -28,4 +28,5 @@
       return this.Ok(result);
     }
   }
+
 }
