@@ -17,19 +17,27 @@
 
     private static async Task SeedUsers(UserManager<ApplicationUser> userManager)
     {
-      var users = new[] { "user1", "user2" };
-
-      foreach (var userName in users)
+      var users = new[]
       {
-        if (await userManager.FindByNameAsync(userName) == null)
-        {
-          var user = new ApplicationUser
+          new ApplicationUser
           {
-            UserName = userName,
-            Email = $"{userName}@localhost",
-          };
+            Id = "00000000-0000-0000-0000-000000000000",
+            UserName = "user1",
+            Email = $"user1@localhost",
+          },
+          new ApplicationUser
+          {
+            Id = "00000000-1111-0000-0000-000000000000",
+            UserName = "user2",
+            Email = $"user2@localhost",
+          },
+      };
 
-          await userManager.CreateAsync(user, password: userName + userName);
+      foreach (var user in users)
+      {
+        if (await userManager.FindByNameAsync(user.UserName) == null)
+        {
+          await userManager.CreateAsync(user, password: user.UserName + user.UserName);
         }
       }
     }
