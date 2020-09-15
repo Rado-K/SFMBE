@@ -7,6 +7,7 @@
   using Microsoft.IdentityModel.Tokens;
   using Newtonsoft.Json;
   using SFMBE.Data.Models;
+  using SFMBE.Shared.Authentication.Commands;
   using System;
   using System.Collections.Generic;
   using System.IdentityModel.Tokens.Jwt;

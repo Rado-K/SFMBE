@@ -1,23 +1,12 @@
 namespace SFMBE.Server
 {
-  using System;
-  using System.Linq;
-  using System.Text;
-  using System.Threading.Tasks;
-  using Microsoft.AspNetCore.Authentication.Cookies;
-  using Microsoft.AspNetCore.Authentication.JwtBearer;
-  using Microsoft.AspNetCore.Authorization;
   using Microsoft.AspNetCore.Builder;
   using Microsoft.AspNetCore.Hosting;
-  using Microsoft.AspNetCore.Http;
   using Microsoft.AspNetCore.Identity;
-  using Microsoft.AspNetCore.Mvc;
-  using Microsoft.AspNetCore.ResponseCompression;
   using Microsoft.EntityFrameworkCore;
   using Microsoft.Extensions.Configuration;
   using Microsoft.Extensions.DependencyInjection;
   using Microsoft.Extensions.Hosting;
-  using Microsoft.IdentityModel.Tokens;
   using Newtonsoft.Json;
   using SFMBE.Data;
   using SFMBE.Data.Models;

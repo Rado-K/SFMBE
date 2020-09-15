@@ -10,7 +10,12 @@
 @using SFMBE.Client
 @using SFMBE.Client.Shared
 @using SFMBE.Shared.Authentication.Commands
-@using SFMBE.Client.Services.Contracts
-@using SFMBE.Client.Services.Implementations
+@using SFMBE.Client.Infrastructure
 @using System.Security.Claims
 @using System.Net.Http.Json
+
+@inject IApplicationState State
+@inject IJSRuntime JsRuntime
+@inject NavigationManager NavigationManager
+@inject IApiClient ApiClient 
+@inject IAuthService AuthService

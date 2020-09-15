@@ -1,7 +1,5 @@
 ﻿@page "/register"
 @layout LoginLayout
-@inject NavigationManager navigationManager
-@inject IdentityAuthenticationStateProvider authStateProvider
 
 <h1 class="h2 font-weight-normal login-title">
     SFMBE
@@ -41,8 +39,14 @@
       error = null;
       try
       {
-          await authStateProvider.Register(registerParameters);
-          navigationManager.NavigateTo("/login");
+          var response = await this.AuthService.Register(this.registerParameters);
+
+          NavigationManager.NavigateTo("/login");
+
+          if (response.IsOk)
+          {
+              this.NavigationManager.NavigateTo("account/login");
+          }
       }
       catch (Exception ex)
       {

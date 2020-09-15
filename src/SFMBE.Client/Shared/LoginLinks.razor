@@ -1,6 +1,5 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager navigationManager
-@inject IdentityAuthenticationStateProvider authStateProvider
 
 <nav style="max-height: 56px;" class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/">SFMBE</a>
@@ -48,9 +47,9 @@
 
 
 @code{
-    async Task LogoutClick()
-    {
-        await authStateProvider.Logout();
-        navigationManager.NavigateTo("/login");
-    }
+  async Task LogoutClick()
+  {
+      await this.JsRuntime.DeleteToken();
+      this.NavigationManager.NavigateTo("/login");
+  }
 }

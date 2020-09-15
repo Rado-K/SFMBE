@@ -5,7 +5,7 @@ namespace SFMBE.Shared.Authentication.Commands
   public class LoginParametersCommand
   {
     [Required]
-    public string UserName { get; set; }
+    public string Email { get; set; }
 
     [Required]
     public string Password { get; set; }

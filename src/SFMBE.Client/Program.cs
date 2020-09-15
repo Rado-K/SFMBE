@@ -1,13 +1,12 @@
 namespace SFMBE.Client
 {
-  using System;
-  using System.Net.Http;
-  using System.Threading.Tasks;
   using Microsoft.AspNetCore.Components.Authorization;
   using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
   using Microsoft.Extensions.DependencyInjection;
-  using Services.Contracts;
-  using Services.Implementations;
+  using SFMBE.Client.Infrastructure;
+  using System;
+  using System.Net.Http;
+  using System.Threading.Tasks;
 
   public class Program
   {
@@ -16,16 +15,22 @@ namespace SFMBE.Client
       var builder = WebAssemblyHostBuilder.CreateDefault(args);
       builder.RootComponents.Add<App>("app");
 
-      builder.Services.AddOptions();
-      builder.Services.AddAuthorizationCore();
-      builder.Services.AddScoped<IdentityAuthenticationStateProvider>();
-      builder.Services.AddScoped<AuthenticationStateProvider>(s => s.GetRequiredService<IdentityAuthenticationStateProvider>());
-      builder.Services.AddScoped<IAuthorizeApi, AuthorizeApi>();
-
       builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-      var host = builder.Build();
-      await host.RunAsync();
+      ConfigureServices(builder.Services);
+
+      await builder.Build().RunAsync();
+    }
+
+    private static void ConfigureServices(IServiceCollection services)
+    {
+      services.AddOptions();
+      services.AddAuthorizationCore();
+      services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
+      services.AddScoped<IAuthService, AuthService>();
+      services.AddSingleton<IHttpService, HttpService>();
+      services.AddSingleton<IApplicationState, ApplicationState>();
+      services.AddTransient<IApiClient, ApiClient>();
     }
   }
 }

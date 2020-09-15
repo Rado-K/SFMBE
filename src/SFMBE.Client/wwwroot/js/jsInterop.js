@@ -15,18 +15,3 @@
         return true;
     }
 };
-
-window.storageManager = {
-    save: function (key, data) {
-        window.localStorage.setItem(key, data);
-        return true;
-    },
-    read: function (key) {
-        var value = window.localStorage.getItem(key);
-        return value;
-    },
-    delete: function (key) {
-        window.localStorage.removeItem(key);
-        return true;
-    }
-};

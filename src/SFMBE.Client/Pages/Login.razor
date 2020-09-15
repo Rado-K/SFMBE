@@ -1,7 +1,5 @@
 ﻿@page "/login"
 @layout LoginLayout
-@inject NavigationManager navigationManager
-@inject IdentityAuthenticationStateProvider authStateProvider
 
 <h1 class="h2 font-weight-normal login-title">
     SFMBE
@@ -13,8 +11,8 @@
     <h4 class="font-weight-normal text-center">Login</h4>
 
     <label for="inputUsername" class="sr-only">User Name</label>
-    <InputText id="inputUsername" class="form-control" @bind-Value="loginParameters.UserName" autofocus placeholder="Username" />
-    <ValidationMessage For="@(() => loginParameters.UserName)" />
+    <InputText id="inputUsername" class="form-control" @bind-Value="loginParameters.Email" autofocus placeholder="Username" />
+    <ValidationMessage For="@(() => loginParameters.Email)" />
 
     <label for="inputPassword" class="sr-only">Password</label>
     <InputPassword class="form-control" @bind-Value="this.loginParameters.Password" />
@@ -35,20 +33,23 @@
 </EditForm>
 
 @code{
-    LoginParametersCommand loginParameters { get; set; } = new LoginParametersCommand();
-    string error { get; set; }
+  LoginParametersCommand loginParameters { get; set; } = new LoginParametersCommand();
+  string error { get; set; }
 
-    async Task OnSubmit()
-    {
-        error = null;
-        try
-        {
-            await authStateProvider.Login(loginParameters);
-            navigationManager.NavigateTo("");
-        }
-        catch (Exception ex)
-        {
-            error = ex.Message;
-        }
-    }
+  async Task OnSubmit()
+  {
+      error = null;
+      var response = await this.AuthService.Login(this.loginParameters);
+      if (response.IsOk)
+      {
+          this.State.UserToken = response.Data.token;
+          await JsRuntime.SaveToken(this.State.UserToken);
+          this.State.Username = this.loginParameters.Email;
+          this.NavigationManager.NavigateTo("/");
+      }
+      else
+      {
+          this.StateHasChanged();
+      }
+  }
 }

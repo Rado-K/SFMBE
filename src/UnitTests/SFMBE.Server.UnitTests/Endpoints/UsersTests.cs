@@ -102,7 +102,7 @@
           {
             new LoginParametersCommand
             {
-              UserName = "user1",
+              Email = "user1",
               Password = "user1user1",
             },
             "You are login in"
@@ -134,7 +134,7 @@
           {
             new LoginParametersCommand
             {
-              UserName = "user2",
+              Email = "user2",
               Password = "123456",
             },
             "Invalid password"
@@ -143,7 +143,7 @@
           {
             new LoginParametersCommand
             {
-              UserName = "user3",
+              Email = "user3",
               Password = "123456",
             },
             "User does not exist"
