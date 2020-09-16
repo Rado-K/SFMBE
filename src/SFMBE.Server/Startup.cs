@@ -24,8 +24,6 @@ namespace SFMBE.Server
       this.configuration = configuration;
     }
 
-    // This method gets called by the runtime. Use this method to add services to the container.
-    // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddDbContext<ApplicationDbContext>(
@@ -35,15 +33,15 @@ namespace SFMBE.Server
                   options.EnableSensitiveDataLogging();
                 });
 
-      services.ConfigureJwt(this.configuration);
+      services.AddControllers()
+        .AddNewtonsoftJson(options
+            => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
       services.AddIdentity<ApplicationUser, ApplicationRole>(IdentityOptionsProvider.GetIdentityOptions)
           .AddEntityFrameworkStores<ApplicationDbContext>()
           .AddDefaultTokenProviders();
 
-      services.AddControllers()
-        .AddNewtonsoftJson(options
-            => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+      services.ConfigureJwt(this.configuration);
 
       services.AddHttpContextAccessor();
 
@@ -52,7 +50,6 @@ namespace SFMBE.Server
       services.AddScoped<IUsersService, UsersService>();
     }
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
       using (var serviceScope = app.ApplicationServices.CreateScope())

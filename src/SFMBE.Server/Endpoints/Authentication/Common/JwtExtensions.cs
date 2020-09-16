@@ -29,8 +29,14 @@
         options.SecretKey = key;
       });
 
+      // .AddAuthentication(JwtBearerDefaults.AuthenticationScheme) Not Working ;<
       services
-        .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddAuthentication(options =>
+        {
+          options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+          options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+          options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
         .AddJwtBearer(options =>
         {
           options.RequireHttpsMetadata = false;

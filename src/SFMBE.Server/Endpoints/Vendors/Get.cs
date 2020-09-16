@@ -3,6 +3,7 @@
   using System.Threading;
   using System.Threading.Tasks;
   using Ardalis.ApiEndpoints;
+  using Microsoft.AspNetCore.Authorization;
   using Microsoft.AspNetCore.Mvc;
   using SFMBE.Data.Models;
   using SFMBE.Data.Repositories;
@@ -18,6 +19,7 @@
       this.vendorRepository = vendorRepository;
     }
 
+    [Authorize]
     [HttpGet("api/Vendors/Get")]
     public override async Task<ActionResult<GetVendorQueryResponse>> HandleAsync([FromQuery] int vendorId, CancellationToken cancellationToken = default)
     {
