@@ -21,9 +21,17 @@
     {
       try
       {
-        var serialized = JsonSerializer.Serialize(request);
-        var stringContent = new StringContent(serialized, Encoding.UTF8, "application/json");
-        var response = await this.httpClient.PostAsync(url, request as HttpContent);
+        HttpResponseMessage response;
+        if (request is HttpContent)
+        {
+          response = await this.httpClient.PostAsync(url, request as HttpContent);
+        }
+        else
+        {
+          var serialized = JsonSerializer.Serialize(request);
+          var stringContent = new StringContent(serialized, Encoding.UTF8, "application/json");
+          response = await this.httpClient.PostAsync(url, stringContent);
+        }
         var responseObject = await response.Content.ReadFromJsonAsync<TResponse>();
         return responseObject.ToApiResponse();
       }

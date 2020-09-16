@@ -24,7 +24,7 @@
       // Arrange
       var registerParameters = new RegisterParametersCommand
       {
-        UserName = name,
+        Email = name,
         Password = "123456",
         PasswordConfirm = "123456"
       };
@@ -50,7 +50,7 @@
           {
             new RegisterParametersCommand
             {
-              UserName = "User1",
+              Email = "User1",
               Password = "123",
               PasswordConfirm = "123"
             },
@@ -64,7 +64,7 @@
           {
             new RegisterParametersCommand
             {
-              UserName = "user1",
+              Email = "user1",
               Password = "123456",
               PasswordConfirm = "654321"
             },

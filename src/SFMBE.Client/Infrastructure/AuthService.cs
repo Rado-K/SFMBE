@@ -23,9 +23,9 @@
       this.jsRuntime = jsRuntime;
     }
 
-    public async Task<ApiResponse<RegisterParametersCommandResponse>> Register(RegisterParametersCommand registerParametersCommandResponse)
+    public async Task<ApiResponse<bool>> Register(RegisterParametersCommand registerParametersCommandResponse)
     {
-      var result = await this.http.PostJson<RegisterParametersCommand, RegisterParametersCommandResponse>("api/Authorize/Register", registerParametersCommandResponse);
+      var result = await this.http.PostJson<RegisterParametersCommand, bool>("api/Authorize/Register", registerParametersCommandResponse);
 
       return result;
     }
@@ -43,7 +43,6 @@
 
       await this.jsRuntime.SaveToken(response.Data.token);
       ((ApiAuthenticationStateProvider)authenticationStateProvider).MarkUserAsAuthenticated(loginParametersCommand.Email);
-      //http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResult.Token);
 
       return response;
     }
@@ -52,7 +51,6 @@
     {
       await jsRuntime.DeleteToken();
       ((ApiAuthenticationStateProvider)authenticationStateProvider).MarkUserAsLoggedOut();
-      //httpClient.DefaultRequestHeaders.Authorization = null;
     }
   }
 }

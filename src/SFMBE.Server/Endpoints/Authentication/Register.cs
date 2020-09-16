@@ -17,7 +17,7 @@
     }
 
     [HttpPost("api/Authorize/Register")]
-    public async Task<IActionResult> HandleAsync(RegisterParametersCommand parameters)
+    public async Task<IActionResult> HandleAsync([FromBody] RegisterParametersCommand parameters)
     {
       var result = await this.usersService.Register(parameters);
 
@@ -26,7 +26,7 @@
         return this.BadRequest(result.Errors.FirstOrDefault()?.Description);
       }
 
-      return this.Ok();
+      return this.Ok(result.Succeeded);
     }
   }
 }

@@ -137,7 +137,7 @@
 
       var roles = await userManager.GetRolesAsync(user);
 
-      var identity = new GenericIdentity(email, "Token");
+      var identity = new GenericIdentity(email, "token");
       identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
 
       return new GenericPrincipal(identity, roles.ToArray());

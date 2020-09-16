@@ -9,9 +9,9 @@
     <DataAnnotationsValidator />
     <h4 class="font-weight-normal text-center">Create Account</h4>
 
-    <label for="inputUsername" class="sr-only">User Name</label>
-    <InputText id="inputUsername" class="form-control" placeholder="Username" autofocus @bind-Value="@registerParameters.UserName" />
-    <ValidationMessage For="@(() => registerParameters.UserName)" />
+    <label for="inputUsername" class="sr-only">Email</label>
+    <InputText id="inputUsername" class="form-control" placeholder="Email" autofocus @bind-Value="@registerParameters.Email" />
+    <ValidationMessage For="@(() => registerParameters.Email)" />
 
     <label for="inputPassword" class="sr-only">Password</label>
     <InputText type="password" id="inputPassword" class="form-control" placeholder="Password" @bind-Value="@registerParameters.Password" />
@@ -29,7 +29,7 @@
     </NavLink>
 </EditForm>
 
-@functions{
+@code{
 
   RegisterParametersCommand registerParameters { get; set; } = new RegisterParametersCommand();
   string error { get; set; }
@@ -41,11 +41,9 @@
       {
           var response = await this.AuthService.Register(this.registerParameters);
 
-          NavigationManager.NavigateTo("/login");
-
           if (response.IsOk)
           {
-              this.NavigationManager.NavigateTo("account/login");
+              this.NavigationManager.NavigateTo("/login");
           }
       }
       catch (Exception ex)

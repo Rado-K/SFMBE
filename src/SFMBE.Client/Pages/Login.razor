@@ -10,8 +10,8 @@
 
     <h4 class="font-weight-normal text-center">Login</h4>
 
-    <label for="inputUsername" class="sr-only">User Name</label>
-    <InputText id="inputUsername" class="form-control" @bind-Value="loginParameters.Email" autofocus placeholder="Username" />
+    <label for="inputUsername" class="sr-only">Email</label>
+    <InputText id="inputUsername" class="form-control" @bind-Value="loginParameters.Email" placeholder="Email" />
     <ValidationMessage For="@(() => loginParameters.Email)" />
 
     <label for="inputPassword" class="sr-only">Password</label>
