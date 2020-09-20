@@ -1,12 +1,12 @@
 ﻿namespace SFMBE.Client.Infrastructure
 {
-  using SFMBE.Shared;
-  using System;
-  using System.Net.Http;
   using System.Net.Http.Json;
-  using System.Text;
+  using System.Net.Http;
   using System.Text.Json;
+  using System.Text;
   using System.Threading.Tasks;
+  using System;
+  using SFMBE.Shared;
 
   public class HttpService : IHttpService
   {

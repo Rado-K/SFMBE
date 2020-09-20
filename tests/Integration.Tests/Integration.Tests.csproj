@@ -1,8 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <LangVersion>latest</LangVersion>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -24,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SFMBE.Server\SFMBE.Server.csproj" />
+    <ProjectReference Include="..\..\src\SFMBE.Server\SFMBE.Server.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,10 +1,10 @@
-﻿namespace Tests.SFMBE.Server.UnitTests.Endpoints
+namespace Unit.Tests
 {
-  using global::SFMBE.Data;
-  using global::SFMBE.Data.Models;
-  using global::SFMBE.Data.Repositories;
-  using global::SFMBE.Server.Endpoints.Vendors;
-  using global::SFMBE.Shared.Vendors;
+  using SFMBE.Data;
+  using SFMBE.Data.Models;
+  using SFMBE.Data.Repositories;
+  using SFMBE.Server.Endpoints.Vendors;
+  using SFMBE.Shared.Vendors;
   using Microsoft.AspNetCore.Mvc;
   using Microsoft.EntityFrameworkCore;
   using System.Collections.Generic;
@@ -33,19 +33,19 @@
           new dynamic []
           {
             new Vendor
-                  {
-                    Items = new[]
-                    {
-                      new Item
-                      {
-                        Stamina = 1,
-                      },
-                      new Item
-                      {
-                        Stamina = 2,
-                      }
-                    }
-                  },
+            {
+              Items = new[]
+              {
+                new Item
+                {
+                  Stamina = 1,
+                },
+                new Item
+                {
+                  Stamina = 2,
+                }
+              }
+            },
             1,
           },
         };

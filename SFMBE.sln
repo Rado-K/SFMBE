@@ -3,19 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFMBE.Shared", "SFMBE.Shared\SFMBE.Shared.csproj", "{DA5613C4-070D-4F5D-A4E7-1A7B473D33D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFMBE.Shared", "src\SFMBE.Shared\SFMBE.Shared.csproj", "{DA5613C4-070D-4F5D-A4E7-1A7B473D33D6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFMBE.Data", "SFMBE.Data\SFMBE.Data.csproj", "{EA9F7B5B-9FDF-4AEF-AED4-4C5B303CEB84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFMBE.Data", "src\SFMBE.Data\SFMBE.Data.csproj", "{EA9F7B5B-9FDF-4AEF-AED4-4C5B303CEB84}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFMBE.Data.Common", "SFMBE.Data.Common\SFMBE.Data.Common.csproj", "{811AA4F8-A4C8-45CA-9D17-8F758BFB85FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFMBE.Data.Common", "src\SFMBE.Data.Common\SFMBE.Data.Common.csproj", "{811AA4F8-A4C8-45CA-9D17-8F758BFB85FF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFMBE.Data.Models", "SFMBE.Data.Models\SFMBE.Data.Models.csproj", "{9E3D7EA9-B703-4D35-926E-A511B5D57D0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFMBE.Data.Models", "src\SFMBE.Data.Models\SFMBE.Data.Models.csproj", "{9E3D7EA9-B703-4D35-926E-A511B5D57D0B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFMBE.Server", "SFMBE.Server\SFMBE.Server.csproj", "{285ACD60-7491-4DAE-A237-D069AB9DC2D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFMBE.Server", "src\SFMBE.Server\SFMBE.Server.csproj", "{285ACD60-7491-4DAE-A237-D069AB9DC2D9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFMBE.Client", "SFMBE.Client\SFMBE.Client.csproj", "{6BE4D358-E1F4-402C-9C74-31329A882B55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFMBE.Client", "src\SFMBE.Client\SFMBE.Client.csproj", "{6BE4D358-E1F4-402C-9C74-31329A882B55}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "UnitTests\Tests.csproj", "{37A435E7-1024-4769-88A3-D6CED555DAE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unit.Tests", "tests\Unit.Tests.csproj", "{8AFF762E-EA47-4C01-AF1C-B32031058657}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9A01B2B0-3335-4DA2-AFD5-6E731C0255ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit.Tests", "tests\Unit.Tests\Unit.Tests.csproj", "{EC82C4A8-FEF6-46F7-AD47-7FF4C8383A4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration.Tests", "tests\Integration.Tests\Integration.Tests.csproj", "{46870158-FB22-4BE4-BEEA-B285173A40DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,17 +66,33 @@ Global
 		{6BE4D358-E1F4-402C-9C74-31329A882B55}.ReduxDevToolsEnabled|Any CPU.Build.0 = Release|Any CPU
 		{6BE4D358-E1F4-402C-9C74-31329A882B55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BE4D358-E1F4-402C-9C74-31329A882B55}.Release|Any CPU.Build.0 = Release|Any CPU
-		{37A435E7-1024-4769-88A3-D6CED555DAE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37A435E7-1024-4769-88A3-D6CED555DAE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37A435E7-1024-4769-88A3-D6CED555DAE2}.ReduxDevToolsEnabled|Any CPU.ActiveCfg = Release|Any CPU
-		{37A435E7-1024-4769-88A3-D6CED555DAE2}.ReduxDevToolsEnabled|Any CPU.Build.0 = Release|Any CPU
-		{37A435E7-1024-4769-88A3-D6CED555DAE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37A435E7-1024-4769-88A3-D6CED555DAE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AFF762E-EA47-4C01-AF1C-B32031058657}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AFF762E-EA47-4C01-AF1C-B32031058657}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AFF762E-EA47-4C01-AF1C-B32031058657}.ReduxDevToolsEnabled|Any CPU.ActiveCfg = Release|Any CPU
+		{8AFF762E-EA47-4C01-AF1C-B32031058657}.ReduxDevToolsEnabled|Any CPU.Build.0 = Release|Any CPU
+		{8AFF762E-EA47-4C01-AF1C-B32031058657}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AFF762E-EA47-4C01-AF1C-B32031058657}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC82C4A8-FEF6-46F7-AD47-7FF4C8383A4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC82C4A8-FEF6-46F7-AD47-7FF4C8383A4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC82C4A8-FEF6-46F7-AD47-7FF4C8383A4F}.ReduxDevToolsEnabled|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC82C4A8-FEF6-46F7-AD47-7FF4C8383A4F}.ReduxDevToolsEnabled|Any CPU.Build.0 = Debug|Any CPU
+		{EC82C4A8-FEF6-46F7-AD47-7FF4C8383A4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC82C4A8-FEF6-46F7-AD47-7FF4C8383A4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46870158-FB22-4BE4-BEEA-B285173A40DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46870158-FB22-4BE4-BEEA-B285173A40DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46870158-FB22-4BE4-BEEA-B285173A40DD}.ReduxDevToolsEnabled|Any CPU.ActiveCfg = Debug|Any CPU
+		{46870158-FB22-4BE4-BEEA-B285173A40DD}.ReduxDevToolsEnabled|Any CPU.Build.0 = Debug|Any CPU
+		{46870158-FB22-4BE4-BEEA-B285173A40DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46870158-FB22-4BE4-BEEA-B285173A40DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {384484BE-4680-4529-9CC2-AD37BA4D12D1}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EC82C4A8-FEF6-46F7-AD47-7FF4C8383A4F} = {9A01B2B0-3335-4DA2-AFD5-6E731C0255ED}
+		{46870158-FB22-4BE4-BEEA-B285173A40DD} = {9A01B2B0-3335-4DA2-AFD5-6E731C0255ED}
 	EndGlobalSection
 EndGlobal

@@ -1,16 +1,16 @@
-﻿namespace Tests.SFMBE.Server.UnitTests.Endpoints
+namespace Unit.Tests
 {
-  using global::SFMBE.Data;
-  using global::SFMBE.Data.Models;
-  using global::SFMBE.Data.Repositories;
-  using global::SFMBE.Server.Endpoints.Characters;
-  using global::SFMBE.Server.Services;
-  using global::SFMBE.Shared.Characters.Queries;
+  using System.Collections.Generic;
+  using System.Threading.Tasks;
   using Microsoft.AspNetCore.Mvc;
   using Microsoft.EntityFrameworkCore;
   using Moq;
-  using System.Collections.Generic;
-  using System.Threading.Tasks;
+  using SFMBE.Data;
+  using SFMBE.Data.Models;
+  using SFMBE.Data.Repositories;
+  using SFMBE.Server.Endpoints.Characters;
+  using SFMBE.Server.Services;
+  using SFMBE.Shared.Characters.Queries;
   using Xunit;
 
   public class CharactersTests
@@ -56,10 +56,10 @@
       Assert.IsAssignableFrom<ActionResult<int>>(result);
       var model = Assert.IsType<OkObjectResult>(result.Result);
 
-      Assert.Equal(3, model.Value);
+      Assert.Equal(2, model.Value);
     }
 
-    public static IEnumerable<object[]> IsValidDataForGetOk =>
+     public static IEnumerable<object[]> IsValidDataForGetOk =>
      new[]
         {
           new dynamic[]

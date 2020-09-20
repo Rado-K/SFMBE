@@ -1,12 +1,12 @@
-﻿namespace Tests.SFMBE.Server.UnitTests.Endpoints
+namespace Unit.Tests
 {
   using System.Collections.Generic;
   using System.Threading.Tasks;
-  using global::SFMBE.Data;
-  using global::SFMBE.Data.Models;
-  using global::SFMBE.Data.Repositories;
-  using global::SFMBE.Server.Endpoints.Items;
-  using global::SFMBE.Shared.Items.Commands;
+  using SFMBE.Data;
+  using SFMBE.Data.Models;
+  using SFMBE.Data.Repositories;
+  using SFMBE.Server.Endpoints.Items;
+  using SFMBE.Shared.Items.Commands;
   using Microsoft.AspNetCore.Mvc;
   using Microsoft.EntityFrameworkCore;
   using Xunit;
