@@ -1,0 +1,10 @@
+@namespace SFMBE.Client.Features.Bags
+
+
+@using SFMBE.Client.Shared;
+@inherits BaseComponent
+
+@if (this.Items!= default)
+{
+    <Board TypeBoard="Bag" Items="this.Items" BoardRows="this.BoardRows" />
+}

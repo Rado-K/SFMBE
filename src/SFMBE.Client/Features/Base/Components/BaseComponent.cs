@@ -3,13 +3,22 @@ namespace SFMBE.Client.Features.Base.Components
   using BlazorState.Pipeline.ReduxDevTools;
   using SFMBE.Client.Features.Character;
   using SFMBE.Client.Features.Vendor;
+  using SFMBE.Client.Features.Items;
   using System.Threading.Tasks;
+  using SFMBE.Client.Features.Bags;
+  using SFMBE.Client.Features.Gears;
 
   public class BaseComponent : BlazorStateDevToolsComponent
   {
     internal CharacterState CharacterState => this.GetState<CharacterState>();
 
-    internal VendorState VendorState => this.GetState<VendorState>();
+    internal VendorsState VendorState => this.GetState<VendorsState>();
+
+    internal BagsState BagsState => this.GetState<BagsState>();
+
+    internal GearsState GearsState => this.GetState<GearsState>();
+
+    internal ItemsState ItemsState => this.GetState<ItemsState>();
 
     internal async Task ChangeState<T>()
     {

@@ -1,0 +1,9 @@
+@namespace SFMBE.Client.Features.Gears
+
+@using SFMBE.Client.Shared;
+@inherits BaseComponent
+
+@if (this.Items != default)
+{
+    <Board TypeBoard="Gear" Items="this.OrderItems()" BoardRows="this.BoardRows" />
+}
