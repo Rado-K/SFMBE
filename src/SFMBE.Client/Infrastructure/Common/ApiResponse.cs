@@ -1,4 +1,4 @@
-﻿namespace SFMBE.Shared
+﻿namespace SFMBE.Client.Infrastructure.Common
 {
   using System.Collections.Generic;
   using System.Linq;

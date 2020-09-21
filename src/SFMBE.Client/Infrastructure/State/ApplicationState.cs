@@ -1,4 +1,4 @@
-﻿namespace SFMBE.Client.Infrastructure
+﻿namespace SFMBE.Client.Infrastructure.State
 {
   using System;
   using System.Threading.Tasks;

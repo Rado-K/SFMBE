@@ -2,7 +2,8 @@
 {
   using Microsoft.JSInterop;
   using Newtonsoft.Json;
-  using SFMBE.Shared;
+  using SFMBE.Client.Infrastructure.Common;
+  using SFMBE.Client.Infrastructure.State;
   using SFMBE.Shared.Authentication.Commands;
   using System;
   using System.Collections.Generic;
@@ -58,15 +59,7 @@
 
     private async Task<ApiResponse<TResponse>> PostJson<TRequest, TResponse>(string url, TRequest request)
     {
-      if (this.applicationState.IsLoggedIn)
-      {
-        this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.applicationState.UserToken);
-      }
-      else if (await this.jsRuntime.ReadToken() != null)
-      {
-        // This is workaround for https://github.com/aspnet/Blazor/issues/1185
-        this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.applicationState.UserToken);
-      }
+      await this.CheckApplicationState();
 
       try
       {
@@ -82,15 +75,7 @@
 
     private async Task<ApiResponse<T>> GetJson<T>(string url)
     {
-      if (this.applicationState.IsLoggedIn)
-      {
-        this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.applicationState.UserToken);
-      }
-      else if (await this.jsRuntime.ReadToken() != null)
-      {
-        // This is workaround for https://github.com/aspnet/Blazor/issues/1185
-        this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.applicationState.UserToken);
-      }
+      await this.CheckApplicationState();
 
       try
       {
@@ -99,6 +84,18 @@
       catch (Exception ex)
       {
         return new ApiResponse<T>(new ApiError("HTTP Client", ex.Message));
+      }
+    }
+
+    private async Task CheckApplicationState()
+    {
+      if (this.applicationState.IsLoggedIn)
+      {
+        this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.applicationState.UserToken);
+      }
+      else if (await this.jsRuntime.ReadToken() != null)
+      {
+        this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.applicationState.UserToken);
       }
     }
   }

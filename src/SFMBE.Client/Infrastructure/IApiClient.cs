@@ -1,11 +1,8 @@
 ﻿namespace SFMBE.Client.Infrastructure
 {
-  using SFMBE.Shared;
-  using SFMBE.Shared.Authentication.Commands;
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
   using System.Threading.Tasks;
+  using SFMBE.Client.Infrastructure.Common;
+  using SFMBE.Shared.Authentication.Commands;
 
   public interface IApiClient
   {

@@ -1,6 +1,6 @@
-﻿namespace SFMBE.Client.Infrastructure
+﻿namespace SFMBE.Client.Infrastructure.Authentication
 {
-  using SFMBE.Shared;
+  using SFMBE.Client.Infrastructure.Common;
   using SFMBE.Shared.Authentication.Commands;
   using System.Threading.Tasks;
 
@@ -11,6 +11,5 @@
     Task Logout();
 
     Task<ApiResponse<bool>> Register(RegisterParametersCommand registerParametersCommandResponse);
-
   }
 }

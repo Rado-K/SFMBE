@@ -1,4 +1,4 @@
-﻿namespace SFMBE.Shared
+﻿namespace SFMBE.Client.Infrastructure.Common
 {
   public class ApiError
   {

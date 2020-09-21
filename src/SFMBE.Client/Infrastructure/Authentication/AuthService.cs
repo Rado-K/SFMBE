@@ -1,12 +1,13 @@
-﻿namespace SFMBE.Client.Infrastructure
+﻿namespace SFMBE.Client.Infrastructure.Authentication
 {
-  using Microsoft.AspNetCore.Components.Authorization;
-  using Microsoft.JSInterop;
-  using SFMBE.Shared;
-  using SFMBE.Shared.Authentication.Commands;
   using System.Collections.Generic;
   using System.Net.Http;
   using System.Threading.Tasks;
+  using Microsoft.AspNetCore.Components.Authorization;
+  using Microsoft.JSInterop;
+  using SFMBE.Client.Infrastructure.Common;
+  using SFMBE.Client.Infrastructure.Http;
+  using SFMBE.Shared.Authentication.Commands;
 
   public class AuthService : IAuthService
   {
@@ -15,8 +16,8 @@
     private readonly IHttpService http;
 
     public AuthService(IHttpService http,
-                       AuthenticationStateProvider authenticationStateProvider,
-                       IJSRuntime jsRuntime)
+      AuthenticationStateProvider authenticationStateProvider,
+      IJSRuntime jsRuntime)
     {
       this.http = http;
       this.authenticationStateProvider = authenticationStateProvider;
@@ -42,7 +43,7 @@
       var response = await this.http.PostJson<FormUrlEncodedContent, LoginParametersCommandResponse>("api/Authorize/Login", request);
 
       await this.jsRuntime.SaveToken(response.Data.token);
-      ((ApiAuthenticationStateProvider)authenticationStateProvider).MarkUserAsAuthenticated(loginParametersCommand.Email);
+      ((ApiAuthenticationStateProvider) authenticationStateProvider).MarkUserAsAuthenticated(loginParametersCommand.Email);
 
       return response;
     }
@@ -50,7 +51,7 @@
     public async Task Logout()
     {
       await jsRuntime.DeleteToken();
-      ((ApiAuthenticationStateProvider)authenticationStateProvider).MarkUserAsLoggedOut();
+      ((ApiAuthenticationStateProvider) authenticationStateProvider).MarkUserAsLoggedOut();
     }
   }
 }

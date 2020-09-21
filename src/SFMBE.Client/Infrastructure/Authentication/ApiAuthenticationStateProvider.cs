@@ -1,4 +1,4 @@
-﻿namespace SFMBE.Client.Infrastructure
+﻿namespace SFMBE.Client.Infrastructure.Authentication
 {
   using Microsoft.AspNetCore.Components.Authorization;
   using Microsoft.JSInterop;

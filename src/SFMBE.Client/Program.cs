@@ -4,6 +4,9 @@ namespace SFMBE.Client
   using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
   using Microsoft.Extensions.DependencyInjection;
   using SFMBE.Client.Infrastructure;
+  using SFMBE.Client.Infrastructure.Authentication;
+  using SFMBE.Client.Infrastructure.Http;
+  using SFMBE.Client.Infrastructure.State;
   using System;
   using System.Net.Http;
   using System.Threading.Tasks;

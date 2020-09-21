@@ -1,5 +1,6 @@
-﻿namespace SFMBE.Client.Infrastructure
+﻿namespace SFMBE.Client.Infrastructure.Http
 {
+  using SFMBE.Client.Infrastructure.Common;
   using SFMBE.Shared;
   using System.Threading.Tasks;
 
