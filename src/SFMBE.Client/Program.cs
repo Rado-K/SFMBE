@@ -1,5 +1,6 @@
 namespace SFMBE.Client
 {
+  using BlazorState;
   using Microsoft.AspNetCore.Components.Authorization;
   using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
   using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +10,7 @@ namespace SFMBE.Client
   using SFMBE.Client.Infrastructure.State;
   using System;
   using System.Net.Http;
+  using System.Reflection;
   using System.Threading.Tasks;
 
   public class Program
@@ -34,6 +36,15 @@ namespace SFMBE.Client
       services.AddSingleton<IHttpService, HttpService>();
       services.AddSingleton<IApplicationState, ApplicationState>();
       services.AddTransient<IApiClient, ApiClient>();
+
+      services.AddBlazorState(option =>
+      {
+        option.UseReduxDevToolsBehavior = true;
+        option.Assemblies = new []
+        {
+          typeof(Program).GetTypeInfo().Assembly,
+        };
+      });
     }
   }
 }

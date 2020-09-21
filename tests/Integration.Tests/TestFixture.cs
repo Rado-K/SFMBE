@@ -49,15 +49,5 @@ namespace Integration.Tests
         }
       });
     }
-    protected async Task AuthenticationAsync()
-    {
-      //this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", await this.GetJwtAsync());
-    }
-
-    private async Task<string> GetJwtAsync()
-    {
-
-      throw new NotImplementedException();
-    }
   }
 }

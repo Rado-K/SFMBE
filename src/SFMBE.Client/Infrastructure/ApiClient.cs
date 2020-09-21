@@ -26,8 +26,8 @@
       this.jsRuntime = jsRuntime;
     }
 
-    public Task<ApiResponse<RegisterParametersCommandResponse>> UserRegister(RegisterParametersCommand request)
-      => this.PostJson<RegisterParametersCommand, RegisterParametersCommandResponse>("api/Authorize/Register", request);
+    public async Task<ApiResponse<RegisterParametersCommandResponse>> UserRegister(RegisterParametersCommand request)
+      => await this.PostJson<RegisterParametersCommand, RegisterParametersCommandResponse>("api/Authorize/Register", request);
 
     public async Task<ApiResponse<LoginParametersCommandResponse>> UserLogin(LoginParametersCommand request)
     {
