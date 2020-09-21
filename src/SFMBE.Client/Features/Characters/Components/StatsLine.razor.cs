@@ -1,4 +1,4 @@
-namespace SFMBE.Client.Features.Character
+namespace SFMBE.Client.Features.Characters
 {
   using Microsoft.AspNetCore.Components;
   using System.Threading.Tasks;

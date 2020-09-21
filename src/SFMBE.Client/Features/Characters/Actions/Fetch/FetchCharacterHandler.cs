@@ -1,4 +1,4 @@
-namespace SFMBE.Client.Features.Character
+namespace SFMBE.Client.Features.Characters
 {
   using BlazorState;
   using MediatR;

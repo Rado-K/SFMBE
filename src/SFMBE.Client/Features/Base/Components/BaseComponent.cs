@@ -1,7 +1,7 @@
 namespace SFMBE.Client.Features.Base.Components
 {
   using BlazorState.Pipeline.ReduxDevTools;
-  using SFMBE.Client.Features.Character;
+  using SFMBE.Client.Features.Characters;
   using SFMBE.Client.Features.Vendor;
   using SFMBE.Client.Features.Items;
   using System.Threading.Tasks;
@@ -10,7 +10,7 @@ namespace SFMBE.Client.Features.Base.Components
 
   public class BaseComponent : BlazorStateDevToolsComponent
   {
-    internal CharacterState CharacterState => this.GetState<CharacterState>();
+    internal CharactersState CharactersState => this.GetState<CharactersState>();
 
     internal VendorsState VendorState => this.GetState<VendorsState>();
 

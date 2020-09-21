@@ -1,9 +1,9 @@
-namespace SFMBE.Client.Features.Character
+namespace SFMBE.Client.Features.Characters
 {
   using BlazorState;
   using SFMBE.Shared.Characters.Queries;
 
-  internal partial class CharacterState : State<CharacterState>
+  internal partial class CharactersState : State<CharactersState>
   {
     public GetCharacterQueryResponse Character { get; set; }
 
