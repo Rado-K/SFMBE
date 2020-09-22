@@ -8,6 +8,7 @@
   using SFMBE.Data.Models;
   using SFMBE.Data.Repositories;
   using SFMBE.Data.Specifications.Vendors;
+  using SFMBE.Services.Mapping;
   using SFMBE.Shared.Vendors;
 
   public class Get : BaseAsyncEndpoint<int, GetVendorQueryResponse>
@@ -26,7 +27,7 @@
       var spec = new GetVendorSpecification(vendorId);
       var vendor = await this.vendorRepository.FirstOrDefaultAsync(spec);
 
-      return this.Ok(GetVendorQueryResponse.FromVendor(vendor));
+      return this.Ok(vendor.To<GetVendorQueryResponse>());
     }
   }
 }

@@ -2,10 +2,12 @@
 {
   using System.Collections.Generic;
   using System.Linq;
+  using AutoMapper;
   using SFMBE.Data.Models;
+  using SFMBE.Services.Mapping;
   using SFMBE.Shared.Items.Queries;
 
-  public class GetCharacterQueryResponse
+  public class GetCharacterQueryResponse : IMapFrom<Character>, IHaveCustomMappings
   {
     public int Id { get; set; }
 
@@ -33,24 +35,18 @@
 
     public IEnumerable<GetItemQueryResponse> Bag { get; set; }
 
-    public static GetCharacterQueryResponse FromCharacter(Character character)
+    public void CreateMappings(IProfileExpression configuration)
     {
-      return new GetCharacterQueryResponse
-      {
-        Id = character.Id,
-        Name = character.Name,
-        Level = character.Level,
-        Money = character.Money,
-        Image = character.Image,
-        Experience = character.Experience,
-        Stamina = character.Stamina,
-        Agility = character.Agility,
-        Intelligence = character.Intelligence,
-        Strength = character.Strength,
-        VendorId = character.VendorId,
-        Gear = character.Items.Where(x => x.IsEquip == EquipType.InGear).Select(GetItemQueryResponse.FromItem),
-        Bag = character.Items.Where(x => x.IsEquip == EquipType.InBag).Select(GetItemQueryResponse.FromItem)
-      };
+      configuration
+        .CreateMap<Character, GetCharacterQueryResponse>()
+        .ForMember(x => x.Gear,
+                   o => o.MapFrom(
+                    x => x.Items
+                    .Where(f => f.IsEquip == EquipType.InGear)))
+        .ForMember(x => x.Bag,
+                   o => o.MapFrom(
+                    x => x.Items
+                    .Where(f => f.IsEquip == EquipType.InBag)));
     }
   }
 }

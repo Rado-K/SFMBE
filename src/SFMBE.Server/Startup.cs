@@ -1,5 +1,6 @@
 namespace SFMBE.Server
 {
+  using System.Reflection;
   using Microsoft.AspNetCore.Builder;
   using Microsoft.AspNetCore.Hosting;
   using Microsoft.AspNetCore.Identity;
@@ -14,6 +15,8 @@ namespace SFMBE.Server
   using SFMBE.Data.Seeding;
   using SFMBE.Server.Endpoints.Authentication.Common;
   using SFMBE.Server.Services;
+  using SFMBE.Services.Mapping;
+  using SFMBE.Shared;
 
   public class Startup
   {
@@ -52,6 +55,8 @@ namespace SFMBE.Server
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+      AutoMapperConfig.RegisterMappings(typeof(Error).GetTypeInfo().Assembly);
+
       using (var serviceScope = app.ApplicationServices.CreateScope())
       {
         var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();

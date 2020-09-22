@@ -4,8 +4,6 @@
 @using SFMBE.Client.Features.Gears;
 @inherits BaseComponent
 
-<ErrorList Errors="this.CharacterState.Character?.Errors" />
-
 @if (this.CharactersState.Character is null)
 {
     <p><em>Searching Character...</em></p>

@@ -9,6 +9,7 @@
   using SFMBE.Data.Repositories;
   using SFMBE.Data.Specifications.Characters;
   using SFMBE.Server.Services;
+  using SFMBE.Services.Mapping;
   using SFMBE.Shared.Characters.Queries;
 
   public class Get : BaseAsyncEndpoint<GetCharacterQueryResponse>
@@ -41,7 +42,7 @@
         return this.BadRequest("Character not found");
       }
 
-      return this.Ok(GetCharacterQueryResponse.FromCharacter(character));
+      return this.Ok(character.To<GetCharacterQueryResponse>());
     }
   }
 }

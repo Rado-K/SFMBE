@@ -8,6 +8,8 @@ namespace SFMBE.Client
   using SFMBE.Client.Infrastructure.Authentication;
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Client.Infrastructure.State;
+  using SFMBE.Services.Mapping;
+  using SFMBE.Shared;
   using System;
   using System.Net.Http;
   using System.Reflection;
@@ -23,6 +25,8 @@ namespace SFMBE.Client
       builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
       ConfigureServices(builder.Services);
+
+      AutoMapperConfig.RegisterMappings(typeof(Error).GetTypeInfo().Assembly);
 
       await builder.Build().RunAsync();
     }

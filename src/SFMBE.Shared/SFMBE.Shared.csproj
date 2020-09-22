@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SFMBE.Data.Models\SFMBE.Data.Models.csproj" />
+    <ProjectReference Include="..\SFMBE.Services.Mapping\SFMBE.Services.Mapping.csproj" />
   </ItemGroup>
 
 </Project>
