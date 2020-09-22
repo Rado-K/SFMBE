@@ -6,7 +6,7 @@ namespace SFMBE.Client.Features.Characters
   using MediatR;
   using SFMBE.Client.Features.Base;
 
-  internal partial class CharacterState
+  internal partial class CharactersState
   {
     internal class CreateCharacterHandler : BaseHandler<CreateCharacterAction>
     {

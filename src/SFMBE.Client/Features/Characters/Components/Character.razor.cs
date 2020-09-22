@@ -10,13 +10,13 @@ namespace SFMBE.Client.Features.Characters
     {
       if (this.CharactersState.Character is null)
       {
-        await this.Mediator.Send(new CharacterState.FetchCharacterAction());
+        await this.Mediator.Send(new CharactersState.FetchCharacterAction());
       }
     }
 
     private async Task CreateCharacter()
     {
-      await this.Mediator.Send(new CharacterState.CreateCharacterAction { CharacterName = this.characterName });
+      await this.Mediator.Send(new CharactersState.CreateCharacterAction { CharacterName = this.characterName });
 
       //TODO: Remove null.
       this.CharactersState.Character = null;

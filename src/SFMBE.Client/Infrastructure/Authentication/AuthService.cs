@@ -43,7 +43,7 @@
       var response = await this.http.PostJson<FormUrlEncodedContent, LoginParametersCommandResponse>("api/Authorize/Login", request);
 
       await this.jsRuntime.SaveToken(response.Data.token);
-      ((ApiAuthenticationStateProvider) authenticationStateProvider).MarkUserAsAuthenticated(loginParametersCommand.Email);
+      ((ApiAuthenticationStateProvider) this.authenticationStateProvider).MarkUserAsAuthenticated(loginParametersCommand.Email);
 
       return response;
     }
@@ -51,7 +51,7 @@
     public async Task Logout()
     {
       await jsRuntime.DeleteToken();
-      ((ApiAuthenticationStateProvider) authenticationStateProvider).MarkUserAsLoggedOut();
+      ((ApiAuthenticationStateProvider) this.authenticationStateProvider).MarkUserAsLoggedOut();
     }
   }
 }

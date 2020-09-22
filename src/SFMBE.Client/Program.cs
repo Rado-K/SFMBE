@@ -27,14 +27,15 @@ namespace SFMBE.Client
       ConfigureServices(builder.Services);
 
       AutoMapperConfig.RegisterMappings(typeof(Error).GetTypeInfo().Assembly);
-
       await builder.Build().RunAsync();
     }
 
     private static void ConfigureServices(IServiceCollection services)
     {
       services.AddOptions();
+      services.AddApiAuthorization();
       services.AddAuthorizationCore();
+
       services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
       services.AddScoped<IAuthService, AuthService>();
       services.AddSingleton<IHttpService, HttpService>();
