@@ -16,7 +16,7 @@
 
     public string SessionId { get; set; }
 
-    public bool IsLoggedIn { get; }
+    public bool IsLoggedIn => this.UserToken != default;
 
     public string Username
     {

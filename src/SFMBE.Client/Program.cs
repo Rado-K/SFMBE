@@ -1,19 +1,19 @@
 namespace SFMBE.Client
 {
+  using System.Net.Http;
+  using System.Reflection;
+  using System.Threading.Tasks;
+  using System;
   using BlazorState;
   using Microsoft.AspNetCore.Components.Authorization;
   using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
   using Microsoft.Extensions.DependencyInjection;
-  using SFMBE.Client.Infrastructure;
   using SFMBE.Client.Infrastructure.Authentication;
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Client.Infrastructure.State;
+  using SFMBE.Client.Infrastructure;
   using SFMBE.Services.Mapping;
   using SFMBE.Shared;
-  using System;
-  using System.Net.Http;
-  using System.Reflection;
-  using System.Threading.Tasks;
 
   public class Program
   {
@@ -33,10 +33,11 @@ namespace SFMBE.Client
     private static void ConfigureServices(IServiceCollection services)
     {
       services.AddOptions();
-      services.AddApiAuthorization();
       services.AddAuthorizationCore();
 
-      services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
+      services.AddScoped<ApiAuthenticationStateProvider>();
+      services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>(
+        provider => provider.GetRequiredService<ApiAuthenticationStateProvider>());
       services.AddScoped<IAuthService, AuthService>();
       services.AddSingleton<IHttpService, HttpService>();
       services.AddSingleton<IApplicationState, ApplicationState>();

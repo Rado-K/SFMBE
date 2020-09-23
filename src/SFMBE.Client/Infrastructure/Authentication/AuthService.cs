@@ -3,7 +3,7 @@
   using System.Collections.Generic;
   using System.Net.Http;
   using System.Threading.Tasks;
-  using Microsoft.AspNetCore.Components.Authorization;
+  using System;
   using Microsoft.JSInterop;
   using SFMBE.Client.Infrastructure.Common;
   using SFMBE.Client.Infrastructure.Http;
@@ -11,16 +11,12 @@
 
   public class AuthService : IAuthService
   {
-    private readonly AuthenticationStateProvider authenticationStateProvider;
     private readonly IJSRuntime jsRuntime;
     private readonly IHttpService http;
 
-    public AuthService(IHttpService http,
-      AuthenticationStateProvider authenticationStateProvider,
-      IJSRuntime jsRuntime)
+    public AuthService(IHttpService http, IJSRuntime jsRuntime)
     {
       this.http = http;
-      this.authenticationStateProvider = authenticationStateProvider;
       this.jsRuntime = jsRuntime;
     }
 
@@ -43,15 +39,19 @@
       var response = await this.http.PostJson<FormUrlEncodedContent, LoginParametersCommandResponse>("api/Authorize/Login", request);
 
       await this.jsRuntime.SaveToken(response.Data.token);
-      ((ApiAuthenticationStateProvider) this.authenticationStateProvider).MarkUserAsAuthenticated(loginParametersCommand.Email);
 
       return response;
     }
 
+    private byte[] ParseBase64WithoutPadding(string base64)
+    {
+      base64 = base64.PadRight(base64.Length + (4 - base64.Length % 4) % 4, '=');
+      return Convert.FromBase64String(base64);
+    }
+
     public async Task Logout()
     {
-      await jsRuntime.DeleteToken();
-      ((ApiAuthenticationStateProvider) this.authenticationStateProvider).MarkUserAsLoggedOut();
+      await this.jsRuntime.DeleteToken();
     }
   }
 }

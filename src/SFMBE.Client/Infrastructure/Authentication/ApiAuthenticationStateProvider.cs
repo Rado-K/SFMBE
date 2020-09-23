@@ -15,11 +15,13 @@
   {
     private readonly HttpClient httpClient;
     private readonly IJSRuntime jsRuntime;
+    private readonly AuthenticationState anonymous;
 
     public ApiAuthenticationStateProvider(HttpClient httpClient, IJSRuntime jsRuntime)
     {
       this.httpClient = httpClient;
       this.jsRuntime = jsRuntime;
+      this.anonymous = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
     }
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
@@ -27,26 +29,27 @@
 
       if (string.IsNullOrWhiteSpace(savedToken))
       {
-        return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
+        return this.anonymous;
       }
 
-      this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", savedToken);
+      this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", savedToken);
 
       return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwt(savedToken), "jwt")));
     }
 
     public void MarkUserAsAuthenticated(string email)
     {
+
       var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, email) }, "apiauth"));
-      var authState = Task.FromResult(new AuthenticationState(authenticatedUser));
+      
+      var authState = Task.FromResult(new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwt(email), "jwt"))));
+      //Task.FromResult(new AuthenticationState(authenticatedUser));
       NotifyAuthenticationStateChanged(authState);
     }
 
     public void MarkUserAsLoggedOut()
     {
-      var anonymousUser = new ClaimsPrincipal(new ClaimsIdentity());
-      var authState = Task.FromResult(new AuthenticationState(anonymousUser));
-      NotifyAuthenticationStateChanged(authState);
+      NotifyAuthenticationStateChanged(Task.FromResult(this.anonymous));
     }
 
     private IEnumerable<Claim> ParseClaimsFromJwt(string jwt)

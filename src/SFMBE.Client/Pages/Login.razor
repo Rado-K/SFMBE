@@ -43,7 +43,7 @@
       if (response.IsOk)
       {
           this.State.UserToken = response.Data.token;
-          await JsRuntime.SaveToken(this.State.UserToken);
+          await this.JsRuntime.SaveToken(this.State.UserToken);
           this.State.Username = this.loginParameters.Email;
           this.NavigationManager.NavigateTo("/");
       }
