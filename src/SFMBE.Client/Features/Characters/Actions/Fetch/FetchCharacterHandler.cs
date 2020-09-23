@@ -24,9 +24,9 @@ namespace SFMBE.Client.Features.Characters
         var character = await this.httpService.GetJson<GetCharacterQueryResponse>("api/Characters/Get");
         // var character = await this.charactersRepository.GetCharacter(action.CharacterId);
 
-        // this.CharacterState.Character = character;
-        // this.BagState.Bag = this.CharacterState.Character.Data.Bag;
-        // this.GearState.Gear = this.CharacterState.Character.Data.Gear;
+        this.CharacterState.Character = character.Data;
+        this.BagsState.Bag = this.CharacterState.Character.Bag;
+        this.GearsState.Gear = this.CharacterState.Character.Gear;
 
         return await Unit.Task;
       }

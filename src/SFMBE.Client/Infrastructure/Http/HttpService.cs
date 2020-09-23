@@ -54,7 +54,8 @@
       await this.CheckApplicationState();
       try
       {
-        return await this.httpClient.GetFromJsonAsync<ApiResponse<T>>(url);
+        var response = await this.httpClient.GetFromJsonAsync<T>(url);
+        return response.ToApiResponse();
       }
       catch (Exception ex)
       {

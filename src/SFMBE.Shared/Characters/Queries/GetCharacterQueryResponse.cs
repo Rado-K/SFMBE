@@ -31,9 +31,9 @@
 
     public int VendorId { get; set; }
 
-    public IEnumerable<GetItemQueryResponse> Gear { get; set; }
+    public IList<GetItemQueryResponse> Gear { get; set; }
 
-    public IEnumerable<GetItemQueryResponse> Bag { get; set; }
+    public IList<GetItemQueryResponse> Bag { get; set; }
 
     public void CreateMappings(IProfileExpression configuration)
     {
