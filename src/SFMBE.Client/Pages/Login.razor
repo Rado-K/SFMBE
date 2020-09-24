@@ -42,13 +42,6 @@
       var response = await this.AuthService.Login(this.loginParameters);
       if (response.IsOk)
       {
-          this.State.UserToken = response.Data.token;
-          await this.JsRuntime.SaveToken(this.State.UserToken);
-          this.State.Username = this.loginParameters.Email;
-          this.NavigationManager.NavigateTo("/");
-      }
-      else
-      {
           this.StateHasChanged();
           this.NavigationManager.NavigateTo("/");
       }

@@ -1,25 +1,26 @@
 ﻿namespace SFMBE.Client.Infrastructure.Authentication
 {
-  using Microsoft.AspNetCore.Components.Authorization;
-  using Microsoft.JSInterop;
-  using System;
   using System.Collections.Generic;
   using System.Linq;
-  using System.Net.Http;
   using System.Net.Http.Headers;
+  using System.Net.Http;
   using System.Security.Claims;
   using System.Text.Json;
   using System.Threading.Tasks;
+  using System;
+  using Microsoft.AspNetCore.Components.Authorization;
+  using Microsoft.JSInterop;
+  using SFMBE.Client.Infrastructure.Http;
 
   public class ApiAuthenticationStateProvider : AuthenticationStateProvider
   {
-    private readonly HttpClient httpClient;
+    private readonly IHttpService httpService;
     private readonly IJSRuntime jsRuntime;
     private readonly AuthenticationState anonymous;
 
-    public ApiAuthenticationStateProvider(HttpClient httpClient, IJSRuntime jsRuntime)
+    public ApiAuthenticationStateProvider(IHttpService httpService, IJSRuntime jsRuntime)
     {
-      this.httpClient = httpClient;
+      this.httpService = httpService;
       this.jsRuntime = jsRuntime;
       this.anonymous = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
     }
@@ -32,30 +33,22 @@
         return this.anonymous;
       }
 
-      this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", savedToken);
+      this.httpService.SetAuthorization(new AuthenticationHeaderValue("Bearer", savedToken));
 
-      return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwt(savedToken), "jwt")));
+      var state = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwt(savedToken), "jwt")));
+      return state;
     }
 
-    public void MarkUserAsAuthenticated(string email)
-    {
+    public async Task MarkUserAsAuthenticated() => this.ChangeAuthenticationState(await this.GetAuthenticationStateAsync());
 
-      var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, email) }, "apiauth"));
-      
-      var authState = Task.FromResult(new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwt(email), "jwt"))));
-      //Task.FromResult(new AuthenticationState(authenticatedUser));
-      NotifyAuthenticationStateChanged(authState);
-    }
+    public void MarkUserAsLoggedOut() => this.ChangeAuthenticationState(this.anonymous);
 
-    public void MarkUserAsLoggedOut()
-    {
-      NotifyAuthenticationStateChanged(Task.FromResult(this.anonymous));
-    }
+    private void ChangeAuthenticationState(AuthenticationState state) => this.NotifyAuthenticationStateChanged(Task.FromResult(state));
 
     private IEnumerable<Claim> ParseClaimsFromJwt(string jwt)
     {
       var claims = new List<Claim>();
-      var payload = jwt.Split('.')[1];
+      var payload = jwt.Split('.') [1];
       var jsonBytes = ParseBase64WithoutPadding(payload);
       var keyValuePairs = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonBytes);
 
@@ -83,12 +76,12 @@
       claims.AddRange(keyValuePairs.Select(kvp => new Claim(kvp.Key, kvp.Value.ToString())));
 
       return claims;
-    }
 
-    private byte[] ParseBase64WithoutPadding(string base64)
-    {
-      base64 = base64.PadRight(base64.Length + (4 - base64.Length % 4) % 4, '=');
-      return Convert.FromBase64String(base64);
+      byte[] ParseBase64WithoutPadding(string base64)
+      {
+        base64 = base64.PadRight(base64.Length + (4 - base64.Length % 4) % 4, '=');
+        return Convert.FromBase64String(base64);
+      }
     }
   }
 }

@@ -10,7 +10,6 @@ namespace SFMBE.Client
   using Microsoft.Extensions.DependencyInjection;
   using SFMBE.Client.Infrastructure.Authentication;
   using SFMBE.Client.Infrastructure.Http;
-  using SFMBE.Client.Infrastructure.State;
   using SFMBE.Client.Infrastructure;
   using SFMBE.Services.Mapping;
   using SFMBE.Shared;
@@ -35,13 +34,9 @@ namespace SFMBE.Client
       services.AddOptions();
       services.AddAuthorizationCore();
 
-      services.AddScoped<ApiAuthenticationStateProvider>();
-      services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>(
-        provider => provider.GetRequiredService<ApiAuthenticationStateProvider>());
-      services.AddScoped<IAuthService, AuthService>();
+      services.AddSingleton<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
+      services.AddSingleton<IAuthService, AuthService>();
       services.AddSingleton<IHttpService, HttpService>();
-      services.AddSingleton<IApplicationState, ApplicationState>();
-      services.AddTransient<IApiClient, ApiClient>();
 
       services.AddBlazorState(option =>
       {

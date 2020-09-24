@@ -3,26 +3,28 @@
   using System.Collections.Generic;
   using System.Net.Http;
   using System.Threading.Tasks;
-  using System;
   using Microsoft.JSInterop;
   using SFMBE.Client.Infrastructure.Common;
   using SFMBE.Client.Infrastructure.Http;
   using SFMBE.Shared.Authentication.Commands;
+  using Microsoft.AspNetCore.Components.Authorization;
 
   public class AuthService : IAuthService
   {
     private readonly IJSRuntime jsRuntime;
-    private readonly IHttpService http;
+    private readonly ApiAuthenticationStateProvider apiAuthenticationStateProvider;
+    private readonly IHttpService httpService;
 
-    public AuthService(IHttpService http, IJSRuntime jsRuntime)
+    public AuthService(IHttpService httpService, IJSRuntime jsRuntime, AuthenticationStateProvider authenticationStateProvider)
     {
-      this.http = http;
+      this.httpService = httpService;
       this.jsRuntime = jsRuntime;
+      this.apiAuthenticationStateProvider = authenticationStateProvider as ApiAuthenticationStateProvider;
     }
 
     public async Task<ApiResponse<bool>> Register(RegisterParametersCommand registerParametersCommandResponse)
     {
-      var result = await this.http.PostJson<RegisterParametersCommand, bool>("api/Authorize/Register", registerParametersCommandResponse);
+      var result = await this.httpService.PostJson<RegisterParametersCommand, bool>("api/Authorize/Register", registerParametersCommandResponse);
 
       return result;
     }
@@ -36,22 +38,18 @@
           new KeyValuePair<string, string>("password", loginParametersCommand.Password),
         });
 
-      var response = await this.http.PostJson<FormUrlEncodedContent, LoginParametersCommandResponse>("api/Authorize/Login", request);
+      var response = await this.httpService.PostJson<FormUrlEncodedContent, LoginParametersCommandResponse>("api/Authorize/Login", request);
 
       await this.jsRuntime.SaveToken(response.Data.token);
 
+      await this.apiAuthenticationStateProvider.MarkUserAsAuthenticated();
       return response;
-    }
-
-    private byte[] ParseBase64WithoutPadding(string base64)
-    {
-      base64 = base64.PadRight(base64.Length + (4 - base64.Length % 4) % 4, '=');
-      return Convert.FromBase64String(base64);
     }
 
     public async Task Logout()
     {
       await this.jsRuntime.DeleteToken();
+      this.apiAuthenticationStateProvider.MarkUserAsLoggedOut();
     }
   }
 }

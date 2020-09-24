@@ -47,9 +47,11 @@
 
 
 @code{
+  [Inject] public BlazorState.IStore Store { get; set; }
   async Task LogoutClick()
   {
-      await this.JsRuntime.DeleteToken();
+      await this.AuthService.Logout();
+      this.Store.Reset();
       this.NavigationManager.NavigateTo("/login");
   }
 }

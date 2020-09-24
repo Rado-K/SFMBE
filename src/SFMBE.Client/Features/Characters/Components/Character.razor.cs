@@ -6,10 +6,13 @@ namespace SFMBE.Client.Features.Characters
   {
     private string characterName = string.Empty;
 
+    private bool checkForCharacter = false;
+
     protected override async Task OnInitializedAsync()
     {
       if (this.CharactersState.Character is null)
       {
+        this.checkForCharacter = true;
         await this.Mediator.Send(new CharactersState.FetchCharacterAction());
       }
     }
@@ -17,9 +20,7 @@ namespace SFMBE.Client.Features.Characters
     private async Task CreateCharacter()
     {
       await this.Mediator.Send(new CharactersState.CreateCharacterAction { CharacterName = this.characterName });
-
-      //TODO: Remove null.
-      this.CharactersState.Character = null;
+      this.checkForCharacter = false;
       await this.OnInitializedAsync();
     }
   }

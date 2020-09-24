@@ -1,4 +1,4 @@
-﻿
+﻿@* <CascadingAuthenticationState> *@
   <Router AppAssembly="@typeof(Program).Assembly">
       <Found Context="routeData">
           <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
@@ -16,30 +16,3 @@
           </LayoutView>
       </NotFound>
   </Router>
-@code {
-
-    protected override async Task OnInitializedAsync()
-    {
-        // Session ID
-        @* var sessionId = await this.JsRuntime.StorageRead("sessionId");
-        if (!string.IsNullOrWhiteSpace(sessionId))
-        {
-            this.State.SessionId = sessionId;
-        }
-        else
-        {
-            await this.JsRuntime.StorageSave("sessionId", this.State.SessionId);
-        } *@
-
-        // User token
-        var token = await this.JsRuntime.ReadToken(); // Cannot be blocking call: https://github.com/aspnet/Blazor/issues/1185
-        if (!string.IsNullOrEmpty(token))
-        {
-            this.State.UserToken = token;
-        }
-        else
-        {
-          this.NavigationManager.NavigateTo("/login");
-        }
-    }
-}

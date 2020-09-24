@@ -21,12 +21,14 @@ namespace SFMBE.Client.Features.Characters
 
       public override async Task<Unit> Handle(FetchCharacterAction action, CancellationToken cancellationToken)
       {
-        var character = await this.httpService.GetJson<GetCharacterQueryResponse>("api/Characters/Get");
-        // var character = await this.charactersRepository.GetCharacter(action.CharacterId);
+        var characterResponse = await this.httpService.GetJson<GetCharacterQueryResponse>("api/Characters/Get");
 
-        this.CharacterState.Character = character.Data;
-        this.BagsState.Bag = this.CharacterState.Character.Bag;
-        this.GearsState.Gear = this.CharacterState.Character.Gear;
+        if (characterResponse.IsOk)
+        {   
+          this.CharacterState.Character = characterResponse.Data;
+          this.BagsState.Bag = this.CharacterState.Character.Bag;
+          this.GearsState.Gear = this.CharacterState.Character.Gear;
+        }
 
         return await Unit.Task;
       }
