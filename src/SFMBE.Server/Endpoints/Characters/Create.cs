@@ -22,7 +22,7 @@
 
     [Authorize]
     [HttpPost("api/Characters/Create")]
-    public override async Task<ActionResult<int>> HandleAsync(string name, CancellationToken cancellationToken = default)
+    public override async Task<ActionResult<int>> HandleAsync([FromBody] string name, CancellationToken cancellationToken = default)
     {
       var character = new Character { Name = name };
       character.User = await this.usersService.GetUser();

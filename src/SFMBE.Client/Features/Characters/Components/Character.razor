@@ -4,7 +4,7 @@
 @using SFMBE.Client.Features.Gears;
 @inherits BaseComponent
 
-@if (this.CharactersState.Character is null)
+@if (!this.checkForCharacter)
 {
     <p><em>Searching Character...</em></p>
 }
