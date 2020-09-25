@@ -48,8 +48,7 @@ namespace SFMBE.Client.Features.Characters
 
     private async Task UpdateCharacter()
     {
-      //TODO: Use Mediator!
-      // await this.CharactersRepository.UpdateCharacter(this.characterUpdateModel);
+      await this.Mediator.Send(new CharactersState.UpdateCharacterAction { Character = this.characterUpdateModel });
     }
   }
 }

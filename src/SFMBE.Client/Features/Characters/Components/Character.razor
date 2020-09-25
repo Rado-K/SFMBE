@@ -4,11 +4,11 @@
 @using SFMBE.Client.Features.Gears;
 @inherits BaseComponent
 
-@if (!this.checkForCharacter)
+@if (this.checkForCharacter && this.CharactersState.Character is null)
 {
     <p><em>Searching Character...</em></p>
 }
-else if (this.checkForCharacter && this.CharactersState.Character is null)
+else if (!this.checkForCharacter && this.CharactersState.Character is null)
 {
     <EditForm Model="this.characterName" OnValidSubmit="this.CreateCharacter">
         <div class="form-group">

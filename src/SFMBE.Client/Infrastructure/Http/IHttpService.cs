@@ -10,6 +10,8 @@
 
     Task<ApiResponse<T>> GetJson<T>(string url);
 
+    Task<ApiResponse<TResponse>> PutJson<TResponse>(string url, TResponse request);
+
     void SetAuthorization(AuthenticationHeaderValue value);
   }
 }

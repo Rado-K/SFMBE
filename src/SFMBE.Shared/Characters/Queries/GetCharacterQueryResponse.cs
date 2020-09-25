@@ -5,9 +5,10 @@
   using AutoMapper;
   using SFMBE.Data.Models;
   using SFMBE.Services.Mapping;
+  using SFMBE.Shared.Characters.Commands;
   using SFMBE.Shared.Items.Queries;
 
-  public class GetCharacterQueryResponse : IMapFrom<Character>, IHaveCustomMappings
+  public class GetCharacterQueryResponse : IMapFrom<Character>, IMapFrom<UpdateCharacterCommand>, IHaveCustomMappings
   {
     public int Id { get; set; }
 

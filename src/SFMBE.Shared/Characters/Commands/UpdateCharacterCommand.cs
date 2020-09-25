@@ -9,6 +9,8 @@ namespace SFMBE.Shared.Characters.Commands
     IMapTo<Character>,
     IMapFrom<Character>
     {
+      public int Id { get; set; }
+
       public string Name { get; set; }
 
       public int Level { get; set; }

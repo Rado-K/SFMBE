@@ -1,14 +1,14 @@
 ﻿namespace SFMBE.Client.Infrastructure.Http
 {
+  using System.Net.Http.Headers;
   using System.Net.Http.Json;
   using System.Net.Http;
   using System.Text.Json;
   using System.Text;
   using System.Threading.Tasks;
   using System;
-  using SFMBE.Client.Infrastructure.Common;
-  using System.Net.Http.Headers;
   using Microsoft.JSInterop;
+  using SFMBE.Client.Infrastructure.Common;
 
   public class HttpService : IHttpService
   {
@@ -32,12 +32,10 @@
         }
         else
         {
-          var serialized = JsonSerializer.Serialize(request);
-          var stringContent = new StringContent(serialized, Encoding.UTF8, "application/json");
+          var stringContent = this.CreateStringContent(request);
           response = await this.httpClient.PostAsync(url, stringContent);
         }
-        var responseObject = await response.Content.ReadFromJsonAsync<TResponse>();
-        return responseObject.ToApiResponse();
+        return await this.CreateResponse<TResponse>(response);
       }
       catch (Exception ex)
       {
@@ -45,19 +43,47 @@
       }
     }
 
-    public async Task<ApiResponse<T>> GetJson<T>(string url)
+    public async Task<ApiResponse<TResponse>> PutJson<TResponse>(string url, TResponse request)
     {
       try
       {
-        var response = await this.httpClient.GetFromJsonAsync<T>(url);
-        return response.ToApiResponse();
+        var stringContent = this.CreateStringContent(request);
+        var response = await this.httpClient.PutAsync(url, stringContent);
+
+        return await this.CreateResponse<TResponse>(response);
       }
       catch (Exception ex)
       {
-        return new ApiResponse<T>(new ApiError("HTTP Client", ex.Message));
+        return new ApiResponse<TResponse>(new ApiError("HTTP Client", ex.Message));
+      }
+    }
+
+    public async Task<ApiResponse<TResponse>> GetJson<TResponse>(string url)
+    {
+      try
+      {
+        var response = await this.httpClient.GetAsync(url);
+        return await this.CreateResponse<TResponse>(response);
+      }
+      catch (Exception ex)
+      {
+        return new ApiResponse<TResponse>(new ApiError("HTTP Client", ex.Message));
       }
     }
 
     public void SetAuthorization(AuthenticationHeaderValue value) => this.httpClient.DefaultRequestHeaders.Authorization = value;
+
+    private StringContent CreateStringContent<TRequest>(TRequest request)
+    {
+      var serialized = JsonSerializer.Serialize(request);
+      var stringContent = new StringContent(serialized, Encoding.UTF8, "application/json");
+      return stringContent;
+    }
+
+    private async Task<ApiResponse<TResponse>> CreateResponse<TResponse>(HttpResponseMessage response)
+    {
+      var responseObject = await response.Content.ReadFromJsonAsync<TResponse>();
+      return responseObject.ToApiResponse();
+    }
   }
 }
