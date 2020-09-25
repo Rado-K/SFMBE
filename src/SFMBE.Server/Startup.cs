@@ -14,7 +14,7 @@ namespace SFMBE.Server
   using SFMBE.Data.Repositories;
   using SFMBE.Data.Seeding;
   using SFMBE.Server.Endpoints.Authentication.Common;
-  using SFMBE.Server.Repositories;
+  using SFMBE.Server.Extensions;
   using SFMBE.Services.Mapping;
   using SFMBE.Shared;
 
@@ -44,13 +44,13 @@ namespace SFMBE.Server
           .AddEntityFrameworkStores<ApplicationDbContext>()
           .AddDefaultTokenProviders();
 
-      services.ConfigureJwt(this.configuration);
+      services.AddJwtConfigurations(this.configuration);
 
       services.AddHttpContextAccessor();
 
       services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
 
-      services.AddScoped<IUsersRepository, UsersRepository>();
+      services.AddApplicationRepositories();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

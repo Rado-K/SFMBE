@@ -1,21 +1,22 @@
-﻿namespace SFMBE.Server.Endpoints.Authentication.Common
+namespace SFMBE.Server.Extensions
 {
+  using System.Text;
   using Microsoft.AspNetCore.Authentication.JwtBearer;
-  using Microsoft.AspNetCore.Builder;
   using Microsoft.Extensions.Configuration;
   using Microsoft.Extensions.DependencyInjection;
   using Microsoft.IdentityModel.Tokens;
-  using System.Text;
+  using SFMBE.Server.Endpoints.Authentication.Common;
+  using SFMBE.Server.Repositories;
+  using SFMBE.Server.Repositories.Characters;
 
-  public static class JwtExtensions
+  public static class ServiceCollectionExtensions
   {
-    public static void UseJwt(this IApplicationBuilder app)
-    {
-      app.UseMiddleware<JwtMiddleware>();
-      app.UseAuthentication();
-    }
+    public static IServiceCollection AddApplicationRepositories(this IServiceCollection services)
+      => services
+            .AddScoped<IUsersRepository, UsersRepository>()
+            .AddTransient<ICharactersRepository, CharactersRepository>();
 
-    public static void ConfigureJwt(this IServiceCollection services, IConfiguration configuration)
+    public static void AddJwtConfigurations(this IServiceCollection services, IConfiguration configuration)
     {
       var issuer = configuration["JwtValidation:Issuer"];
       var audience = configuration["JwtValidation:Audience"];

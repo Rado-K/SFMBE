@@ -5,16 +5,15 @@
   using Ardalis.ApiEndpoints;
   using Microsoft.AspNetCore.Authorization;
   using Microsoft.AspNetCore.Mvc;
-  using SFMBE.Data.Models;
-  using SFMBE.Data.Repositories;
   using SFMBE.Server.Repositories;
+  using SFMBE.Server.Repositories.Characters;
 
   public class Create : BaseAsyncEndpoint<string, int>
   {
-    private readonly IAsyncRepository<Character> characterRepository;
+    private readonly ICharactersRepository characterRepository;
     private readonly IUsersRepository usersRepository;
 
-    public Create(IAsyncRepository<Character> characterRepository, IUsersRepository usersRepository)
+    public Create(ICharactersRepository characterRepository, IUsersRepository usersRepository)
     {
       this.characterRepository = characterRepository;
       this.usersRepository = usersRepository;
@@ -24,12 +23,14 @@
     [HttpPost("api/Characters/Create")]
     public override async Task<ActionResult<int>> HandleAsync([FromBody] string name, CancellationToken cancellationToken = default)
     {
-      var character = new Character { Name = name };
-      character.User = await this.usersRepository.GetUser();
+      var characterId = await this.characterRepository.Create(name);
 
-      character = await this.characterRepository.AddAsync(character);
+      if (!characterId.HasValue)
+      {
+        this.BadRequest();
+      }
 
-      return this.Ok(character.Id);
+      return this.Ok(characterId.Value);
     }
   }
 }

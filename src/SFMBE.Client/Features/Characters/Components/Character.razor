@@ -4,33 +4,33 @@
 @using SFMBE.Client.Features.Gears;
 @inherits BaseComponent
 
-@if (this.checkForCharacter && this.CharactersState.Character is null)
+@if (!this.checkForCharacter)
 {
-    <p><em>Searching Character...</em></p>
+  <p><em>Searching Character...</em></p>
 }
-else if (!this.checkForCharacter && this.CharactersState.Character is null)
+else if (this.checkForCharacter && this.CharactersState.Character is null)
 {
-    <EditForm Model="this.characterName" OnValidSubmit="this.CreateCharacter">
-        <div class="form-group">
-            <label>Character name:</label>
-            <div>
-                <InputText class="form-control" @bind-Value="this.characterName" />
-                <ValidationMessage For="(() => this.characterName)" />
-            </div>
-        </div>
+  <EditForm Model="this.characterName" OnValidSubmit="this.CreateCharacter">
+    <div class="form-group">
+      <label>Character name:</label>
+      <div>
+        <InputText class="form-control" @bind-Value="this.characterName" />
+        <ValidationMessage For="(() => this.characterName)" />
+      </div>
+    </div>
 
-        <button type="submit" class="btn btn-block text-right">Create</button>
-    </EditForm>
+    <button type="submit" class="btn btn-block text-right">Create</button>
+  </EditForm>
 }
 else
 {
-    <div class="row py-2">
+  <div class="row py-2">
 
-        <CharacterInfo Character="this.CharactersState.Character" />
+    <CharacterInfo Character="this.CharactersState.Character" />
 
-        <Gear />
+    <Gear />
 
-        <Bag />
+    <Bag />
 
-    </div>
+  </div>
 }
