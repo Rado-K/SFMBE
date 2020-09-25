@@ -14,7 +14,7 @@ namespace SFMBE.Server
   using SFMBE.Data.Repositories;
   using SFMBE.Data.Seeding;
   using SFMBE.Server.Endpoints.Authentication.Common;
-  using SFMBE.Server.Services;
+  using SFMBE.Server.Repositories;
   using SFMBE.Services.Mapping;
   using SFMBE.Shared;
 
@@ -50,7 +50,7 @@ namespace SFMBE.Server
 
       services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
 
-      services.AddScoped<IUsersService, UsersService>();
+      services.AddScoped<IUsersRepository, UsersRepository>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

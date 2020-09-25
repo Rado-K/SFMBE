@@ -7,17 +7,17 @@
   using Microsoft.AspNetCore.Mvc;
   using SFMBE.Data.Models;
   using SFMBE.Data.Repositories;
-  using SFMBE.Server.Services;
+  using SFMBE.Server.Repositories;
 
   public class Create : BaseAsyncEndpoint<string, int>
   {
     private readonly IAsyncRepository<Character> characterRepository;
-    private readonly IUsersService usersService;
+    private readonly IUsersRepository usersRepository;
 
-    public Create(IAsyncRepository<Character> characterRepository, IUsersService usersService)
+    public Create(IAsyncRepository<Character> characterRepository, IUsersRepository usersRepository)
     {
       this.characterRepository = characterRepository;
-      this.usersService = usersService;
+      this.usersRepository = usersRepository;
     }
 
     [Authorize]
@@ -25,7 +25,7 @@
     public override async Task<ActionResult<int>> HandleAsync([FromBody] string name, CancellationToken cancellationToken = default)
     {
       var character = new Character { Name = name };
-      character.User = await this.usersService.GetUser();
+      character.User = await this.usersRepository.GetUser();
 
       character = await this.characterRepository.AddAsync(character);
 

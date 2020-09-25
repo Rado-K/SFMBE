@@ -1,4 +1,4 @@
-﻿namespace SFMBE.Server.Services
+﻿namespace SFMBE.Server.Repositories
 {
   using System.Threading.Tasks;
   using Microsoft.AspNetCore.Http;
@@ -6,12 +6,12 @@
   using SFMBE.Data.Models;
   using SFMBE.Shared.Authentication.Commands;
 
-  public class UsersService : IUsersService
+  public class UsersRepository : IUsersRepository
   {
     private readonly IHttpContextAccessor httpContext;
     private readonly UserManager<ApplicationUser> userManager;
 
-    public UsersService(
+    public UsersRepository(
       IHttpContextAccessor httpContext,
       UserManager<ApplicationUser> userManager)
     {

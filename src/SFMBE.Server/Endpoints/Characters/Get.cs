@@ -8,26 +8,26 @@
   using SFMBE.Data.Models;
   using SFMBE.Data.Repositories;
   using SFMBE.Data.Specifications.Characters;
-  using SFMBE.Server.Services;
+  using SFMBE.Server.Repositories;
   using SFMBE.Services.Mapping;
   using SFMBE.Shared.Characters.Queries;
 
   public class Get : BaseAsyncEndpoint<GetCharacterQueryResponse>
   {
     private readonly IAsyncRepository<Character> characterRepository;
-    private readonly IUsersService usersService;
+    private readonly IUsersRepository usersRepository;
 
-    public Get(IAsyncRepository<Character> repository, IUsersService usersService)
+    public Get(IAsyncRepository<Character> repository, IUsersRepository usersRepository)
     {
       this.characterRepository = repository;
-      this.usersService = usersService;
+      this.usersRepository = usersRepository;
     }
 
     [Authorize]
     [HttpGet("api/Characters/Get")]
     public override async Task<ActionResult<GetCharacterQueryResponse>> HandleAsync(CancellationToken cancellationToken = default)
     {
-      var userId = (await this.usersService.GetUser())?.Id;
+      var userId = (await this.usersRepository.GetUser())?.Id;
 
       if (string.IsNullOrEmpty(userId))
       {

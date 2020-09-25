@@ -4,22 +4,22 @@
   using System.Threading.Tasks;
   using Ardalis.ApiEndpoints;
   using Microsoft.AspNetCore.Mvc;
-  using SFMBE.Server.Services;
+  using SFMBE.Server.Repositories;
   using SFMBE.Shared.Authentication.Commands;
 
   public class Register : BaseAsyncEndpoint
   {
-    private readonly IUsersService usersService;
+    private readonly IUsersRepository usersRepository;
 
-    public Register(IUsersService usersService)
+    public Register(IUsersRepository usersRepository)
     {
-      this.usersService = usersService;
+      this.usersRepository = usersRepository;
     }
 
     [HttpPost("api/Authorize/Register")]
     public async Task<IActionResult> HandleAsync([FromBody] RegisterParametersCommand parameters)
     {
-      var result = await this.usersService.Register(parameters);
+      var result = await this.usersRepository.Register(parameters);
 
       if (!result.Succeeded)
       {
