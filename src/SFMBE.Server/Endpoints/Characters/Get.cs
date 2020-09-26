@@ -9,40 +9,31 @@
   using SFMBE.Data.Repositories;
   using SFMBE.Data.Specifications.Characters;
   using SFMBE.Server.Repositories;
+  using SFMBE.Server.Repositories.Characters;
   using SFMBE.Services.Mapping;
   using SFMBE.Shared.Characters.Queries;
 
   public class Get : BaseAsyncEndpoint<GetCharacterQueryResponse>
   {
-    private readonly IAsyncRepository<Character> characterRepository;
-    private readonly IUsersRepository usersRepository;
+    private readonly ICharactersRepository characterRepository;
 
-    public Get(IAsyncRepository<Character> repository, IUsersRepository usersRepository)
+    public Get(ICharactersRepository characterRepository)
     {
-      this.characterRepository = repository;
-      this.usersRepository = usersRepository;
+      this.characterRepository = characterRepository;
     }
 
     [Authorize]
     [HttpGet("api/Characters/Get")]
     public override async Task<ActionResult<GetCharacterQueryResponse>> HandleAsync(CancellationToken cancellationToken = default)
     {
-      var userId = (await this.usersRepository.GetUser())?.Id;
-
-      if (string.IsNullOrEmpty(userId))
-      {
-        return this.BadRequest("You're not log in.");
-      }
-
-      var spec = new GetCharacterSpecification(userId);
-      var character = await this.characterRepository.FirstOrDefaultAsync(spec);
+      (GetCharacterQueryResponse character, string message) = await this.characterRepository.Get();
 
       if (character is null)
       {
-        return this.BadRequest("Character not found");
+        return this.BadRequest(message);
       }
 
-      return this.Ok(character.To<GetCharacterQueryResponse>());
+      return this.Ok(character);
     }
   }
 }
