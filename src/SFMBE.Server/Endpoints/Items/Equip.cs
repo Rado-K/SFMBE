@@ -4,26 +4,24 @@
   using Ardalis.ApiEndpoints;
   using Microsoft.AspNetCore.Authorization;
   using Microsoft.AspNetCore.Mvc;
-  using SFMBE.Data.Models;
-  using SFMBE.Data.Repositories;
+  using SFMBE.Server.Repositories.Items;
   using SFMBE.Shared.Items.Commands;
 
   public class Equip : BaseAsyncEndpoint
   {
-    private readonly IAsyncRepository<Item> repository;
+    private readonly IItemsRepository itemsRepository;
 
-    public Equip(IAsyncRepository<Item> repository)
+    public Equip(IItemsRepository itemsRepository)
     {
-      this.repository = repository;
+      this.itemsRepository = itemsRepository;
     }
 
     [Authorize]
     [HttpPut("api/Items/Equip")]
     public async Task<IActionResult> HandleAsync(EquipItemCommand equipItemCommand)
     {
-      var item = await this.repository.GetByIdAsync(equipItemCommand.ItemId);
-      item.IsEquip = EquipType.InGear;
-      await this.repository.UpdateAsync(item);
+      await this.itemsRepository.Equip(equipItemCommand);
+
       return this.Ok();
     }
   }

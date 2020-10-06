@@ -2,6 +2,7 @@ namespace SFMBE.Server.Repositories.Items
 {
   using System.Threading.Tasks;
   using System;
+  using Microsoft.EntityFrameworkCore;
   using SFMBE.Data.Models;
   using SFMBE.Data;
   using SFMBE.Shared.Items.Commands;
@@ -50,6 +51,29 @@ namespace SFMBE.Server.Repositories.Items
       await this.db.SaveChangesAsync();
 
       return item.Id;
+    }
+
+    public async Task Equip(EquipItemCommand equipItemCommand)
+    {
+      var item = await this.db
+        .Items
+        .FirstOrDefaultAsync(x => x.Id == equipItemCommand.ItemId);
+      item.IsEquip = EquipType.InGear;
+
+      this.db.Entry(item).State = EntityState.Modified;
+      await this.db.SaveChangesAsync();
+    }
+
+    public async Task Unequip(UnquipItemCommand unquipItemCommand)
+    {
+      var item = await this.db
+        .Items
+        .FirstOrDefaultAsync(x => x.Id == unquipItemCommand.ItemId);
+
+      item.IsEquip = EquipType.InBag;
+
+      this.db.Entry(item).State = EntityState.Modified;
+      await this.db.SaveChangesAsync();
     }
   }
 }

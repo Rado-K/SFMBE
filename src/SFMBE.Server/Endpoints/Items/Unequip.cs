@@ -4,26 +4,24 @@
   using Ardalis.ApiEndpoints;
   using Microsoft.AspNetCore.Authorization;
   using Microsoft.AspNetCore.Mvc;
-  using SFMBE.Data.Models;
-  using SFMBE.Data.Repositories;
+  using SFMBE.Server.Repositories.Items;
   using SFMBE.Shared.Items.Commands;
 
   public class Unequip : BaseAsyncEndpoint
   {
-    private readonly IAsyncRepository<Item> repository;
+    private readonly IItemsRepository itemsRepository;
 
-    public Unequip(IAsyncRepository<Item> repository)
+    public Unequip(IItemsRepository itemsRepository)
     {
-      this.repository = repository;
+      this.itemsRepository = itemsRepository;
     }
 
     [Authorize]
     [HttpPut("api/Items/Unequip")]
-    public async Task<IActionResult> HandleAsync(UnquipItemCommand equipItemCommand)
+    public async Task<IActionResult> HandleAsync(UnquipItemCommand unquipItemCommand)
     {
-      var item = await this.repository.GetByIdAsync(equipItemCommand.ItemId);
-      item.IsEquip = EquipType.InBag;
-      await this.repository.UpdateAsync(item);
+      await this.itemsRepository.Unequip(unquipItemCommand);
+
       return this.Ok();
     }
   }
