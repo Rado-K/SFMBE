@@ -8,8 +8,9 @@ namespace SFMBE.Server.Repositories.Characters
   using SFMBE.Data;
   using SFMBE.Services.Mapping;
   using SFMBE.Shared.Characters.Queries;
+    using SFMBE.Shared.Characters.Commands;
 
-  public class CharactersRepository : ICharactersRepository
+    public class CharactersRepository : ICharactersRepository
   {
     private readonly ApplicationDbContext db;
     private readonly IUsersRepository usersRepository;
@@ -69,6 +70,20 @@ namespace SFMBE.Server.Repositories.Characters
         .ToListAsync();
 
       return characters;
+    }
+
+    public async Task<UpdateCharacterCommand> Update(UpdateCharacterCommand updateCharacterCommand)
+    {
+      var character = await this.db
+      .Characters
+      .FirstOrDefaultAsync(x => x.Id == updateCharacterCommand.Id);
+
+      MappingExtensions.To(updateCharacterCommand, character);
+
+      this.db.Entry(character).State = EntityState.Modified;
+      await this.db.SaveChangesAsync();
+
+      return updateCharacterCommand;
     }
   }
 }
