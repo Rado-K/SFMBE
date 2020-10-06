@@ -1,22 +1,14 @@
 ﻿namespace SFMBE.Shared.Characters.Queries
 {
   using SFMBE.Data.Models;
+  using SFMBE.Services.Mapping;
 
-  public class ListCharactersQueryResponse
+  public class ListCharactersQueryResponse : IMapFrom<Character>
   {
     public string Name { get; set; }
 
     public int Level { get; set; }
 
     public string Guild { get; set; } = "None.";
-
-    public static ListCharactersQueryResponse FromCharacter(Character character)
-    {
-      return new ListCharactersQueryResponse
-      {
-        Name = character.Name,
-        Level = character.Level,
-      };
-    }
   }
-}
+} 

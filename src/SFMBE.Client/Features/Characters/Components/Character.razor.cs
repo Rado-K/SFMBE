@@ -12,15 +12,15 @@ namespace SFMBE.Client.Features.Characters
     {
       if (this.CharactersState.Character is null)
       {
-        this.checkForCharacter = true;
         await this.Mediator.Send(new CharactersState.FetchCharacterAction());
       }
+      this.checkForCharacter = true;
     }
 
     private async Task CreateCharacter()
     {
       await this.Mediator.Send(new CharactersState.CreateCharacterAction { CharacterName = this.characterName });
-      this.checkForCharacter = false;
+      
       await this.OnInitializedAsync();
     }
   }

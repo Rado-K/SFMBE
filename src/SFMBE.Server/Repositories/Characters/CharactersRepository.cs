@@ -1,9 +1,10 @@
 namespace SFMBE.Server.Repositories.Characters
 {
+  using System.Collections.Generic;
   using System.Linq;
   using System.Threading.Tasks;
+  using Microsoft.EntityFrameworkCore;
   using SFMBE.Data.Models;
-  using AutoMapper;
   using SFMBE.Data;
   using SFMBE.Services.Mapping;
   using SFMBE.Shared.Characters.Queries;
@@ -56,6 +57,18 @@ namespace SFMBE.Server.Repositories.Characters
       }
 
       return (character, default);
+    }
+
+    public async Task<IEnumerable<ListCharactersQueryResponse>> GetList(string parameter)
+    {
+      parameter = parameter.ToLower();
+      var characters = await this.db
+        .Characters
+        .Where(x => x.Name.ToLower().StartsWith(parameter))
+        .To<ListCharactersQueryResponse>()
+        .ToListAsync();
+
+      return characters;
     }
   }
 }
