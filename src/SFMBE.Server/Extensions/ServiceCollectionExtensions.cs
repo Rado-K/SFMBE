@@ -6,15 +6,16 @@ namespace SFMBE.Server.Extensions
   using Microsoft.Extensions.DependencyInjection;
   using Microsoft.IdentityModel.Tokens;
   using SFMBE.Server.Endpoints.Authentication.Common;
-  using SFMBE.Server.Repositories;
   using SFMBE.Server.Repositories.Characters;
+  using SFMBE.Server.Repositories.Items;
+  using SFMBE.Server.Repositories;
 
   public static class ServiceCollectionExtensions
   {
-    public static IServiceCollection AddApplicationRepositories(this IServiceCollection services)
-      => services
-            .AddScoped<IUsersRepository, UsersRepository>()
-            .AddTransient<ICharactersRepository, CharactersRepository>();
+    public static IServiceCollection AddApplicationRepositories(this IServiceCollection services) => services
+      .AddScoped<IUsersRepository, UsersRepository>()
+      .AddTransient<ICharactersRepository, CharactersRepository>()
+      .AddTransient<IItemsRepository, ItemsRepository>();
 
     public static void AddJwtConfigurations(this IServiceCollection services, IConfiguration configuration)
     {
